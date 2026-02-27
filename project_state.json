@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 9,
+  "summary": "SmartCampus Connect — a modern, responsive single-page web app prototype with a fixed horizontal top navigation bar and 9 dynamic content sections: Personalized Academic Roadmaps, Competitive Exam Hub, Smart Notifications & Goals, Skill-Based Team Selection, Sustainable Marketplace, Anti-Trap Feedback, Faculty Intelligence Hub, Institute Intelligence Command Center, and Parent Insight Portal. Tech startup aesthetic with light/dark mode. The Faculty Intelligence Hub features a full Teacher Dashboard System. The Institute Intelligence Command Center is a premium executive-level administrative dashboard with 4 sub-menus. The Parent Insight Portal is a trust-building, soft blue/white premium dashboard for parents with 3 main menus: Student Growth & Activity Report, Faculty & Teaching Transparency, and Institute Development & Environment Report — plus a persistent Monthly Parent Connect System with virtual meeting scheduling and parent satisfaction rating.",
+  "architectural_notes": [
+    "Single-page app with dynamic tab switching — no page reload; content rendered/hidden via JS",
+    "Light/dark mode must be implemented globally across all 6 sections",
+    "Navbar now has 9 tabs — Parent Insight Portal added; ensure responsive layout or scrollable nav accommodates all items"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-a-fixed-horizontal-top-navigation-bar-with-exactly-6-menu-items-displayed-in-a-single-line-personalized-academic-roadmaps-competitive-exam-hub-smart-notifications-goals-skill-based-team-selection-sustainable-marketplace-and-anti-trap-feedback-the-navbar-must-stay-fixed-at-the-top-on-scroll-active-tab-must-display-a-thin-underline-and-a-subtle-color-highlight-switching-tabs-must-trigger-smooth-css-transition-animations-without-any-page-reload-even-spacing-between-all-menu-items-include-the-smartcampus-connect-logo-wordmark-on-the-left-and-a-light-dark-mode-toggle-on-the-right",
+      "title": "Implement a fixed horizontal top navigation bar with exactly 6 menu items displayed in a single line: 'Personalized Academic Roadmaps', 'Competitive Exam Hub', 'Smart Notifications & Goals', 'Skill-Based Team Selection', 'Sustainable Marketplace', and 'Anti-Trap Feedback'. The navbar must stay fixed at the top on scroll. Active tab must display a thin underline and a subtle color highlight. Switching tabs must trigger smooth CSS transition animations without any page reload. Even spacing between all menu items. Include the SmartCampus Connect logo/wordmark on the left and a light/dark mode toggle on the right.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-personalized-academic-roadmaps-tab-content-section-include-1-a-branch-selection-dropdown-with-options-cse-it-ece-mechanical-civil-eee-2-a-horizontal-semester-timeline-showing-sem-1-through-sem-8-with-clickable-nodes-3-subject-cards-for-the-selected-semester-showing-subject-name-credits-and-status-4-a-teacher-details-card-section-with-name-phone-qualification-and-linkedin-link-5-an-exam-tracker-panel-listing-upcoming-exams-with-status-tags-6-progress-bars-showing-subject-completion-percentages-7-an-integrations-display-row-showing-mock-google-classroom-leetcode-stats-and-github-profile-preview-cards-use-a-dashboard-timeline-card-based-layout",
+      "title": "Build the 'Personalized Academic Roadmaps' tab content section. Include: (1) a branch selection dropdown with options CSE, IT, ECE, Mechanical, Civil, EEE; (2) a horizontal semester timeline showing Sem 1 through Sem 8 with clickable nodes; (3) subject cards for the selected semester showing subject name, credits, and status; (4) a teacher details card section with Name, Phone, Qualification, and LinkedIn link; (5) an exam tracker panel listing upcoming exams with status tags; (6) progress bars showing subject completion percentages; (7) an integrations display row showing mock Google Classroom, LeetCode stats, and GitHub profile preview cards. Use a dashboard + timeline + card-based layout.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-competitive-exam-hub-tab-content-section-include-1-a-create-exam-profile-primary-button-2-an-exam-selection-dropdown-with-options-gate-upsc-cat-gre-placements-custom-3-a-grid-of-student-profile-cards-showing-name-exam-target-and-a-match-indicator-badge-when-two-students-share-the-same-exam-4-a-create-study-group-button-5-a-chat-icon-button-on-each-student-card-use-a-linkedin-style-networking-interface-layout",
+      "title": "Build the 'Competitive Exam Hub' tab content section. Include: (1) a 'Create Exam Profile' primary button; (2) an exam selection dropdown with options GATE, UPSC, CAT, GRE, Placements, Custom; (3) a grid of student profile cards showing name, exam target, and a match indicator badge when two students share the same exam; (4) a 'Create Study Group' button; (5) a 'Chat' icon/button on each student card. Use a LinkedIn-style networking interface layout.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-smart-notifications-goals-tab-content-section-include-1-a-monthly-calendar-grid-interface-with-date-cells-2-an-upcoming-exams-list-with-date-and-subject-3-an-assignment-reminders-list-with-due-dates-4-countdown-timers-for-the-nearest-2-3-events-5-a-goal-creation-form-with-title-and-duration-e-g-complete-java-in-10-days-6-a-streak-tracker-showing-current-and-longest-streak-7-achievement-badge-gallery-use-a-clean-productivity-dashboard-layout",
+      "title": "Build the 'Smart Notifications & Goals' tab content section. Include: (1) a monthly calendar grid interface with date cells; (2) an upcoming exams list with date and subject; (3) an assignment reminders list with due dates; (4) countdown timers for the nearest 2–3 events; (5) a goal creation form with title and duration (e.g., 'Complete Java in 10 days'); (6) a streak tracker showing current and longest streak; (7) achievement badge gallery. Use a clean productivity dashboard layout.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-skill-based-team-selection-tab-content-section-include-1-a-toggle-switch-between-software-students-and-hardware-students-that-filters-the-displayed-cards-2-student-profile-cards-showing-name-skills-list-projects-count-github-link-and-linkedin-link-3-a-search-bar-to-filter-students-by-skill-keyword-4-a-hackathon-listings-section-with-event-name-date-and-a-register-button-5-an-invite-to-team-button-on-each-student-card-use-a-professional-networking-team-builder-layout",
+      "title": "Build the 'Skill-Based Team Selection' tab content section. Include: (1) a toggle switch between 'Software Students' and 'Hardware Students' that filters the displayed cards; (2) student profile cards showing name, skills list, projects count, GitHub link, and LinkedIn link; (3) a search bar to filter students by skill keyword; (4) a hackathon listings section with event name, date, and a register button; (5) an 'Invite to Team' button on each student card. Use a professional networking + team-builder layout.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-sustainable-marketplace-tab-content-section-include-1-a-category-filter-bar-with-options-hardware-software-books-dev-boards-2-a-responsive-product-listing-grid-3-each-product-card-showing-image-placeholder-title-rent-or-sell-tag-price-seller-rating-stars-and-a-chat-with-seller-button-4-a-reviews-snippet-on-each-card-use-a-modern-e-commerce-design-layout",
+      "title": "Build the 'Sustainable Marketplace' tab content section. Include: (1) a category filter bar with options: Hardware, Software, Books, Dev Boards; (2) a responsive product listing grid; (3) each product card showing: image placeholder, title, 'Rent' or 'Sell' tag, price, seller rating (stars), and a 'Chat with Seller' button; (4) a reviews snippet on each card. Use a modern e-commerce design layout.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-anti-trap-feedback-tab-content-section-include-1-a-complaint-submission-form-with-fields-issue-title-company-name-tag-description-and-a-file-upload-input-for-proof-2-a-scam-report-feed-below-the-form-showing-community-submitted-reports-3-each-report-card-shows-company-name-issue-summary-verified-or-warning-badge-and-a-comment-count-with-a-collapsible-comment-section-4-a-submit-button-use-a-community-reporting-platform-layout-with-clear-alert-visual-indicators",
+      "title": "Build the 'Anti-Trap Feedback' tab content section. Include: (1) a complaint submission form with fields: issue title, company name tag, description, and a file upload input for proof; (2) a scam report feed below the form showing community-submitted reports; (3) each report card shows: company name, issue summary, Verified or Warning badge, and a comment count with a collapsible comment section; (4) a submit button. Use a community reporting platform layout with clear alert visual indicators.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-visual-design-system-across-the-entire-application-use-a-deep-teal-and-emerald-green-primary-palette-with-soft-neutral-backgrounds-modern-sans-serif-typography-inter-or-equivalent-rounded-card-components-border-radius-12-16px-subtle-soft-gradient-backgrounds-on-hero-and-section-headers-smooth-hover-lift-animations-on-all-cards-and-full-light-dark-mode-support-toggled-from-the-navbar-button-the-overall-aesthetic-should-resemble-a-polished-tech-startup-saas-dashboard-not-a-student-project",
+      "title": "Apply a cohesive visual design system across the entire application: use a deep teal and emerald green primary palette with soft neutral backgrounds, modern sans-serif typography (Inter or equivalent), rounded card components (border-radius 12–16px), subtle soft-gradient backgrounds on hero and section headers, smooth hover lift animations on all cards, and full light/dark mode support toggled from the navbar button. The overall aesthetic should resemble a polished tech startup SaaS dashboard, not a student project.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-faculty-intelligence-hub-as-a-7th-menu-item-to-the-existing-fixed-horizontal-top-navigation-bar-in-navbar-tsx-it-must-follow-the-same-styling-conventions-as-the-existing-6-tabs-single-line-layout-even-spacing-active-tab-underline-and-subtle-color-highlight-smooth-css-transition-on-tab-switch-and-no-page-reload-register-the-new-tab-in-app-tsx-so-clicking-it-renders-the-facultyintelligencehub-component",
+      "title": "Add 'Faculty Intelligence Hub' as a 7th menu item to the existing fixed horizontal top navigation bar in Navbar.tsx. It must follow the same styling conventions as the existing 6 tabs: single-line layout, even spacing, active tab underline and subtle color highlight, smooth CSS transition on tab switch, and no page reload. Register the new tab in App.tsx so clicking it renders the FacultyIntelligenceHub component.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-components-tabs-facultyintelligencehub-tsx-as-the-root-component-for-the-teacher-dashboard-system-it-must-contain-7-internal-sub-sections-navigable-via-a-secondary-tab-sidebar-nav-1-smartboard-connected-teaching-2-class-topic-tracking-3-student-performance-reports-4-faculty-networking-ranking-5-integrations-6-academic-control-panel-7-ai-teaching-assistant-the-overall-visual-theme-must-be-professional-and-authority-conveying-blue-white-primary-palette-data-visualization-heavy-layout-clean-sans-serif-typography-rounded-cards-smooth-transitions-resembling-a-national-level-smart-education-control-system",
+      "title": "Create frontend/src/components/tabs/FacultyIntelligenceHub.tsx as the root component for the Teacher Dashboard System. It must contain 7 internal sub-sections navigable via a secondary tab/sidebar nav: (1) Smartboard Connected Teaching, (2) Class & Topic Tracking, (3) Student Performance & Reports, (4) Faculty Networking & Ranking, (5) Integrations, (6) Academic Control Panel, (7) AI Teaching Assistant. The overall visual theme must be professional and authority-conveying: blue/white primary palette, data-visualization-heavy layout, clean sans-serif typography, rounded cards, smooth transitions — resembling a national-level smart education control system.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-smartboard-connected-teaching-system-sub-section-inside-facultyintelligencehub-display-1-a-smartboard-integration-panel-showing-connection-status-2-a-prominent-start-class-button-3-a-branch-selector-dropdown-cse-it-ece-mechanical-civil-eee-4-a-division-selector-a-b-c-5-a-subject-selector-below-the-selectors-show-a-session-panel-with-notes-auto-save-indicator-a-start-stop-lecture-recording-toggle-an-auto-upload-notes-to-student-portal-status-indicator-a-topic-completion-tracker-checklist-a-last-topic-covered-indicator-badge-and-a-resume-from-here-suggestion-card-use-a-modern-classroom-control-dashboard-layout",
+      "title": "Build the 'Smartboard Connected Teaching System' sub-section inside FacultyIntelligenceHub. Display: (1) a Smartboard Integration Panel showing connection status; (2) a prominent 'Start Class' button; (3) a Branch selector dropdown (CSE, IT, ECE, Mechanical, Civil, EEE); (4) a Division selector (A, B, C); (5) a Subject selector. Below the selectors show a session panel with: notes auto-save indicator, a 'Start/Stop Lecture Recording' toggle, an 'Auto-Upload Notes to Student Portal' status indicator, a topic completion tracker checklist, a 'Last Topic Covered' indicator badge, and a 'Resume From Here' suggestion card. Use a modern classroom control dashboard layout.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-class-topic-tracking-system-sub-section-inside-facultyintelligencehub-display-1-branch-wise-progress-cards-showing-syllabus-completion-percentages-per-branch-2-division-wise-syllabus-completion-progress-bars-e-g-div-a-72-div-b-65-3-a-horizontal-topic-timeline-showing-covered-vs-pending-topics-4-a-pending-syllabus-indicator-panel-highlighting-overdue-topics-5-auto-generated-teaching-analytics-summary-cards-topics-week-avg-completion-rate-6-a-semester-completion-tracker-with-overall-percentage-7-a-subject-coverage-heatmap-grid-subjects-vs-weeks-color-coded-by-coverage-intensity",
+      "title": "Build the 'Class & Topic Tracking System' sub-section inside FacultyIntelligenceHub. Display: (1) branch-wise progress cards showing syllabus completion percentages per branch; (2) division-wise syllabus completion progress bars (e.g., Div A: 72%, Div B: 65%); (3) a horizontal topic timeline showing covered vs. pending topics; (4) a pending syllabus indicator panel highlighting overdue topics; (5) auto-generated teaching analytics summary cards (topics/week, avg completion rate); (6) a semester completion tracker with overall percentage; (7) a subject coverage heatmap grid (subjects vs. weeks, color-coded by coverage intensity).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-student-performance-reports-sub-section-inside-facultyintelligencehub-display-an-analytics-dashboard-with-1-filter-controls-for-branch-division-subject-and-individual-student-2-per-student-data-cards-or-a-table-showing-attendance-percentage-academic-performance-score-assignment-completion-rate-participation-score-achievements-count-hackathon-involvement-count-and-a-skill-growth-mini-graph-3-class-level-aggregate-charts-bar-or-line-for-attendance-trends-and-performance-distribution-4-an-export-generate-report-button-use-an-analytics-dashboard-aesthetic-with-charts-and-graphs-rendered-as-styled-svg-css-based-charts-or-using-a-lightweight-charting-approach-in-react",
+      "title": "Build the 'Student Performance & Reports' sub-section inside FacultyIntelligenceHub. Display an analytics dashboard with: (1) filter controls for Branch, Division, Subject, and Individual Student; (2) per-student data cards or a table showing: attendance percentage, academic performance score, assignment completion rate, participation score, achievements count, hackathon involvement count, and a skill growth mini-graph; (3) class-level aggregate charts (bar or line) for attendance trends and performance distribution; (4) an export/generate report button. Use an analytics dashboard aesthetic with charts and graphs (rendered as styled SVG/CSS-based charts or using a lightweight charting approach in React).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-faculty-networking-ranking-system-sub-section-inside-facultyintelligencehub-display-1-a-grid-of-faculty-profile-cards-showing-name-department-profile-photo-placeholder-teaching-performance-score-contribution-index-research-contribution-count-and-student-feedback-rating-with-stars-2-a-department-filter-dropdown-3-an-hod-dashboard-access-button-panel-mock-4-a-comparative-ranking-leaderboard-showing-faculty-ranked-by-an-overall-score-5-each-faculty-card-includes-a-suggestions-to-improve-expandable-section-listing-improvement-areas-6-highlight-what-areas-a-faculty-member-needs-to-contribute-more-use-a-linkedin-style-internal-professional-network-layout",
+      "title": "Build the 'Faculty Networking & Ranking System' sub-section inside FacultyIntelligenceHub. Display: (1) a grid of faculty profile cards showing name, department, profile photo placeholder, teaching performance score, contribution index, research contribution count, and student feedback rating with stars; (2) a department filter dropdown; (3) an HOD Dashboard Access button/panel (mock); (4) a comparative ranking leaderboard showing faculty ranked by an overall score; (5) each faculty card includes a 'Suggestions to Improve' expandable section listing improvement areas; (6) highlight what areas a faculty member needs to contribute more. Use a LinkedIn-style internal professional network layout.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-integrations-sub-section-inside-facultyintelligencehub-display-a-row-grid-of-integration-status-cards-for-1-google-classroom-assignment-distribution-status-with-a-link-mock-connect-button-2-github-project-tracking-for-practical-subjects-with-repo-count-indicator-3-linkedin-professional-profile-link-with-a-mock-preview-card-4-smartboard-sync-system-last-sync-timestamp-and-sync-status-indicator-5-automated-report-generator-last-generated-date-and-a-generate-now-button-each-integration-card-should-show-a-logo-placeholder-icon-integration-name-status-badge-connected-disconnected-and-a-primary-action-button",
+      "title": "Build the 'Integrations' sub-section inside FacultyIntelligenceHub. Display a row/grid of integration status cards for: (1) Google Classroom — assignment distribution status with a link/mock connect button; (2) GitHub — project tracking for practical subjects with repo count indicator; (3) LinkedIn — professional profile link with a mock preview card; (4) Smartboard Sync System — last sync timestamp and sync status indicator; (5) Automated Report Generator — last generated date and a 'Generate Now' button. Each integration card should show a logo placeholder icon, integration name, status badge (Connected/Disconnected), and a primary action button.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-academic-control-panel-sub-section-inside-facultyintelligencehub-provide-action-panels-forms-for-1-upload-syllabus-file-upload-input-with-branch-semester-selectors-2-assign-tasks-form-with-task-title-due-date-and-target-branch-division-3-create-quiz-form-with-quiz-title-subject-number-of-questions-placeholder-4-set-internal-marks-a-marks-entry-table-with-student-name-and-marks-input-fields-5-generate-report-cards-a-button-triggering-a-mock-generation-confirmation-6-send-notifications-to-students-a-message-form-with-target-audience-selector-and-message-text-area-7-schedule-exams-form-with-exam-name-date-time-and-branch-8-track-ise-semester-exams-a-list-table-of-scheduled-exams-with-status-tags-upcoming-ongoing-completed-lay-out-these-actions-in-a-clean-grid-of-action-cards",
+      "title": "Build the 'Academic Control Panel' sub-section inside FacultyIntelligenceHub. Provide action panels/forms for: (1) Upload Syllabus — file upload input with branch/semester selectors; (2) Assign Tasks — form with task title, due date, and target branch/division; (3) Create Quiz — form with quiz title, subject, number of questions placeholder; (4) Set Internal Marks — a marks entry table with student name and marks input fields; (5) Generate Report Cards — a button triggering a mock generation confirmation; (6) Send Notifications to Students — a message form with target audience selector and message text area; (7) Schedule Exams — form with exam name, date, time, and branch; (8) Track ISE & Semester Exams — a list/table of scheduled exams with status tags (Upcoming, Ongoing, Completed). Lay out these actions in a clean grid of action cards.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-ai-teaching-assistant-sub-section-inside-facultyintelligencehub-display-1-an-ai-suggestion-for-next-topic-panel-showing-a-recommended-next-topic-based-on-current-progress-mock-data-2-a-weak-student-detection-panel-listing-students-flagged-as-at-risk-with-their-weak-subjects-3-a-performance-prediction-panel-showing-predicted-end-of-semester-scores-for-students-4-an-automated-note-summarization-panel-with-a-text-area-to-paste-notes-and-a-summarize-button-that-returns-a-mock-summary-5-a-question-paper-generator-panel-with-subject-and-difficulty-selectors-and-a-generate-paper-button-that-shows-a-mock-generated-question-list-label-the-section-with-an-ai-powered-badge-to-indicate-advanced-functionality",
+      "title": "Build the 'AI Teaching Assistant' sub-section inside FacultyIntelligenceHub. Display: (1) an 'AI Suggestion for Next Topic' panel showing a recommended next topic based on current progress (mock data); (2) a 'Weak Student Detection' panel listing students flagged as at-risk with their weak subjects; (3) a 'Performance Prediction' panel showing predicted end-of-semester scores for students; (4) an 'Automated Note Summarization' panel with a text area to paste notes and a 'Summarize' button that returns a mock summary; (5) a 'Question Paper Generator' panel with subject and difficulty selectors and a 'Generate Paper' button that shows a mock generated question list. Label the section with an 'AI-Powered' badge to indicate advanced functionality.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-institute-intelligence-command-center-as-an-8th-menu-item-to-the-existing-fixed-horizontal-top-navigation-bar-in-navbar-tsx-it-must-follow-the-same-styling-conventions-as-the-existing-7-tabs-single-line-layout-even-spacing-active-tab-underline-and-subtle-color-highlight-smooth-css-transition-on-tab-switch-and-no-page-reload-register-the-new-tab-in-app-tsx-so-clicking-it-renders-the-institutecommandcenter-component-located-at-frontend-src-components-tabs-institutecommandcenter-tsx",
+      "title": "Add 'Institute Intelligence Command Center' as an 8th menu item to the existing fixed horizontal top navigation bar in Navbar.tsx. It must follow the same styling conventions as the existing 7 tabs: single-line layout, even spacing, active tab underline and subtle color highlight, smooth CSS transition on tab switch, and no page reload. Register the new tab in App.tsx so clicking it renders the InstituteCommandCenter component located at frontend/src/components/tabs/InstituteCommandCenter.tsx.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-components-tabs-institutecommandcenter-tsx-as-the-root-component-for-the-institute-intelligence-command-center-it-must-contain-4-primary-sub-sections-navigable-via-a-secondary-horizontal-tab-bar-1-institutional-performance-analytics-2-faculty-staff-optimization-system-3-student-growth-transformation-engine-4-infrastructure-technology-placement-control-additionally-embed-a-persistent-campus-environment-smart-governance-layer-panel-visible-within-the-dashboard-not-as-a-separate-sub-menu-tab-that-shows-the-smart-campus-score-and-monthly-improvement-progress-the-overall-visual-theme-must-be-a-premium-executive-dark-blue-white-and-silver-accent-palette-resembling-a-government-level-national-smart-education-monitoring-authority-dashboard-with-smooth-animated-transitions-between-sub-sections",
+      "title": "Create frontend/src/components/tabs/InstituteCommandCenter.tsx as the root component for the Institute Intelligence Command Center. It must contain 4 primary sub-sections navigable via a secondary horizontal tab bar: (1) Institutional Performance Analytics, (2) Faculty & Staff Optimization System, (3) Student Growth & Transformation Engine, (4) Infrastructure, Technology & Placement Control. Additionally, embed a persistent Campus Environment & Smart Governance Layer panel visible within the dashboard (not as a separate sub-menu tab) that shows the Smart Campus Score and monthly improvement progress. The overall visual theme must be a premium executive dark blue, white, and silver accent palette — resembling a government-level national smart education monitoring authority dashboard, with smooth animated transitions between sub-sections.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-institutional-performance-analytics-sub-section-inside-institutecommandcenter-display-1-an-overall-academic-performance-dashboard-with-kpi-summary-cards-overall-gpa-attendance-rate-placement-rate-research-output-2-branch-wise-performance-comparison-bar-chart-cse-it-ece-mechanical-civil-eee-3-division-wise-performance-progress-bars-4-a-teacher-performance-ranking-leaderboard-with-scores-5-a-weak-student-detection-panel-showing-count-and-percentage-of-at-risk-students-per-branch-6-a-dropout-risk-indicator-with-risk-level-badges-7-placement-statistics-panel-placed-count-average-salary-top-recruiters-8-attendance-analytics-chart-showing-monthly-trends-9-hackathon-participation-data-teams-entered-wins-participation-rate-10-research-contribution-metrics-papers-published-patents-filed-add-a-dedicated-institute-vs-top-colleges-comparison-panel-that-shows-a-side-by-side-gap-analysis-between-this-institute-and-iits-nits-and-tier-1-colleges-across-key-metrics-with-color-coded-gap-indicators-and-ai-generated-improvement-recommendations-use-a-data-heavy-layout-with-svg-css-based-charts-performance-meters-and-ranking-boards",
+      "title": "Build the 'Institutional Performance Analytics' sub-section inside InstituteCommandCenter. Display: (1) an overall academic performance dashboard with KPI summary cards (overall GPA, attendance rate, placement rate, research output); (2) branch-wise performance comparison bar chart (CSE, IT, ECE, Mechanical, Civil, EEE); (3) division-wise performance progress bars; (4) a teacher performance ranking leaderboard with scores; (5) a weak student detection panel showing count and percentage of at-risk students per branch; (6) a dropout risk indicator with risk-level badges; (7) placement statistics panel (placed count, average salary, top recruiters); (8) attendance analytics chart showing monthly trends; (9) hackathon participation data (teams entered, wins, participation rate); (10) research contribution metrics (papers published, patents filed). Add a dedicated 'Institute vs. Top Colleges' comparison panel that shows a side-by-side gap analysis between this institute and IITs, NITs, and Tier-1 colleges across key metrics, with color-coded gap indicators and AI-generated improvement recommendations. Use a data-heavy layout with SVG/CSS-based charts, performance meters, and ranking boards.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-faculty-staff-optimization-system-sub-section-inside-institutecommandcenter-display-1-a-grid-of-faculty-performance-cards-showing-name-department-teaching-performance-score-contribution-index-research-count-and-student-feedback-rating-2-a-department-filter-dropdown-to-filter-faculty-by-department-3-a-weak-performing-faculty-panel-that-flags-faculty-below-a-performance-threshold-with-highlighted-warning-indicators-4-a-training-program-recommendation-panel-listing-suggested-training-or-skill-upgrade-programs-per-flagged-faculty-member-5-research-contribution-tracking-per-faculty-6-an-hod-leadership-performance-panel-with-hod-level-metrics-7-class-engagement-metrics-and-subject-completion-efficiency-stats-per-faculty-8-student-feedback-analytics-aggregated-per-faculty-member-9-admin-level-approve-assign-training-and-initiate-replacement-action-buttons-on-each-faculty-card-mock-actions-with-confirmation-dialogs-style-it-as-a-corporate-hr-performance-management-system-with-clean-data-tables-score-meters-and-status-badges",
+      "title": "Build the 'Faculty & Staff Optimization System' sub-section inside InstituteCommandCenter. Display: (1) a grid of faculty performance cards showing name, department, teaching performance score, contribution index, research count, and student feedback rating; (2) a department filter dropdown to filter faculty by department; (3) a weak-performing faculty panel that flags faculty below a performance threshold with highlighted warning indicators; (4) a training program recommendation panel listing suggested training or skill upgrade programs per flagged faculty member; (5) research contribution tracking per faculty; (6) an HOD leadership performance panel with HOD-level metrics; (7) class engagement metrics and subject completion efficiency stats per faculty; (8) student feedback analytics aggregated per faculty member; (9) admin-level 'Approve', 'Assign Training', and 'Initiate Replacement' action buttons on each faculty card (mock actions with confirmation dialogs). Style it as a corporate HR performance management system with clean data tables, score meters, and status badges.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-student-growth-transformation-engine-sub-section-inside-institutecommandcenter-display-1-a-weak-students-panel-listing-at-risk-students-across-branches-with-their-branch-current-score-and-risk-level-badge-2-a-convert-weak-to-strong-improvement-model-panel-showing-ai-generated-improvement-plan-cards-per-at-risk-student-with-recommended-actions-mock-ai-data-3-a-skill-development-tracking-dashboard-showing-skill-acquisition-progress-per-student-cohort-4-a-placement-readiness-score-panel-with-a-distribution-chart-of-student-placement-readiness-scores-5-internship-participation-tracker-showing-participation-rates-per-branch-6-competitive-exam-preparation-stats-students-enrolled-per-exam-type-7-certification-tracking-panel-listing-certifications-java-python-ai-cloud-etc-with-counts-8-a-skill-gap-analysis-chart-comparing-current-student-skills-against-industry-demand-9-a-personalized-mentorship-allocation-panel-assigning-mentors-to-at-risk-students-mock-data-10-an-industry-readiness-dashboard-showing-an-overall-industry-readiness-index-style-as-a-transformation-focused-academic-control-panel-with-progress-indicators-trend-graphs-and-actionable-insight-cards",
+      "title": "Build the 'Student Growth & Transformation Engine' sub-section inside InstituteCommandCenter. Display: (1) a weak students panel listing at-risk students across branches with their branch, current score, and risk level badge; (2) a 'Convert Weak to Strong' improvement model panel showing AI-generated improvement plan cards per at-risk student with recommended actions (mock AI data); (3) a skill development tracking dashboard showing skill acquisition progress per student cohort; (4) a placement readiness score panel with a distribution chart of student placement readiness scores; (5) internship participation tracker showing participation rates per branch; (6) competitive exam preparation stats (students enrolled per exam type); (7) certification tracking panel listing certifications (Java, Python, AI, Cloud, etc.) with counts; (8) a skill gap analysis chart comparing current student skills against industry demand; (9) a personalized mentorship allocation panel assigning mentors to at-risk students (mock data); (10) an industry readiness dashboard showing an overall industry readiness index. Style as a transformation-focused academic control panel with progress indicators, trend graphs, and actionable insight cards.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-infrastructure-technology-placement-control-sub-section-inside-institutecommandcenter-infrastructure-section-1-a-missing-facilities-tracker-listing-infrastructure-gaps-with-priority-tags-2-a-lab-infrastructure-comparison-panel-benchmarking-this-institute-s-labs-against-top-colleges-iits-nits-with-gap-indicators-3-a-smartboard-usage-monitoring-panel-showing-usage-rates-per-department-4-a-technology-upgrade-tracker-listing-pending-and-approved-software-hardware-purchases-with-status-tags-5-a-campus-modernization-progress-tracker-with-an-overall-completion-percentage-bar-placement-section-6-a-company-outreach-tracking-panel-listing-companies-contacted-with-engagement-status-7-a-company-engagement-score-leaderboard-ranking-active-recruiters-8-an-industry-collaboration-tracker-9-a-placement-statistics-dashboard-total-placed-average-ctc-branch-wise-breakdown-10-salary-trend-analytics-chart-showing-year-on-year-salary-trends-11-a-recruiter-feedback-panel-with-feedback-summaries-12-a-bring-new-companies-strategy-panel-with-outreach-suggestions-and-a-mock-launch-campaign-button-13-a-placement-growth-forecasting-chart-projecting-next-year-placements-14-an-industry-partnership-heatmap-grid-departments-vs-industry-sectors-color-coded-by-partnership-intensity-style-as-a-powerful-operations-control-center-with-data-tables-charts-and-action-panels",
+      "title": "Build the 'Infrastructure, Technology & Placement Control' sub-section inside InstituteCommandCenter. Infrastructure section: (1) a missing facilities tracker listing infrastructure gaps with priority tags; (2) a lab infrastructure comparison panel benchmarking this institute's labs against top colleges (IITs, NITs) with gap indicators; (3) a smartboard usage monitoring panel showing usage rates per department; (4) a technology upgrade tracker listing pending and approved software/hardware purchases with status tags; (5) a campus modernization progress tracker with an overall completion percentage bar. Placement section: (6) a company outreach tracking panel listing companies contacted with engagement status; (7) a company engagement score leaderboard ranking active recruiters; (8) an industry collaboration tracker; (9) a placement statistics dashboard (total placed, average CTC, branch-wise breakdown); (10) salary trend analytics chart showing year-on-year salary trends; (11) a recruiter feedback panel with feedback summaries; (12) a 'Bring New Companies' strategy panel with outreach suggestions and a mock 'Launch Campaign' button; (13) a placement growth forecasting chart projecting next-year placements; (14) an industry partnership heatmap grid (departments vs. industry sectors, color-coded by partnership intensity). Style as a powerful operations control center with data tables, charts, and action panels.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-persistent-campus-environment-smart-governance-layer-panel-inside-institutecommandcenter-display-1-a-campus-environment-quality-index-score-with-a-visual-meter-2-a-student-satisfaction-score-with-a-rating-indicator-3-a-faculty-satisfaction-score-with-a-rating-indicator-4-an-anti-trap-scam-monitoring-status-panel-showing-active-reports-count-and-alert-level-5-a-marketplace-impact-tracking-summary-active-listings-transactions-this-month-6-a-sustainability-index-score-7-a-prominent-smart-campus-score-card-displaying-an-overall-rating-out-of-100-with-a-large-circular-progress-meter-8-a-monthly-improvement-progress-panel-showing-a-trend-line-or-bar-chart-of-the-smart-campus-score-over-the-last-6-months-this-panel-should-be-visually-distinct-e-g-a-full-width-strip-or-collapsible-bottom-panel-and-always-visible-when-the-user-is-inside-any-of-the-4-sub-menus-of-institutecommandcenter",
+      "title": "Build the persistent Campus Environment & Smart Governance Layer panel inside InstituteCommandCenter. Display: (1) a Campus Environment Quality Index score with a visual meter; (2) a Student Satisfaction Score with a rating indicator; (3) a Faculty Satisfaction Score with a rating indicator; (4) an Anti-Trap & Scam Monitoring status panel showing active reports count and alert level; (5) a Marketplace Impact Tracking summary (active listings, transactions this month); (6) a Sustainability Index score; (7) a prominent Smart Campus Score card displaying an overall rating out of 100 with a large circular progress meter; (8) a Monthly Improvement Progress panel showing a trend line or bar chart of the Smart Campus Score over the last 6 months. This panel should be visually distinct (e.g., a full-width strip or collapsible bottom panel) and always visible when the user is inside any of the 4 sub-menus of InstituteCommandCenter.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-parent-insight-portal-as-a-9th-menu-item-to-the-existing-fixed-horizontal-top-navigation-bar-in-navbar-tsx-it-must-follow-the-same-styling-conventions-as-the-existing-8-tabs-single-line-layout-even-spacing-active-tab-underline-and-subtle-color-highlight-smooth-css-transition-on-tab-switch-and-no-page-reload-register-the-new-tab-in-app-tsx-so-clicking-it-renders-the-parentinsightportal-component-located-at-frontend-src-components-tabs-parentinsightportal-tsx",
+      "title": "Add 'Parent Insight Portal' as a 9th menu item to the existing fixed horizontal top navigation bar in Navbar.tsx. It must follow the same styling conventions as the existing 8 tabs: single-line layout, even spacing, active tab underline and subtle color highlight, smooth CSS transition on tab switch, and no page reload. Register the new tab in App.tsx so clicking it renders the ParentInsightPortal component located at frontend/src/components/tabs/ParentInsightPortal.tsx.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-components-tabs-parentinsightportal-tsx-as-the-root-component-for-the-parent-insight-portal-it-must-contain-3-main-menus-navigable-via-a-secondary-horizontal-tab-bar-1-student-growth-activity-report-2-faculty-teaching-transparency-3-institute-development-environment-report-additionally-embed-a-persistent-monthly-parent-connect-system-panel-at-the-bottom-of-the-dashboard-always-visible-regardless-of-which-menu-is-active-the-overall-visual-theme-must-be-soft-blue-and-white-clean-emotional-trust-building-and-premium-resembling-a-transparent-smart-education-window-for-parents-with-smooth-animated-transitions-between-sub-sections",
+      "title": "Create frontend/src/components/tabs/ParentInsightPortal.tsx as the root component for the Parent Insight Portal. It must contain 3 main menus navigable via a secondary horizontal tab bar: (1) Student Growth & Activity Report, (2) Faculty & Teaching Transparency, (3) Institute Development & Environment Report. Additionally, embed a persistent Monthly Parent Connect System panel at the bottom of the dashboard, always visible regardless of which menu is active. The overall visual theme must be soft blue and white — clean, emotional, trust-building, and premium — resembling a transparent smart education window for parents, with smooth animated transitions between sub-sections.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-student-growth-activity-report-menu-inside-parentinsightportal-include-four-sub-sections-1-academic-overview-showing-branch-division-semester-progress-indicator-subject-wise-performance-cards-with-internal-marks-attendance-percentage-assignment-completion-rate-and-skill-development-progress-bars-2-activities-achievements-showing-hackathon-participation-competitions-attended-awards-certificates-club-involvement-events-participated-and-leadership-roles-as-a-visual-achievement-gallery-3-career-exam-preparation-showing-the-competitive-exam-the-student-is-preparing-for-gate-upsc-cat-gre-etc-placement-readiness-score-internship-status-badge-certifications-completed-list-and-a-coding-progress-summary-card-leetcode-stats-github-contribution-summary-mock-4-monthly-performance-summary-showing-an-improvement-graph-svg-css-based-trend-line-strength-areas-list-weak-areas-list-and-an-ai-recommendation-card-for-growth-mock-data-use-an-elegant-report-card-dashboard-layout-with-charts-progress-meters-and-a-growth-timeline",
+      "title": "Build the 'Student Growth & Activity Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Academic Overview — showing Branch & Division, semester progress indicator, subject-wise performance cards with internal marks, attendance percentage, assignment completion rate, and skill development progress bars; (2) Activities & Achievements — showing hackathon participation, competitions attended, awards & certificates, club involvement, events participated, and leadership roles as a visual achievement gallery; (3) Career & Exam Preparation — showing the competitive exam the student is preparing for (GATE, UPSC, CAT, GRE, etc.), placement readiness score, internship status badge, certifications completed list, and a coding progress summary card (LeetCode stats + GitHub contribution summary mock); (4) Monthly Performance Summary — showing an improvement graph (SVG/CSS-based trend line), strength areas list, weak areas list, and an AI recommendation card for growth (mock data). Use an elegant report card dashboard layout with charts, progress meters, and a growth timeline.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-faculty-teaching-transparency-menu-inside-parentinsightportal-display-1-a-grid-of-teacher-profile-cards-for-each-subject-the-child-is-enrolled-in-each-card-showing-teacher-name-subject-taught-qualification-years-of-experience-specialization-a-linkedin-profile-preview-link-and-research-or-industry-background-note-2-a-class-teacher-name-card-and-hod-name-card-prominently-displayed-3-per-teacher-metrics-including-teacher-engagement-score-syllabus-completion-status-progress-bar-and-a-teaching-feedback-summary-rating-4-a-class-performance-comparison-indicator-showing-how-the-child-s-class-compares-to-other-divisions-5-a-prominent-is-your-child-being-guided-by-expert-faculty-trust-indicator-badge-at-the-top-of-the-section-that-evaluates-the-overall-faculty-quality-score-use-professional-profile-card-layout-with-performance-indicator-meters",
+      "title": "Build the 'Faculty & Teaching Transparency' menu inside ParentInsightPortal. Display: (1) a grid of teacher profile cards for each subject the child is enrolled in, each card showing teacher name, subject taught, qualification, years of experience, specialization, a LinkedIn profile preview link, and research or industry background note; (2) a class teacher name card and HOD name card prominently displayed; (3) per-teacher metrics including teacher engagement score, syllabus completion status progress bar, and a teaching feedback summary rating; (4) a class performance comparison indicator showing how the child's class compares to other divisions; (5) a prominent 'Is your child being guided by expert faculty?' trust indicator badge at the top of the section that evaluates the overall faculty quality score. Use professional profile card layout with performance indicator meters.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-institute-development-environment-report-menu-inside-parentinsightportal-include-four-sub-sections-1-infrastructure-facilities-showing-smartboard-usage-rate-lab-upgrade-updates-new-technology-introduced-software-tools-added-and-industry-collaboration-updates-as-a-timeline-or-card-list-2-placement-industry-exposure-showing-new-companies-visiting-average-package-trends-year-on-year-chart-internship-tie-ups-count-and-industry-workshops-conducted-3-comparison-with-top-colleges-showing-how-the-institute-s-syllabus-aligns-with-trending-technologies-skill-based-curriculum-update-notes-a-modernization-score-meter-and-innovation-initiatives-list-4-campus-environment-showing-a-student-satisfaction-index-score-faculty-quality-index-score-campus-improvement-updates-and-an-anti-trap-safety-reports-status-badge-use-an-executive-summary-dashboard-layout-with-trust-indicators-and-data-driven-visual-elements",
+      "title": "Build the 'Institute Development & Environment Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Infrastructure & Facilities — showing smartboard usage rate, lab upgrade updates, new technology introduced, software tools added, and industry collaboration updates as a timeline or card list; (2) Placement & Industry Exposure — showing new companies visiting, average package trends (year-on-year chart), internship tie-ups count, and industry workshops conducted; (3) Comparison with Top Colleges — showing how the institute's syllabus aligns with trending technologies, skill-based curriculum update notes, a modernization score meter, and innovation initiatives list; (4) Campus Environment — showing a student satisfaction index score, faculty quality index score, campus improvement updates, and an anti-trap safety reports status badge. Use an executive summary dashboard layout with trust indicators and data-driven visual elements.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-persistent-monthly-parent-connect-system-panel-inside-parentinsightportal-that-is-always-visible-at-the-bottom-of-the-dashboard-regardless-of-which-menu-tab-is-active-include-1-a-schedule-monthly-virtual-meeting-section-with-options-to-meet-the-class-teacher-or-optionally-the-hod-showing-available-time-slots-mock-data-and-a-confirm-schedule-button-2-a-performance-discussion-notes-area-showing-the-agenda-topics-for-the-upcoming-meeting-3-a-parent-feedback-submission-form-with-a-text-area-for-written-feedback-and-an-improvement-suggestion-text-field-4-a-parent-satisfaction-rating-system-with-a-5-star-rating-input-and-a-submit-button-style-this-panel-as-a-visually-distinct-full-width-bottom-strip-with-a-soft-blue-accent-background-that-clearly-separates-it-from-the-main-content-area",
+      "title": "Build the persistent Monthly Parent Connect System panel inside ParentInsightPortal that is always visible at the bottom of the dashboard regardless of which menu tab is active. Include: (1) a 'Schedule Monthly Virtual Meeting' section with options to meet the class teacher or optionally the HOD, showing available time slots (mock data) and a confirm/schedule button; (2) a performance discussion notes area showing the agenda topics for the upcoming meeting; (3) a parent feedback submission form with a text area for written feedback and an improvement suggestion text field; (4) a parent satisfaction rating system with a 5-star rating input and a submit button. Style this panel as a visually distinct full-width bottom strip with a soft blue accent background that clearly separates it from the main content area.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-print-download-monthly-pdf-report-button-to-the-parentinsightportal-header-area-clicking-this-button-should-trigger-the-browser-s-native-print-dialog-window-print-with-print-specific-css-applied-so-that-the-currently-visible-dashboard-content-renders-in-a-clean-report-style-printable-layout-hiding-the-navigation-bars-interactive-controls-and-sidebar-elements-while-preserving-charts-progress-meters-performance-data-and-summary-cards",
+      "title": "Add a 'Print / Download Monthly PDF Report' button to the ParentInsightPortal header area. Clicking this button should trigger the browser's native print dialog (window.print()) with print-specific CSS applied so that the currently visible dashboard content renders in a clean, report-style printable layout — hiding the navigation bars, interactive controls, and sidebar elements while preserving charts, progress meters, performance data, and summary cards.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-css-custom-properties-design-tokens-for-the-parent-insight-portal-in-frontend-src-index-css-use-a-soft-sky-blue-and-white-primary-palette-e-g-oklch-based-tokens-for-parent-primary-parent-surface-parent-accent-parent-text-that-is-distinct-from-the-teal-emerald-student-palette-and-the-dark-blue-institute-palette-apply-these-tokens-throughout-all-parentinsightportal-sub-components-to-achieve-a-clean-emotional-trust-building-premium-aesthetic-ensure-the-theme-respects-the-existing-light-dark-mode-toggle",
+      "title": "Define and apply CSS custom properties (design tokens) for the Parent Insight Portal in frontend/src/index.css. Use a soft sky blue and white primary palette (e.g., OKLCH-based tokens for parent-primary, parent-surface, parent-accent, parent-text) that is distinct from the teal/emerald student palette and the dark blue institute palette. Apply these tokens throughout all ParentInsightPortal sub-components to achieve a clean, emotional, trust-building premium aesthetic. Ensure the theme respects the existing light/dark mode toggle.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Fixed horizontal top navigation bar with 6 tabs, active tab underline/highlight, smooth transition animations, no page reload",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Personalized Academic Roadmaps section: branch dropdown, semester timeline, subject cards, teacher details, exam tracker, progress bars, integrations (Google Classroom, LeetCode, GitHub)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Competitive Exam Hub section: exam profile creation, exam dropdown, student profile cards, match indicator, study group creation, chat option (LinkedIn-style)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Smart Notifications & Goals section: calendar interface, upcoming exams, assignment reminders, countdown timers, goal creation, streak tracker, achievement badges",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Skill-Based Team Selection section: software/hardware toggle, student profile cards with skills/GitHub/LinkedIn, skill search, hackathon listings, invite to team button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Sustainable Marketplace section: product grid, categories, rent/sell tags, price display, chat with seller, ratings and reviews (e-commerce style)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Anti-Trap Feedback section: complaint form, company tagging, proof upload, scam report feed, verified/warning badges, comment section (community reporting platform)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Overall design: minimal tech startup vibe, soft gradients, rounded cards, clean typography, light + dark mode toggle, smooth hover animations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Faculty Intelligence Hub: 7th nav tab opening a Teacher Dashboard System with Smartboard Connected Teaching, Class & Topic Tracking, Student Performance & Reports, Faculty Networking & Ranking, Integrations (Google Classroom, GitHub, LinkedIn), Academic Control Panel, and AI Teaching Assistant. Blue/white professional education dashboard aesthetic.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add 'Institute Intelligence Command Center' as an 8th nav tab — premium executive admin dashboard with 4 sub-menus: Institutional Performance Analytics (branch/division/teacher/student analytics, college comparison with IITs/NITs, gap analysis), Faculty & Staff Optimization System (HR-style teacher performance, training recommendations, replace/approve faculty), Student Growth & Transformation Engine (AI improvement plans, skill gaps, placement readiness, mentorship), and Infrastructure Technology & Placement Control (lab/facility tracking, company outreach, placement forecasting). Includes Campus Environment & Smart Governance Layer with Smart Campus Score. Dark blue/white/silver theme.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Add 'Parent Insight Portal' as a 9th nav tab — a secure, trust-building parent dashboard with soft blue/white theme. Contains 3 menus: (1) Student Growth & Activity Report (academic overview, achievements, career/exam prep, monthly performance summary with AI recommendations), (2) Faculty & Teaching Transparency (teacher profiles, qualifications, engagement scores, syllabus completion, expert faculty indicator), (3) Institute Development & Environment Report (infrastructure, placement, college comparison, campus environment). Includes persistent Monthly Parent Connect System at the bottom with virtual meeting scheduling, feedback submission, and parent satisfaction rating. Printable monthly PDF report option.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "SmartCampus Connect",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

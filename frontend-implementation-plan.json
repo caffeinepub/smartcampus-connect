@@ -1,0 +1,184 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add Parent Insight Portal as 9th navigation tab with 3 menus and Monthly Parent Connect System",
+  "requirements": [
+    {
+      "id": "REQ-25",
+      "summary": "Add 'Parent Insight Portal' as a 9th navigation tab in Navbar with routing",
+      "acceptanceCriteria": [
+        "Navbar displays 9 tabs including 'Parent Insight Portal' in a single horizontal line",
+        "Clicking 'Parent Insight Portal' renders the ParentInsightPortal component without a page reload",
+        "Active tab shows underline and subtle color highlight consistent with existing tabs",
+        "Tab switch triggers smooth CSS transition animation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Add 'Parent Insight Portal' as the 9th tab item with an appropriate icon (e.g., Users or UserCheck icon from lucide-react). Include the tab ID 'parent-insight-portal' in the tabs array following the same structure as existing 8 tabs. Ensure the tab label, icon, and responsive short/full label display follow existing conventions. The active tab state, underline, and color highlight will automatically apply via the existing TabContext and CSS transitions."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add 'parent-insight-portal' to the TabId union type and the tabs array. Import and register the ParentInsightPortal component in the renderActiveTab function so clicking the new tab renders it. Ensure the tab follows the same structure as existing tabs with id, label, and icon properties."
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "create",
+          "description": "Create the root ParentInsightPortal component scaffold. This will serve as the container for the three main menus and the persistent Monthly Parent Connect System panel. Include a placeholder structure that will be populated in subsequent requirements."
+        }
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "summary": "Create ParentInsightPortal root component with 3-menu secondary tab bar and persistent Monthly Parent Connect panel",
+      "acceptanceCriteria": [
+        "Component renders at frontend/src/components/tabs/ParentInsightPortal.tsx",
+        "Secondary horizontal tab bar displays all 3 menu options",
+        "Switching between menus triggers smooth animated transitions",
+        "Persistent Monthly Parent Connect System panel is always visible at the bottom",
+        "Visual theme uses soft blue and white palette with clean, premium typography"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Implement the full ParentInsightPortal component structure with: (1) A secondary horizontal tab bar for navigating between 'Student Growth & Activity Report', 'Faculty & Teaching Transparency', and 'Institute Development & Environment Report'. Use local state to track the active sub-menu. (2) A content area that conditionally renders the active menu component with smooth fade/slide transitions using CSS or Tailwind transition classes. (3) A persistent full-width bottom panel for the Monthly Parent Connect System, visually separated with a soft blue accent background. Apply parent portal CSS tokens (defined in REQ-32) for backgrounds, cards, and accents. Use clean typography (Inter/Space Grotesk from existing config) and ensure the layout feels premium and trust-building."
+        }
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "summary": "Build 'Student Growth & Activity Report' menu with 4 sub-sections: Academic Overview, Activities & Achievements, Career & Exam Preparation, Monthly Performance Summary",
+      "acceptanceCriteria": [
+        "Academic Overview displays branch, division, semester progress, subject performance, attendance, assignment completion, and skill development",
+        "Activities & Achievements section displays hackathon participation, competitions, awards, club and event involvement, and leadership roles",
+        "Career & Exam Preparation section shows competitive exam target, placement readiness score, internship status, certifications, and coding progress",
+        "Monthly Performance Summary shows an improvement trend graph, strength areas, weak areas, and an AI growth recommendation card",
+        "Layout uses charts and progress meters consistent with a report card aesthetic"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/StudentGrowthActivityReport.tsx",
+          "operation": "create",
+          "description": "Create the StudentGrowthActivityReport component with four distinct sub-sections: (1) Academic Overview — display branch/division, semester progress indicator, subject-wise performance cards showing internal marks, attendance percentage, assignment completion rate, and skill development progress bars using mock data. (2) Activities & Achievements — render a visual achievement gallery with cards for hackathon participation, competitions attended, awards/certificates, club involvement, events participated, and leadership roles. (3) Career & Exam Preparation — show competitive exam target (GATE, UPSC, CAT, GRE, etc.), placement readiness score as a percentage meter, internship status badge, certifications completed list, and a coding progress summary card displaying mock LeetCode stats and GitHub contribution summary. (4) Monthly Performance Summary — render an SVG or CSS-based improvement trend line graph, lists of strength and weak areas, and an AI recommendation card for growth using mock suggestions. Use elegant report card layout with charts, progress meters, and a growth timeline visual. Apply parent portal design tokens for cards, backgrounds, and accents."
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Import StudentGrowthActivityReport and conditionally render it when the 'Student Growth & Activity Report' sub-menu tab is active. Ensure smooth transitions when switching between sub-menus."
+        }
+      ]
+    },
+    {
+      "id": "REQ-28",
+      "summary": "Build 'Faculty & Teaching Transparency' menu with teacher profiles, class teacher/HOD cards, per-teacher metrics, class comparison, and faculty quality trust indicator",
+      "acceptanceCriteria": [
+        "Teacher profile cards display name, subject, qualification, experience, specialization, LinkedIn link, and background note",
+        "Class teacher and HOD names are prominently displayed",
+        "Each teacher card shows engagement score, syllabus completion progress bar, and feedback summary",
+        "Class performance comparison is shown",
+        "'Is your child being guided by expert faculty?' trust indicator badge is displayed at the top and reflects an overall faculty quality assessment"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/FacultyTeachingTransparency.tsx",
+          "operation": "create",
+          "description": "Create the FacultyTeachingTransparency component displaying: (1) A prominent 'Is your child being guided by expert faculty?' trust indicator badge at the top showing an overall faculty quality score using a large badge or score meter. (2) Class teacher and HOD name cards displayed prominently near the top. (3) A grid of teacher profile cards, one per subject the child is enrolled in, each card showing: teacher name, subject taught, qualification, years of experience, specialization, a LinkedIn profile preview link (external link icon), and a research or industry background note. (4) Per-teacher metrics including teacher engagement score (progress circle or bar), syllabus completion status progress bar, and teaching feedback summary rating (star rating or score out of 5). (5) A class performance comparison indicator showing how the child's class compares to other divisions (e.g., bar chart or comparison card). Use professional profile card layout with performance indicator meters. Apply parent portal design tokens for cards and accents."
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Import FacultyTeachingTransparency and conditionally render it when the 'Faculty & Teaching Transparency' sub-menu tab is active."
+        }
+      ]
+    },
+    {
+      "id": "REQ-29",
+      "summary": "Build 'Institute Development & Environment Report' menu with 4 sub-sections: Infrastructure & Facilities, Placement & Industry Exposure, Comparison with Top Colleges, Campus Environment",
+      "acceptanceCriteria": [
+        "Infrastructure & Facilities section shows smartboard usage, lab upgrades, new tech, software tools, and industry collaboration",
+        "Placement & Industry Exposure section shows visiting companies, average package trend chart, internship tie-ups, and workshops",
+        "Comparison with Top Colleges section shows syllabus alignment, curriculum updates, modernization score meter, and innovation initiatives",
+        "Campus Environment section shows student satisfaction index, faculty quality index, campus improvement updates, and anti-trap safety status",
+        "Layout uses executive summary style with trust indicators"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/InstituteDevelopmentEnvironmentReport.tsx",
+          "operation": "create",
+          "description": "Create the InstituteDevelopmentEnvironmentReport component with four sub-sections: (1) Infrastructure & Facilities — display smartboard usage rate, lab upgrade updates, new technology introduced, software tools added, and industry collaboration updates as a timeline or card list with status badges. (2) Placement & Industry Exposure — show new companies visiting, an average package trend chart (year-on-year SVG or CSS line chart), internship tie-ups count, and industry workshops conducted count. (3) Comparison with Top Colleges — display syllabus alignment with trending technologies, skill-based curriculum update notes, a modernization score meter (circular progress or gauge), and innovation initiatives list. (4) Campus Environment — show student satisfaction index score, faculty quality index score, campus improvement updates timeline, and an anti-trap safety reports status badge. Use an executive summary dashboard layout with trust indicators (badges, score meters) and data-driven visual elements. Apply parent portal design tokens."
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Import InstituteDevelopmentEnvironmentReport and conditionally render it when the 'Institute Development & Environment Report' sub-menu tab is active."
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Build persistent Monthly Parent Connect System panel with meeting scheduling, discussion agenda, feedback form, and satisfaction rating",
+      "acceptanceCriteria": [
+        "Monthly Parent Connect panel is always visible at the bottom of the dashboard across all 3 menu tabs",
+        "Virtual meeting scheduling section shows options to meet class teacher or HOD with mock time slots and a confirm button",
+        "Performance discussion agenda topics are displayed",
+        "Parent feedback form includes a text area and improvement suggestion field with a submit button",
+        "Parent satisfaction rating system with 5-star input and submit button is present",
+        "Panel is visually distinct with a soft blue accent background separating it from main content"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/MonthlyParentConnectPanel.tsx",
+          "operation": "create",
+          "description": "Create the MonthlyParentConnectPanel component as a persistent full-width bottom panel. Include: (1) A 'Schedule Monthly Virtual Meeting' section with radio buttons or dropdown to select meeting with class teacher or HOD, a list of available mock time slots (e.g., radio buttons or clickable time cards), and a confirm/schedule button. (2) A performance discussion notes area displaying agenda topics for the upcoming meeting as a bullet list or card. (3) A parent feedback submission form with a labeled text area for written feedback and a separate text field for improvement suggestions, with a submit button. (4) A parent satisfaction rating system with 5-star rating input (interactive star icons) and a submit button. Style the panel with a soft blue accent background (using parent portal tokens) that visually separates it from the main content above. Use a clean, organized layout with sections clearly labeled and spaced."
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Import MonthlyParentConnectPanel and render it persistently at the bottom of the ParentInsightPortal component layout, below the active sub-menu content, so it remains visible regardless of which sub-menu tab is active."
+        }
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "summary": "Add 'Print / Download Monthly PDF Report' button to ParentInsightPortal header with print-optimized CSS",
+      "acceptanceCriteria": [
+        "A 'Print / Download Monthly Report' button is visible in the ParentInsightPortal header",
+        "Clicking the button triggers window.print()",
+        "Print CSS hides navigation bars, tab controls, and interactive buttons",
+        "Print layout preserves charts, progress bars, performance data, and summary cards in a clean report format"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Add a 'Print / Download Monthly Report' button in the ParentInsightPortal header area (above the secondary tab bar). Attach an onClick handler that calls window.print(). Use an icon button with a printer icon from lucide-react and a visible label. Style it consistently with parent portal theme."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add print-specific CSS rules within an @media print block. Hide the Navbar, the secondary tab bar in ParentInsightPortal, the print button itself, the theme toggle, and interactive form controls (buttons in the Monthly Parent Connect panel). Preserve charts, progress bars, performance data cards, summary sections, and text content. Ensure the layout is clean and report-style suitable for PDF generation via browser print. Use page-break rules if needed to avoid awkward breaks within sections."
+        }
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "summary": "Define CSS custom properties (design tokens) for Parent Insight Portal soft blue and white theme in index.css",
+      "acceptanceCriteria": [
+        "CSS custom properties for parent portal palette are defined in frontend/src/index.css",
+        "Tokens are distinct from existing student (teal/emerald) and institute (dark blue/silver) palettes",
+        "All ParentInsightPortal components use these tokens for backgrounds, cards, accents, and text",
+        "Light/dark mode toggle correctly applies parent portal theme variants"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define CSS custom properties for the Parent Insight Portal theme using OKLCH-based tokens. Add variables under both :root (light mode) and .dark (dark mode) selectors. Use a soft sky blue primary color (e.g., OKLCH lightness ~0.7, chroma ~0.08, hue ~230-240 for light mode; adjust lightness/chroma for dark mode) distinct from the existing teal/emerald student palette and dark blue institute palette. Define tokens for: --parent-primary (main accent), --parent-primary-hover, --parent-surface (card background), --parent-border, --parent-accent (highlights, badges), --parent-text, --parent-text-muted. Ensure these tokens work in both light and dark mode. Document the tokens with comments indicating they are for the Parent Insight Portal. All ParentInsightPortal sub-components will reference these tokens via Tailwind utility classes or direct CSS custom property usage."
+        }
+      ]
+    }
+  ]
+}
