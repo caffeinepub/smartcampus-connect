@@ -1,39 +1,43 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "NIRGRANTHA is a closed, institution-specific, AI-powered EdTech platform (formerly called SmartCampus) designed to transform Tier-2 Indian engineering colleges. It features 4 portals (Student, Teacher, Institute, Parent) with modules covering academic roadmaps, AI-powered calendars, campus guides, career navigation, hackathon team matching, and a project marketplace. The website starts with a 'Welcome to NIRGRANTHA' landing page, followed by a role-based login page that routes users to their respective dashboards.",
+  "summary": "EduManage platform with role-based login system. Each role (Student, Teacher, Institute, Parents) has a dedicated login that shows only their relevant menu/dashboard upon authentication.",
   "architectural_notes": [
-    "Stack: React.js (web), React Native (mobile), Node.js + Express (backend), PostgreSQL + MongoDB, Python FastAPI for AI/ML",
-    "Platform is institution-specific and closed — not a public social network; acts as a bridge to GitHub, LinkedIn, LeetCode, NPTEL",
-    "Biometric auth (facial recognition via OpenCV/FaceNet + fingerprint) used for daily login after initial credential setup",
-    "AI components: NLP chatbot, adaptive notification engine, dropout predictor, smart board AI, automated parent report generator, scam detection NLP",
-    "External integrations: GitHub API, LinkedIn API, LeetCode API, Google Classroom API, NPTEL/SWAYAM, Razorpay for marketplace payments"
+    "Role-based authentication: separate login entry points per role (student/teacher/institute/parents), each routing to role-specific dashboard and menus"
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Abstract dark-gradient hero background with subtle glowing circuit-board or neural-network line art motif in deep teal and gold tones (nirgrantha-hero-bg.dim_1920x1080.png)\n- Stylized NIRGRANTHA wordmark logo with a geometric academic cap or connected-node icon in gold and white on a transparent background (nirgrantha-logo.dim_480x120.png)",
+  "imageRequirements": "## Required Images\n- EduManage campus portal logo mark — a modern graduation cap combined with a circuit/network node motif, flat vector style with clean lines (edumanage-logo.dim_256x256.png)",
   "existing_features": [
     {
-      "id": "feature-create-a-full-screen-welcome-landing-page-as-the-very-first-screen-users-see-when-visiting-the-site-it-must-prominently-display-welcome-to-nirgrantha-as-the-hero-heading-include-the-company-name-nirgrantha-styled-as-the-brand-and-provide-a-clear-call-to-action-button-e-g-get-started-or-enter-portal-that-navigates-the-user-to-the-role-selection-login-page-this-page-should-appear-before-any-login-or-role-selection-ui",
-      "title": "Create a full-screen welcome landing page as the very first screen users see when visiting the site. It must prominently display 'Welcome to NIRGRANTHA' as the hero heading, include the company name 'NIRGRANTHA' styled as the brand, and provide a clear call-to-action button (e.g., 'Get Started' or 'Enter Portal') that navigates the user to the role selection / login page. This page should appear before any login or role selection UI.",
+      "id": "feature-create-a-login-landing-page-inspired-by-https-edumanage-9ftdqajs-manus-space-login-teacher-that-presents-four-role-based-login-entry-points-student-teacher-institute-and-parents-each-role-card-button-should-navigate-to-a-dedicated-login-route-e-g-login-student-login-teacher-login-institute-login-parent-the-visual-design-should-include-a-role-selector-with-distinct-icons-and-role-appropriate-accent-colors-consistent-with-the-existing-per-role-design-tokens-already-defined-in-index-css",
+      "title": "Create a login landing page (inspired by https://edumanage-9ftdqajs.manus.space/login/teacher) that presents four role-based login entry points: Student, Teacher, Institute, and Parents. Each role card/button should navigate to a dedicated login route (e.g., /login/student, /login/teacher, /login/institute, /login/parent). The visual design should include a role selector with distinct icons and role-appropriate accent colors consistent with the existing per-role design tokens already defined in index.css.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-app-navigation-flow-in-app-tsx-to-introduce-a-new-welcome-view-state-as-the-initial-state-replacing-landing-as-the-first-shown-view-the-sequence-must-be-welcome-page-role-selection-login-page-role-specific-dashboard-ensure-the-existing-role-based-login-and-dashboard-logic-is-preserved-unchanged",
-      "title": "Update the app navigation flow in App.tsx to introduce a new 'welcome' view state as the initial state (replacing 'landing' as the first shown view). The sequence must be: welcome page → role selection/login page → role-specific dashboard. Ensure the existing role-based login and dashboard logic is preserved unchanged.",
+      "id": "feature-implement-per-role-login-pages-at-login-student-login-teacher-login-institute-and-login-parent-each-page-shows-a-login-form-username-password-fields-with-a-submit-button-no-backend-authentication-required-use-mock-static-credentials-or-simply-a-single-enter-as-role-button-on-successful-login-store-the-active-role-in-react-state-or-context-and-redirect-to-the-main-app",
+      "title": "Implement per-role login pages at /login/student, /login/teacher, /login/institute, and /login/parent. Each page shows a login form (username/password fields with a Submit button — no backend authentication required, use mock/static credentials or simply a single 'Enter as [Role]' button). On successful login, store the active role in React state or context and redirect to the main app.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-apply-a-visually-rich-cohesive-design-theme-to-the-welcome-landing-page-that-reflects-nirgrantha-s-identity-as-an-ai-powered-edtech-platform-for-indian-engineering-colleges-use-a-bold-modern-color-palette-with-deep-gradients-elegant-typography-for-the-brand-name-subtle-animated-or-decorative-background-elements-and-a-professional-yet-energetic-visual-style-ensure-the-theme-is-consistent-with-the-existing-portal-design-tokens-defined-in-the-project",
-      "title": "Apply a visually rich, cohesive design theme to the welcome landing page that reflects NIRGRANTHA's identity as an AI-powered EdTech platform for Indian engineering colleges. Use a bold, modern color palette with deep gradients, elegant typography for the brand name, subtle animated or decorative background elements, and a professional yet energetic visual style. Ensure the theme is consistent with the existing portal design tokens defined in the project.",
+      "id": "feature-after-login-render-only-the-menu-and-dashboard-that-belongs-to-the-authenticated-role-student-login-show-only-the-student-dashboard-and-its-sub-navigation-academic-roadmaps-exam-hub-goals-teams-marketplace-feedback-teacher-login-show-only-the-faculty-hub-and-its-sub-navigation-institute-login-show-only-the-institute-command-center-and-its-sub-navigation-parents-login-show-only-the-parent-insight-portal-and-its-sub-navigation-all-other-role-tabs-must-be-hidden-from-the-navbar",
+      "title": "After login, render only the menu and dashboard that belongs to the authenticated role. Student login → show only the Student dashboard and its sub-navigation (Academic Roadmaps, Exam Hub, Goals, Teams, Marketplace, Feedback). Teacher login → show only the Faculty Hub and its sub-navigation. Institute login → show only the Institute Command Center and its sub-navigation. Parents login → show only the Parent Insight Portal and its sub-navigation. All other role tabs must be hidden from the Navbar.",
       "reqIds": [
         "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-role-aware-auth-context-e-g-authcontext-that-stores-the-currently-logged-in-role-student-teacher-institute-parent-null-this-context-should-be-consumed-by-the-navbar-to-conditionally-render-tabs-and-by-the-app-router-to-guard-routes-unauthenticated-users-are-redirected-to-the-login-landing-page",
+      "title": "Add a role-aware auth context (e.g., AuthContext) that stores the currently logged-in role ('student' | 'teacher' | 'institute' | 'parent' | null). This context should be consumed by the Navbar to conditionally render tabs, and by the App router to guard routes — unauthenticated users are redirected to the login landing page.",
+      "reqIds": [
+        "REQ-4"
       ],
       "version": 1
     }
@@ -41,43 +45,13 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Welcome landing page with 'Welcome to NIRGRANTHA' branding as the entry point before login",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Role-based login page routing students, teachers, institute staff, and parents to their respective dashboards",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Student Portal with 6 modules: Academic Roadmap, AI Calendar, Campus Guide + Scam Alert, Career Navigator, Hackathon & Events Network, Project Marketplace",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Teacher Portal with lesson continuity engine, material uploads, smart board AI integration, and anonymous student feedback",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Institute Portal with HOD activity feed, healthy HOD competition display, smart lab booking, startup incubation module, and analytics",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Parent Portal with read-only AI-generated monthly growth reports, welfare alerts, and activity summaries",
+      "summary": "Role-based login: Student login shows student menus, Teacher login shows teacher menus, Institute login shows institute menus, Parents login shows parents menus",
       "reqIds": [],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "NIRGRANTHA",
+  "projectName": "EduManage",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-full-screen-welcome-landing-page-as-the-very-first-screen-users-see-when-visiting-the-site-it-must-prominently-display-welcome-to-nirgrantha-as-the-hero-heading-include-the-company-name-nirgrantha-styled-as-the-brand-and-provide-a-clear-call-to-action-button-e-g-get-started-or-enter-portal-that-navigates-the-user-to-the-role-selection-login-page-this-page-should-appear-before-any-login-or-role-selection-ui",
-      "featureTitle": "Create a full-screen welcome landing page as the very first screen users see when visiting the site. It must prominently display 'Welcome to NIRGRANTHA' as the hero heading, include the company name 'NIRGRANTHA' styled as the brand, and provide a clear call-to-action button (e.g., 'Get Started' or 'Enter Portal') that navigates the user to the role selection / login page. This page should appear before any login or role selection UI.",
+      "featureId": "feature-create-a-login-landing-page-inspired-by-https-edumanage-9ftdqajs-manus-space-login-teacher-that-presents-four-role-based-login-entry-points-student-teacher-institute-and-parents-each-role-card-button-should-navigate-to-a-dedicated-login-route-e-g-login-student-login-teacher-login-institute-login-parent-the-visual-design-should-include-a-role-selector-with-distinct-icons-and-role-appropriate-accent-colors-consistent-with-the-existing-per-role-design-tokens-already-defined-in-index-css",
+      "featureTitle": "Create a login landing page (inspired by https://edumanage-9ftdqajs.manus.space/login/teacher) that presents four role-based login entry points: Student, Teacher, Institute, and Parents. Each role card/button should navigate to a dedicated login route (e.g., /login/student, /login/teacher, /login/institute, /login/parent). The visual design should include a role selector with distinct icons and role-appropriate accent colors consistent with the existing per-role design tokens already defined in index.css.",
       "files": [
-        "frontend/src/components/WelcomePage.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/RoleSelectionLanding.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -20,10 +21,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-app-navigation-flow-in-app-tsx-to-introduce-a-new-welcome-view-state-as-the-initial-state-replacing-landing-as-the-first-shown-view-the-sequence-must-be-welcome-page-role-selection-login-page-role-specific-dashboard-ensure-the-existing-role-based-login-and-dashboard-logic-is-preserved-unchanged",
-      "featureTitle": "Update the app navigation flow in App.tsx to introduce a new 'welcome' view state as the initial state (replacing 'landing' as the first shown view). The sequence must be: welcome page → role selection/login page → role-specific dashboard. Ensure the existing role-based login and dashboard logic is preserved unchanged.",
+      "featureId": "feature-implement-per-role-login-pages-at-login-student-login-teacher-login-institute-and-login-parent-each-page-shows-a-login-form-username-password-fields-with-a-submit-button-no-backend-authentication-required-use-mock-static-credentials-or-simply-a-single-enter-as-role-button-on-successful-login-store-the-active-role-in-react-state-or-context-and-redirect-to-the-main-app",
+      "featureTitle": "Implement per-role login pages at /login/student, /login/teacher, /login/institute, and /login/parent. Each page shows a login form (username/password fields with a Submit button — no backend authentication required, use mock/static credentials or simply a single 'Enter as [Role]' button). On successful login, store the active role in React state or context and redirect to the main app.",
       "files": [
-        "frontend/src/App.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/RoleLoginPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -38,11 +40,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-apply-a-visually-rich-cohesive-design-theme-to-the-welcome-landing-page-that-reflects-nirgrantha-s-identity-as-an-ai-powered-edtech-platform-for-indian-engineering-colleges-use-a-bold-modern-color-palette-with-deep-gradients-elegant-typography-for-the-brand-name-subtle-animated-or-decorative-background-elements-and-a-professional-yet-energetic-visual-style-ensure-the-theme-is-consistent-with-the-existing-portal-design-tokens-defined-in-the-project",
-      "featureTitle": "Apply a visually rich, cohesive design theme to the welcome landing page that reflects NIRGRANTHA's identity as an AI-powered EdTech platform for Indian engineering colleges. Use a bold, modern color palette with deep gradients, elegant typography for the brand name, subtle animated or decorative background elements, and a professional yet energetic visual style. Ensure the theme is consistent with the existing portal design tokens defined in the project.",
+      "featureId": "feature-after-login-render-only-the-menu-and-dashboard-that-belongs-to-the-authenticated-role-student-login-show-only-the-student-dashboard-and-its-sub-navigation-academic-roadmaps-exam-hub-goals-teams-marketplace-feedback-teacher-login-show-only-the-faculty-hub-and-its-sub-navigation-institute-login-show-only-the-institute-command-center-and-its-sub-navigation-parents-login-show-only-the-parent-insight-portal-and-its-sub-navigation-all-other-role-tabs-must-be-hidden-from-the-navbar",
+      "featureTitle": "After login, render only the menu and dashboard that belongs to the authenticated role. Student login → show only the Student dashboard and its sub-navigation (Academic Roadmaps, Exam Hub, Goals, Teams, Marketplace, Feedback). Teacher login → show only the Faculty Hub and its sub-navigation. Institute login → show only the Institute Command Center and its sub-navigation. Parents login → show only the Parent Insight Portal and its sub-navigation. All other role tabs must be hidden from the Navbar.",
       "files": [
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navbar.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -53,6 +55,25 @@
       ],
       "testIds": [
         "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-role-aware-auth-context-e-g-authcontext-that-stores-the-currently-logged-in-role-student-teacher-institute-parent-null-this-context-should-be-consumed-by-the-navbar-to-conditionally-render-tabs-and-by-the-app-router-to-guard-routes-unauthenticated-users-are-redirected-to-the-login-landing-page",
+      "featureTitle": "Add a role-aware auth context (e.g., AuthContext) that stores the currently logged-in role ('student' | 'teacher' | 'institute' | 'parent' | null). This context should be consumed by the Navbar to conditionally render tabs, and by the App router to guard routes — unauthenticated users are redirected to the login landing page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/contexts/AuthContext.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

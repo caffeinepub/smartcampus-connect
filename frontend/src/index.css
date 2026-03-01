@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -76,6 +76,8 @@
 
     /* ============================================
        Parent Insight Portal tokens (soft sky blue)
+       Distinct from teal/emerald (student) and
+       dark blue/silver (institute) palettes
        ============================================ */
     --parent-bg: oklch(0.975 0.008 230);
     --parent-header: oklch(1 0 0);
@@ -92,6 +94,8 @@
 
     /* ============================================
        Student Dashboard tokens (emerald/teal-to-cyan)
+       Distinct from faculty (indigo), institute (dark blue),
+       and parent (sky blue) palettes
        ============================================ */
     --student-bg: oklch(0.975 0.010 165);
     --student-header: oklch(1 0 0);
@@ -104,17 +108,6 @@
     --student-primary-hover: oklch(0.44 0.17 166);
     --student-accent-subtle: oklch(0.93 0.05 165);
     --student-badge-bg: oklch(0.92 0.06 163);
-
-    /* ============================================
-       NIRGRANTHA Welcome Page tokens
-       Deep teal + gold accent palette
-       ============================================ */
-    --nirgrantha-dark: oklch(0.10 0.04 220);
-    --nirgrantha-teal: oklch(0.55 0.18 185);
-    --nirgrantha-teal-light: oklch(0.78 0.16 185);
-    --nirgrantha-gold: oklch(0.78 0.18 55);
-    --nirgrantha-gold-light: oklch(0.88 0.16 60);
-    --nirgrantha-glow: 0 0 40px oklch(0.55 0.18 185 / 0.45);
   }
 
   .dark {
@@ -208,14 +201,6 @@
     --student-primary-hover: oklch(0.70 0.15 166);
     --student-accent-subtle: oklch(0.20 0.06 165);
     --student-badge-bg: oklch(0.22 0.07 163);
-
-    /* NIRGRANTHA Welcome Page tokens - dark (same, it's always dark) */
-    --nirgrantha-dark: oklch(0.08 0.04 220);
-    --nirgrantha-teal: oklch(0.60 0.18 185);
-    --nirgrantha-teal-light: oklch(0.80 0.16 185);
-    --nirgrantha-gold: oklch(0.80 0.18 55);
-    --nirgrantha-gold-light: oklch(0.88 0.16 60);
-    --nirgrantha-glow: 0 0 40px oklch(0.60 0.18 185 / 0.50);
   }
 
   * {
@@ -282,16 +267,13 @@
   .animate-pulse-ring {
     animation: pulse-ring 2s infinite;
   }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.35s ease-out forwards;
-  }
 }
 
 /* ============================================
    Print Styles for Parent Insight Portal
    ============================================ */
 @media print {
+  /* Hide navigation and interactive elements */
   header,
   .no-print,
   .print-btn,
@@ -299,6 +281,7 @@
     display: none !important;
   }
 
+  /* Reset page layout */
   body {
     background: white !important;
     color: black !important;
@@ -309,16 +292,19 @@
     padding-top: 0 !important;
   }
 
+  /* Ensure portal content fills page */
   .parent-portal-theme {
     min-height: auto !important;
   }
 
+  /* Card print styles */
   .card,
   [class*="rounded"] {
     box-shadow: none !important;
     border: 1px solid #ddd !important;
   }
 
+  /* Page breaks */
   section {
     page-break-inside: avoid;
   }

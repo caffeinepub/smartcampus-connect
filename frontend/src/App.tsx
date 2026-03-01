@@ -5,7 +5,6 @@ import StudentDashboard from './components/tabs/StudentDashboard';
 import FacultyIntelligenceHub from './components/tabs/FacultyIntelligenceHub';
 import InstituteCommandCenter from './components/tabs/InstituteCommandCenter';
 import ParentInsightPortal from './components/tabs/ParentInsightPortal';
-import WelcomePage from './components/WelcomePage';
 import RoleSelectionLanding from './components/RoleSelectionLanding';
 import RoleLoginPage from './components/RoleLoginPage';
 import { AuthProvider, useAuth, type UserRole } from './contexts/AuthContext';
@@ -42,27 +41,20 @@ const tabComponents: Record<TabId, React.ComponentType> = {
   'parent-insight-portal': ParentInsightPortal,
 };
 
-type AppView = 'welcome' | 'landing' | 'login' | 'dashboard';
+type AppView = 'landing' | 'login' | 'dashboard';
 
 function AppInner() {
   const { currentRole, login, logout } = useAuth();
   const [pendingRole, setPendingRole] = useState<UserRole | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>('student-dashboard');
-  const [hasEnteredPortal, setHasEnteredPortal] = useState(false);
 
   // Determine current view
-  let view: AppView = 'welcome';
+  let view: AppView = 'landing';
   if (currentRole) {
     view = 'dashboard';
   } else if (pendingRole) {
     view = 'login';
-  } else if (hasEnteredPortal) {
-    view = 'landing';
   }
-
-  const handleEnterPortal = () => {
-    setHasEnteredPortal(true);
-  };
 
   const handleSelectRole = (role: UserRole) => {
     setPendingRole(role);
@@ -81,19 +73,9 @@ function AppInner() {
   const handleLogout = () => {
     logout();
     setPendingRole(null);
-    setHasEnteredPortal(false);
   };
 
-  // Welcome page — first screen
-  if (view === 'welcome') {
-    return (
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <WelcomePage onEnter={handleEnterPortal} />
-      </ThemeProvider>
-    );
-  }
-
-  // Role selection landing
+  // Landing page
   if (view === 'landing') {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -134,21 +116,21 @@ function AppInner() {
             <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <img
-                  src="/assets/generated/nirgrantha-logo.dim_480x120.png"
-                  alt="NIRGRANTHA"
+                  src="/assets/generated/logo-smartcampus.dim_320x64.png"
+                  alt="SmartCampus Connect"
                   className="h-7 w-auto opacity-80"
                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                © {new Date().getFullYear()} NIRGRANTHA. All rights reserved.
+                © {new Date().getFullYear()} EduManage. All rights reserved.
               </p>
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 Built with{' '}
                 <span className="text-red-500">♥</span>{' '}
                 using{' '}
                 <a
-                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'nirgrantha')}`}
+                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'edumanage')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline font-medium"

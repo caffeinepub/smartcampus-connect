@@ -1,64 +1,100 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Welcome Landing Page with NIRGRANTHA Branding Before Login",
+  "title": "Role-based login screen with per-role menu isolation",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Create a full-screen welcome landing page displaying 'Welcome to NIRGRANTHA' with brand styling and a call-to-action button that navigates to the role selection page",
+      "summary": "Create a login landing page with four role-based login entry points (Student, Teacher, Institute, Parents) that navigate to dedicated login routes",
       "acceptanceCriteria": [
-        "The first screen displayed when the app loads is the welcome page, not the role selection or login page.",
-        "The welcome page displays the heading 'Welcome to NIRGRANTHA' prominently.",
-        "The company name 'NIRGRANTHA' is styled distinctively as a brand name.",
-        "A call-to-action button is present that, when clicked, navigates to the role selection / login page.",
-        "After clicking the CTA, the role selection login page is shown as the next step.",
-        "After a role is selected and login is completed, the appropriate role-specific dashboard is displayed as before."
+        "A landing page is shown at the root route (/) with four role login options: Student, Teacher, Institute, Parents.",
+        "Each role option links to its own login route.",
+        "Visual style references the reference URL design with role cards or segmented tabs.",
+        "Role accent colors use existing CSS custom property tokens (student, faculty, institute, parent)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/WelcomePage.tsx",
+          "path": "frontend/src/components/RoleSelectionLanding.tsx",
           "operation": "create",
-          "description": "Create a new WelcomePage component that displays the NIRGRANTHA brand name prominently with the generated logo image at frontend/public/assets/generated/nirgrantha-logo.dim_480x120.png, a hero heading 'Welcome to NIRGRANTHA', and a call-to-action button (e.g., 'Get Started' or 'Enter Portal'). The component should use the generated hero background image at frontend/public/assets/generated/nirgrantha-hero-bg.dim_1920x1080.png as a full-screen backdrop with deep gradients and subtle decorative effects. Include a prop `onEnter` callback that triggers navigation to the role selection page when the CTA button is clicked. Apply modern, bold typography for the brand name using the existing design tokens from the project's theme configuration."
+          "description": "Create a landing page component that presents four role-based login entry points (Student, Teacher, Institute, Parents) as cards or buttons. Each card should display the role name, a distinct icon, and use role-appropriate accent colors from the existing CSS custom properties (--student-*, --faculty-*, --institute-*, --parent-*). Reference the generated logo image at frontend/public/assets/generated/edumanage-logo.dim_256x256.png for branding. Each role card links to its dedicated login route (/login/student, /login/teacher, /login/institute, /login/parent). Use the existing shadcn/ui Card and Button components for UI consistency."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update the App component to serve as a router that conditionally renders RoleSelectionLanding at the root route (/) or the appropriate role-specific login page or authenticated dashboard based on the current route and authentication state. The component should consume AuthContext (to be created in REQ-4) to determine if a user is authenticated and which role they have selected. Maintain the existing ThemeProvider wrapper and preserve all existing tab components."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Update App.tsx navigation flow to add 'welcome' as the initial view state, ensuring the sequence: welcome page → role selection → role-specific dashboard",
+      "summary": "Implement per-role login pages that accept mock credentials and redirect to the main app after storing the active role",
       "acceptanceCriteria": [
-        "App initializes showing the welcome page view.",
-        "Clicking the CTA on the welcome page transitions to the role selection/login view.",
-        "Logging in from the role selection page transitions to the correct role-specific dashboard.",
-        "Logging out returns the user to the welcome page (or role selection page at minimum).",
-        "No existing dashboard or login functionality is broken."
+        "Visiting /login/student shows a Student-themed login form.",
+        "Visiting /login/teacher shows a Teacher-themed login form.",
+        "Visiting /login/institute shows an Institute-themed login form.",
+        "Visiting /login/parent shows a Parent-themed login form.",
+        "Clicking login/enter on each page stores the selected role and redirects to the dashboard."
       ],
       "file_operations": [
         {
+          "path": "frontend/src/components/RoleLoginPage.tsx",
+          "operation": "create",
+          "description": "Create a reusable role-specific login page component that accepts a role prop ('student' | 'teacher' | 'institute' | 'parent'). The component should display a themed login form with username and password fields or a single 'Enter as [Role]' button (no real authentication required). Use the role prop to apply role-specific accent colors from existing CSS custom properties (--student-*, --faculty-*, --institute-*, --parent-*). On form submission or button click, call the login(role) function from AuthContext (to be created in REQ-4) to store the role and programmatically navigate to the appropriate dashboard route. Include the logo image at frontend/public/assets/generated/edumanage-logo.dim_256x256.png in the header. Use shadcn/ui Input, Label, and Button components."
+        },
+        {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Modify the App component to introduce a new view state 'welcome' as the initial state (replacing 'landing' as the first view shown). Import and render the WelcomePage component when the view state is 'welcome'. Wire the WelcomePage's onEnter callback to transition the view to 'landing' (the existing role selection page). Ensure the existing flow from role selection → login → dashboard remains unchanged. Update the logout handler to return users to the 'welcome' view. Preserve all existing AuthProvider, ThemeProvider wrapping, role-based routing, and dashboard rendering logic."
+          "description": "Wire the RoleLoginPage component into the App router to render it at routes /login/student, /login/teacher, /login/institute, and /login/parent, passing the corresponding role prop ('student', 'teacher', 'institute', 'parent') to each route. Ensure the router logic integrates with the AuthContext (to be created in REQ-4) so that authenticated users are redirected away from login routes to their appropriate dashboard."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Apply a visually rich, cohesive design theme to the welcome landing page reflecting NIRGRANTHA's identity as an AI-powered EdTech platform with bold gradients, elegant typography, and modern color palette",
+      "summary": "Render only the menu and dashboard belonging to the authenticated role, hiding all other role tabs from the Navbar",
       "acceptanceCriteria": [
-        "The welcome page has a distinctive, polished visual theme.",
-        "The brand name 'NIRGRANTHA' uses large, prominent typography.",
-        "The color scheme feels modern and appropriate for an EdTech platform.",
-        "The page is fully responsive and looks good on desktop and mobile."
+        "When logged in as Student, the Navbar shows only the Student tab and its sub-sections; Faculty Hub, Command Center, and Parent Portal tabs are not visible.",
+        "When logged in as Teacher, only Faculty Hub and its sub-sections are shown.",
+        "When logged in as Institute, only the Institute Command Center and its sub-sections are shown.",
+        "When logged in as Parents, only the Parent Insight Portal and its sub-sections are shown.",
+        "A logout button is visible on the Navbar that returns the user to the role selection landing page and clears the active role."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/src/components/Navbar.tsx",
           "operation": "modify",
-          "description": "Add CSS custom properties or utility classes for the NIRGRANTHA welcome page theme using deep teal and gold accent colors that complement the generated hero background image at frontend/public/assets/generated/nirgrantha-hero-bg.dim_1920x1080.png. Define typographic styles for the brand name 'NIRGRANTHA' using large, bold, elegant fonts. Ensure the theme integrates seamlessly with the existing portal design tokens and remains consistent with the overall project styling. The color palette should feel modern, professional, and energetic, appropriate for an AI-powered EdTech platform targeting Indian engineering colleges."
+          "description": "Modify the Navbar component to consume AuthContext (to be created in REQ-4) and conditionally render only the tab that corresponds to the currentRole. When currentRole is 'student', show only the Student tab. When 'teacher', show only Faculty Hub. When 'institute', show only Command. When 'parent', show only Parents. Hide all other role tabs. Add a logout button (using shadcn/ui Button) that calls the logout() function from AuthContext, clears the active role, and navigates the user back to the role selection landing page (/). Preserve the existing theme toggle and logo. Ensure the active tab highlighting still uses the existing per-role CSS custom properties."
         },
         {
-          "path": "frontend/tailwind.config.js",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Extend the Tailwind configuration to include custom utility classes or theme extensions for the NIRGRANTHA welcome page, such as custom gradient definitions using deep teal and gold tones, large heading font sizes for the brand name, and any additional design tokens needed for the welcome page visual theme. Ensure the extended configuration is additive and does not conflict with existing portal theme configurations (faculty, institute, parent, student)."
+          "description": "Update the App component to render only the dashboard component that matches the currentRole from AuthContext. When currentRole is 'student', render StudentDashboard. When 'teacher', render FacultyIntelligenceHub. When 'institute', render InstituteCommandCenter. When 'parent', render ParentInsightPortal. Do not render tabs for roles other than the currentRole. Ensure all existing dashboard components (StudentDashboard, FacultyIntelligenceHub, InstituteCommandCenter, ParentInsightPortal) remain intact and continue to function correctly with their sub-navigation and sub-sections."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add a role-aware AuthContext that stores the currently logged-in role and guards routes to redirect unauthenticated users",
+      "acceptanceCriteria": [
+        "AuthContext exposes currentRole and login(role) / logout() functions.",
+        "Navigating to / or any dashboard route while unauthenticated redirects to the role selection page.",
+        "Role persists across page refreshes (e.g., via sessionStorage or localStorage).",
+        "Logging out clears the role and redirects to the landing page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/contexts/AuthContext.tsx",
+          "operation": "create",
+          "description": "Create an AuthContext that manages the currently logged-in role as React state. Export an AuthProvider component that wraps children and provides { currentRole, login, logout } via context. currentRole should be typed as 'student' | 'teacher' | 'institute' | 'parent' | null. The login(role) function should update currentRole state and persist the role to localStorage (or sessionStorage) so it survives page refreshes. The logout() function should clear currentRole state, remove the persisted role from storage, and programmatically navigate to the root route (/). On component mount, read the persisted role from storage and restore it to state if present. Use React.createContext and useContext patterns."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Wrap the root App component with the AuthProvider from AuthContext so that all components in the application can access the currentRole and login/logout functions. Preserve the existing QueryClientProvider and InternetIdentityProvider wrappers. Do not modify the file structure or imports for useInternetIdentity or useActor hooks."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Consume AuthContext to implement route guards. If currentRole is null and the user navigates to any route other than /, /login/student, /login/teacher, /login/institute, or /login/parent, redirect them to the role selection landing page (/). If currentRole is set and the user navigates to / or a login route, redirect them to their appropriate dashboard route. Ensure the router logic correctly handles unauthenticated and authenticated states, and that role persistence across page refreshes works as expected by reading currentRole from AuthContext on mount."
         }
       ]
     }
