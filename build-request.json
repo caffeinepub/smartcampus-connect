@@ -1,211 +1,88 @@
 {
   "kind": "build_request",
-  "title": "Add Parent Insight Portal as 9th navigation tab with 3 menus and Monthly Parent Connect System",
-  "projectName": "SmartCampus Connect",
+  "title": "Add Welcome Landing Page with NIRGRANTHA Branding Before Login",
+  "projectName": "NIRGRANTHA",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-25",
-      "text": "Add 'Parent Insight Portal' as a 9th menu item to the existing fixed horizontal top navigation bar in Navbar.tsx. It must follow the same styling conventions as the existing 8 tabs: single-line layout, even spacing, active tab underline and subtle color highlight, smooth CSS transition on tab switch, and no page reload. Register the new tab in App.tsx so clicking it renders the ParentInsightPortal component located at frontend/src/components/tabs/ParentInsightPortal.tsx.",
+      "id": "REQ-1",
+      "text": "Create a full-screen welcome landing page as the very first screen users see when visiting the site. It must prominently display 'Welcome to NIRGRANTHA' as the hero heading, include the company name 'NIRGRANTHA' styled as the brand, and provide a clear call-to-action button (e.g., 'Get Started' or 'Enter Portal') that navigates the user to the role selection / login page. This page should appear before any login or role selection UI.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5"
         ],
         "quotes": [
-          "Add a new top navigation menu called: Parent Insight Portal",
-          "When clicked, it should open a secure dashboard designed only for parents."
+          "i want startinG welcome page witH company name NIRGRANTHA",
+          "company name startin of website sould be welcome to NIRGRANTHA",
+          "after tHat loin paes tHen according to login page it should sHow"
         ]
       },
       "acceptanceCriteria": [
-        "Navbar displays 9 tabs including 'Parent Insight Portal' in a single horizontal line",
-        "Clicking 'Parent Insight Portal' renders the ParentInsightPortal component without a page reload",
-        "Active tab shows underline and subtle color highlight consistent with existing tabs",
-        "Tab switch triggers smooth CSS transition animation"
+        "The first screen displayed when the app loads is the welcome page, not the role selection or login page.",
+        "The welcome page displays the heading 'Welcome to NIRGRANTHA' prominently.",
+        "The company name 'NIRGRANTHA' is styled distinctively as a brand name.",
+        "A call-to-action button is present that, when clicked, navigates to the role selection / login page.",
+        "After clicking the CTA, the role selection login page is shown as the next step.",
+        "After a role is selected and login is completed, the appropriate role-specific dashboard is displayed as before."
       ]
     },
     {
-      "id": "REQ-26",
-      "text": "Create frontend/src/components/tabs/ParentInsightPortal.tsx as the root component for the Parent Insight Portal. It must contain 3 main menus navigable via a secondary horizontal tab bar: (1) Student Growth & Activity Report, (2) Faculty & Teaching Transparency, (3) Institute Development & Environment Report. Additionally, embed a persistent Monthly Parent Connect System panel at the bottom of the dashboard, always visible regardless of which menu is active. The overall visual theme must be soft blue and white — clean, emotional, trust-building, and premium — resembling a transparent smart education window for parents, with smooth animated transitions between sub-sections.",
+      "id": "REQ-2",
+      "text": "Update the app navigation flow in App.tsx to introduce a new 'welcome' view state as the initial state (replacing 'landing' as the first shown view). The sequence must be: welcome page → role selection/login page → role-specific dashboard. Ensure the existing role-based login and dashboard logic is preserved unchanged.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5"
         ],
         "quotes": [
-          "Inside this portal, create 3 main menus",
-          "Soft blue + white theme (trust & transparency)",
-          "Clean typography",
-          "Emotional but professional",
-          "Report-style layout",
-          "Smooth animations"
+          "after tHat loin paes tHen according to login page it should sHow"
         ]
       },
       "acceptanceCriteria": [
-        "Component renders at frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "Secondary horizontal tab bar displays all 3 menu options",
-        "Switching between menus triggers smooth animated transitions",
-        "Persistent Monthly Parent Connect System panel is always visible at the bottom",
-        "Visual theme uses soft blue and white palette with clean, premium typography"
+        "App initializes showing the welcome page view.",
+        "Clicking the CTA on the welcome page transitions to the role selection/login view.",
+        "Logging in from the role selection page transitions to the correct role-specific dashboard.",
+        "Logging out returns the user to the welcome page (or role selection page at minimum).",
+        "No existing dashboard or login functionality is broken."
       ]
     },
     {
-      "id": "REQ-27",
-      "text": "Build the 'Student Growth & Activity Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Academic Overview — showing Branch & Division, semester progress indicator, subject-wise performance cards with internal marks, attendance percentage, assignment completion rate, and skill development progress bars; (2) Activities & Achievements — showing hackathon participation, competitions attended, awards & certificates, club involvement, events participated, and leadership roles as a visual achievement gallery; (3) Career & Exam Preparation — showing the competitive exam the student is preparing for (GATE, UPSC, CAT, GRE, etc.), placement readiness score, internship status badge, certifications completed list, and a coding progress summary card (LeetCode stats + GitHub contribution summary mock); (4) Monthly Performance Summary — showing an improvement graph (SVG/CSS-based trend line), strength areas list, weak areas list, and an AI recommendation card for growth (mock data). Use an elegant report card dashboard layout with charts, progress meters, and a growth timeline.",
+      "id": "REQ-3",
+      "text": "Apply a visually rich, cohesive design theme to the welcome landing page that reflects NIRGRANTHA's identity as an AI-powered EdTech platform for Indian engineering colleges. Use a bold, modern color palette with deep gradients, elegant typography for the brand name, subtle animated or decorative background elements, and a professional yet energetic visual style. Ensure the theme is consistent with the existing portal design tokens defined in the project.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5"
         ],
         "quotes": [
-          "MENU 1: Student Growth & Activity Report",
-          "Academic Overview",
-          "Activities & Achievements",
-          "Career & Exam Preparation",
-          "Monthly Performance Summary",
-          "Elegant report card dashboard with charts, progress meters, and growth timeline."
+          "i want startinG welcome page witH company name NIRGRANTHA"
         ]
       },
       "acceptanceCriteria": [
-        "Academic Overview displays branch, division, semester progress, subject performance, attendance, assignment completion, and skill development",
-        "Activities & Achievements section displays hackathon participation, competitions, awards, club and event involvement, and leadership roles",
-        "Career & Exam Preparation section shows competitive exam target, placement readiness score, internship status, certifications, and coding progress",
-        "Monthly Performance Summary shows an improvement trend graph, strength areas, weak areas, and an AI growth recommendation card",
-        "Layout uses charts and progress meters consistent with a report card aesthetic"
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "text": "Build the 'Faculty & Teaching Transparency' menu inside ParentInsightPortal. Display: (1) a grid of teacher profile cards for each subject the child is enrolled in, each card showing teacher name, subject taught, qualification, years of experience, specialization, a LinkedIn profile preview link, and research or industry background note; (2) a class teacher name card and HOD name card prominently displayed; (3) per-teacher metrics including teacher engagement score, syllabus completion status progress bar, and a teaching feedback summary rating; (4) a class performance comparison indicator showing how the child's class compares to other divisions; (5) a prominent 'Is your child being guided by expert faculty?' trust indicator badge at the top of the section that evaluates the overall faculty quality score. Use professional profile card layout with performance indicator meters.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "MENU 2: Faculty & Teaching Transparency",
-          "Which teacher is teaching each subject",
-          "Teacher's qualification",
-          "Is your child being guided by expert faculty? indicator",
-          "Professional profile cards with performance indicators."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Teacher profile cards display name, subject, qualification, experience, specialization, LinkedIn link, and background note",
-        "Class teacher and HOD names are prominently displayed",
-        "Each teacher card shows engagement score, syllabus completion progress bar, and feedback summary",
-        "Class performance comparison is shown",
-        "'Is your child being guided by expert faculty?' trust indicator badge is displayed at the top and reflects an overall faculty quality assessment"
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "text": "Build the 'Institute Development & Environment Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Infrastructure & Facilities — showing smartboard usage rate, lab upgrade updates, new technology introduced, software tools added, and industry collaboration updates as a timeline or card list; (2) Placement & Industry Exposure — showing new companies visiting, average package trends (year-on-year chart), internship tie-ups count, and industry workshops conducted; (3) Comparison with Top Colleges — showing how the institute's syllabus aligns with trending technologies, skill-based curriculum update notes, a modernization score meter, and innovation initiatives list; (4) Campus Environment — showing a student satisfaction index score, faculty quality index score, campus improvement updates, and an anti-trap safety reports status badge. Use an executive summary dashboard layout with trust indicators and data-driven visual elements.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "MENU 3: Institute Development & Environment Report",
-          "Infrastructure & Facilities",
-          "Placement & Industry Exposure",
-          "Comparison with Top Colleges",
-          "Campus Environment",
-          "Executive summary dashboard with trust indicators."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Infrastructure & Facilities section shows smartboard usage, lab upgrades, new tech, software tools, and industry collaboration",
-        "Placement & Industry Exposure section shows visiting companies, average package trend chart, internship tie-ups, and workshops",
-        "Comparison with Top Colleges section shows syllabus alignment, curriculum updates, modernization score meter, and innovation initiatives",
-        "Campus Environment section shows student satisfaction index, faculty quality index, campus improvement updates, and anti-trap safety status",
-        "Layout uses executive summary style with trust indicators"
-      ]
-    },
-    {
-      "id": "REQ-30",
-      "text": "Build the persistent Monthly Parent Connect System panel inside ParentInsightPortal that is always visible at the bottom of the dashboard regardless of which menu tab is active. Include: (1) a 'Schedule Monthly Virtual Meeting' section with options to meet the class teacher or optionally the HOD, showing available time slots (mock data) and a confirm/schedule button; (2) a performance discussion notes area showing the agenda topics for the upcoming meeting; (3) a parent feedback submission form with a text area for written feedback and an improvement suggestion text field; (4) a parent satisfaction rating system with a 5-star rating input and a submit button. Style this panel as a visually distinct full-width bottom strip with a soft blue accent background that clearly separates it from the main content area.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Monthly Parent Connect System",
-          "Monthly Video Meeting System",
-          "Schedule monthly virtual meeting",
-          "Meet class teacher",
-          "Meet HOD (optional)",
-          "Parent feedback submission",
-          "Improvement suggestion form",
-          "Parent satisfaction rating system"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Monthly Parent Connect panel is always visible at the bottom of the dashboard across all 3 menu tabs",
-        "Virtual meeting scheduling section shows options to meet class teacher or HOD with mock time slots and a confirm button",
-        "Performance discussion agenda topics are displayed",
-        "Parent feedback form includes a text area and improvement suggestion field with a submit button",
-        "Parent satisfaction rating system with 5-star input and submit button is present",
-        "Panel is visually distinct with a soft blue accent background separating it from main content"
-      ]
-    },
-    {
-      "id": "REQ-31",
-      "text": "Add a 'Print / Download Monthly PDF Report' button to the ParentInsightPortal header area. Clicking this button should trigger the browser's native print dialog (window.print()) with print-specific CSS applied so that the currently visible dashboard content renders in a clean, report-style printable layout — hiding the navigation bars, interactive controls, and sidebar elements while preserving charts, progress meters, performance data, and summary cards.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Printable monthly PDF report option"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A 'Print / Download Monthly Report' button is visible in the ParentInsightPortal header",
-        "Clicking the button triggers window.print()",
-        "Print CSS hides navigation bars, tab controls, and interactive buttons",
-        "Print layout preserves charts, progress bars, performance data, and summary cards in a clean report format"
-      ]
-    },
-    {
-      "id": "REQ-32",
-      "text": "Define and apply CSS custom properties (design tokens) for the Parent Insight Portal in frontend/src/index.css. Use a soft sky blue and white primary palette (e.g., OKLCH-based tokens for parent-primary, parent-surface, parent-accent, parent-text) that is distinct from the teal/emerald student palette and the dark blue institute palette. Apply these tokens throughout all ParentInsightPortal sub-components to achieve a clean, emotional, trust-building premium aesthetic. Ensure the theme respects the existing light/dark mode toggle.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Soft blue + white theme (trust & transparency)",
-          "The portal should feel like: 'A transparent smart education window for parents.'"
-        ]
-      },
-      "acceptanceCriteria": [
-        "CSS custom properties for parent portal palette are defined in frontend/src/index.css",
-        "Tokens are distinct from existing student (teal/emerald) and institute (dark blue/silver) palettes",
-        "All ParentInsightPortal components use these tokens for backgrounds, cards, accents, and text",
-        "Light/dark mode toggle correctly applies parent portal theme variants"
+        "The welcome page has a distinctive, polished visual theme.",
+        "The brand name 'NIRGRANTHA' uses large, prominent typography.",
+        "The color scheme feels modern and appropriate for an EdTech platform.",
+        "The page is fully responsive and looks good on desktop and mobile."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files listed under frontend.immutablePaths",
-    "All new components must use existing Tailwind config and CSS token conventions established in frontend/src/index.css",
-    "ParentInsightPortal must be a pure frontend component — no new backend logic is required",
-    "All data displayed in the portal must use mock/static data consistent with the existing prototype approach"
+    "Do not modify any files under frontend/src/hooks/ or frontend/src/components/ui.",
+    "Preserve all existing role-based login, role selection, and dashboard functionality.",
+    "The company name must be displayed exactly as 'NIRGRANTHA' (all caps)."
   ],
   "nonGoals": [
-    "Real authentication or role-based access control for the parent portal",
-    "Actual video conferencing integration for the monthly meeting system",
-    "Real PDF generation libraries — browser print dialog is sufficient",
-    "Backend data persistence for parent feedback or meeting schedules",
-    "Modifying any existing tab components (AcademicRoadmaps, CompetitiveExamHub, etc.)"
+    "Adding backend logic or authentication changes.",
+    "Redesigning the existing role selection, login, or dashboard pages.",
+    "Adding animations beyond subtle decorative background effects on the welcome page.",
+    "Changing the role-based routing or dashboard content."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Abstract dark-gradient hero background with subtle glowing circuit-board or neural-network line art motif in deep teal and gold tones (nirgrantha-hero-bg.dim_1920x1080.png)",
+      "Stylized NIRGRANTHA wordmark logo with a geometric academic cap or connected-node icon in gold and white on a transparent background (nirgrantha-logo.dim_480x120.png)"
+    ],
     "edits": []
   }
 }

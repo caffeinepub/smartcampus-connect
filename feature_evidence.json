@@ -2,12 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-parent-insight-portal-as-a-9th-menu-item-to-the-existing-fixed-horizontal-top-navigation-bar-in-navbar-tsx-it-must-follow-the-same-styling-conventions-as-the-existing-8-tabs-single-line-layout-even-spacing-active-tab-underline-and-subtle-color-highlight-smooth-css-transition-on-tab-switch-and-no-page-reload-register-the-new-tab-in-app-tsx-so-clicking-it-renders-the-parentinsightportal-component-located-at-frontend-src-components-tabs-parentinsightportal-tsx",
-      "featureTitle": "Add 'Parent Insight Portal' as a 9th menu item to the existing fixed horizontal top navigation bar in Navbar.tsx. It must follow the same styling conventions as the existing 8 tabs: single-line layout, even spacing, active tab underline and subtle color highlight, smooth CSS transition on tab switch, and no page reload. Register the new tab in App.tsx so clicking it renders the ParentInsightPortal component located at frontend/src/components/tabs/ParentInsightPortal.tsx.",
+      "featureId": "feature-create-a-full-screen-welcome-landing-page-as-the-very-first-screen-users-see-when-visiting-the-site-it-must-prominently-display-welcome-to-nirgrantha-as-the-hero-heading-include-the-company-name-nirgrantha-styled-as-the-brand-and-provide-a-clear-call-to-action-button-e-g-get-started-or-enter-portal-that-navigates-the-user-to-the-role-selection-login-page-this-page-should-appear-before-any-login-or-role-selection-ui",
+      "featureTitle": "Create a full-screen welcome landing page as the very first screen users see when visiting the site. It must prominently display 'Welcome to NIRGRANTHA' as the hero heading, include the company name 'NIRGRANTHA' styled as the brand, and provide a clear call-to-action button (e.g., 'Get Started' or 'Enter Portal') that navigates the user to the role selection / login page. This page should appear before any login or role selection UI.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/Navbar.tsx",
-        "frontend/src/components/tabs/ParentInsightPortal.tsx"
+        "frontend/src/components/WelcomePage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,15 +15,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-frontend-src-components-tabs-parentinsightportal-tsx-as-the-root-component-for-the-parent-insight-portal-it-must-contain-3-main-menus-navigable-via-a-secondary-horizontal-tab-bar-1-student-growth-activity-report-2-faculty-teaching-transparency-3-institute-development-environment-report-additionally-embed-a-persistent-monthly-parent-connect-system-panel-at-the-bottom-of-the-dashboard-always-visible-regardless-of-which-menu-is-active-the-overall-visual-theme-must-be-soft-blue-and-white-clean-emotional-trust-building-and-premium-resembling-a-transparent-smart-education-window-for-parents-with-smooth-animated-transitions-between-sub-sections",
-      "featureTitle": "Create frontend/src/components/tabs/ParentInsightPortal.tsx as the root component for the Parent Insight Portal. It must contain 3 main menus navigable via a secondary horizontal tab bar: (1) Student Growth & Activity Report, (2) Faculty & Teaching Transparency, (3) Institute Development & Environment Report. Additionally, embed a persistent Monthly Parent Connect System panel at the bottom of the dashboard, always visible regardless of which menu is active. The overall visual theme must be soft blue and white — clean, emotional, trust-building, and premium — resembling a transparent smart education window for parents, with smooth animated transitions between sub-sections.",
+      "featureId": "feature-update-the-app-navigation-flow-in-app-tsx-to-introduce-a-new-welcome-view-state-as-the-initial-state-replacing-landing-as-the-first-shown-view-the-sequence-must-be-welcome-page-role-selection-login-page-role-specific-dashboard-ensure-the-existing-role-based-login-and-dashboard-logic-is-preserved-unchanged",
+      "featureTitle": "Update the app navigation flow in App.tsx to introduce a new 'welcome' view state as the initial state (replacing 'landing' as the first shown view). The sequence must be: welcome page → role selection/login page → role-specific dashboard. Ensure the existing role-based login and dashboard logic is preserved unchanged.",
       "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -35,16 +33,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-26"
+        "REQ-2"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-build-the-student-growth-activity-report-menu-inside-parentinsightportal-include-four-sub-sections-1-academic-overview-showing-branch-division-semester-progress-indicator-subject-wise-performance-cards-with-internal-marks-attendance-percentage-assignment-completion-rate-and-skill-development-progress-bars-2-activities-achievements-showing-hackathon-participation-competitions-attended-awards-certificates-club-involvement-events-participated-and-leadership-roles-as-a-visual-achievement-gallery-3-career-exam-preparation-showing-the-competitive-exam-the-student-is-preparing-for-gate-upsc-cat-gre-etc-placement-readiness-score-internship-status-badge-certifications-completed-list-and-a-coding-progress-summary-card-leetcode-stats-github-contribution-summary-mock-4-monthly-performance-summary-showing-an-improvement-graph-svg-css-based-trend-line-strength-areas-list-weak-areas-list-and-an-ai-recommendation-card-for-growth-mock-data-use-an-elegant-report-card-dashboard-layout-with-charts-progress-meters-and-a-growth-timeline",
-      "featureTitle": "Build the 'Student Growth & Activity Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Academic Overview — showing Branch & Division, semester progress indicator, subject-wise performance cards with internal marks, attendance percentage, assignment completion rate, and skill development progress bars; (2) Activities & Achievements — showing hackathon participation, competitions attended, awards & certificates, club involvement, events participated, and leadership roles as a visual achievement gallery; (3) Career & Exam Preparation — showing the competitive exam the student is preparing for (GATE, UPSC, CAT, GRE, etc.), placement readiness score, internship status badge, certifications completed list, and a coding progress summary card (LeetCode stats + GitHub contribution summary mock); (4) Monthly Performance Summary — showing an improvement graph (SVG/CSS-based trend line), strength areas list, weak areas list, and an AI recommendation card for growth (mock data). Use an elegant report card dashboard layout with charts, progress meters, and a growth timeline.",
+      "featureId": "feature-apply-a-visually-rich-cohesive-design-theme-to-the-welcome-landing-page-that-reflects-nirgrantha-s-identity-as-an-ai-powered-edtech-platform-for-indian-engineering-colleges-use-a-bold-modern-color-palette-with-deep-gradients-elegant-typography-for-the-brand-name-subtle-animated-or-decorative-background-elements-and-a-professional-yet-energetic-visual-style-ensure-the-theme-is-consistent-with-the-existing-portal-design-tokens-defined-in-the-project",
+      "featureTitle": "Apply a visually rich, cohesive design theme to the welcome landing page that reflects NIRGRANTHA's identity as an AI-powered EdTech platform for Indian engineering colleges. Use a bold, modern color palette with deep gradients, elegant typography for the brand name, subtle animated or decorative background elements, and a professional yet energetic visual style. Ensure the theme is consistent with the existing portal design tokens defined in the project.",
       "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "frontend/src/components/tabs/parent-insight-portal/StudentGrowthActivityReport.tsx"
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -54,101 +52,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-27"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-faculty-teaching-transparency-menu-inside-parentinsightportal-display-1-a-grid-of-teacher-profile-cards-for-each-subject-the-child-is-enrolled-in-each-card-showing-teacher-name-subject-taught-qualification-years-of-experience-specialization-a-linkedin-profile-preview-link-and-research-or-industry-background-note-2-a-class-teacher-name-card-and-hod-name-card-prominently-displayed-3-per-teacher-metrics-including-teacher-engagement-score-syllabus-completion-status-progress-bar-and-a-teaching-feedback-summary-rating-4-a-class-performance-comparison-indicator-showing-how-the-child-s-class-compares-to-other-divisions-5-a-prominent-is-your-child-being-guided-by-expert-faculty-trust-indicator-badge-at-the-top-of-the-section-that-evaluates-the-overall-faculty-quality-score-use-professional-profile-card-layout-with-performance-indicator-meters",
-      "featureTitle": "Build the 'Faculty & Teaching Transparency' menu inside ParentInsightPortal. Display: (1) a grid of teacher profile cards for each subject the child is enrolled in, each card showing teacher name, subject taught, qualification, years of experience, specialization, a LinkedIn profile preview link, and research or industry background note; (2) a class teacher name card and HOD name card prominently displayed; (3) per-teacher metrics including teacher engagement score, syllabus completion status progress bar, and a teaching feedback summary rating; (4) a class performance comparison indicator showing how the child's class compares to other divisions; (5) a prominent 'Is your child being guided by expert faculty?' trust indicator badge at the top of the section that evaluates the overall faculty quality score. Use professional profile card layout with performance indicator meters.",
-      "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "frontend/src/components/tabs/parent-insight-portal/FacultyTeachingTransparency.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-28"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-institute-development-environment-report-menu-inside-parentinsightportal-include-four-sub-sections-1-infrastructure-facilities-showing-smartboard-usage-rate-lab-upgrade-updates-new-technology-introduced-software-tools-added-and-industry-collaboration-updates-as-a-timeline-or-card-list-2-placement-industry-exposure-showing-new-companies-visiting-average-package-trends-year-on-year-chart-internship-tie-ups-count-and-industry-workshops-conducted-3-comparison-with-top-colleges-showing-how-the-institute-s-syllabus-aligns-with-trending-technologies-skill-based-curriculum-update-notes-a-modernization-score-meter-and-innovation-initiatives-list-4-campus-environment-showing-a-student-satisfaction-index-score-faculty-quality-index-score-campus-improvement-updates-and-an-anti-trap-safety-reports-status-badge-use-an-executive-summary-dashboard-layout-with-trust-indicators-and-data-driven-visual-elements",
-      "featureTitle": "Build the 'Institute Development & Environment Report' menu inside ParentInsightPortal. Include four sub-sections: (1) Infrastructure & Facilities — showing smartboard usage rate, lab upgrade updates, new technology introduced, software tools added, and industry collaboration updates as a timeline or card list; (2) Placement & Industry Exposure — showing new companies visiting, average package trends (year-on-year chart), internship tie-ups count, and industry workshops conducted; (3) Comparison with Top Colleges — showing how the institute's syllabus aligns with trending technologies, skill-based curriculum update notes, a modernization score meter, and innovation initiatives list; (4) Campus Environment — showing a student satisfaction index score, faculty quality index score, campus improvement updates, and an anti-trap safety reports status badge. Use an executive summary dashboard layout with trust indicators and data-driven visual elements.",
-      "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "frontend/src/components/tabs/parent-insight-portal/InstituteDevelopmentEnvironmentReport.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-29"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-the-persistent-monthly-parent-connect-system-panel-inside-parentinsightportal-that-is-always-visible-at-the-bottom-of-the-dashboard-regardless-of-which-menu-tab-is-active-include-1-a-schedule-monthly-virtual-meeting-section-with-options-to-meet-the-class-teacher-or-optionally-the-hod-showing-available-time-slots-mock-data-and-a-confirm-schedule-button-2-a-performance-discussion-notes-area-showing-the-agenda-topics-for-the-upcoming-meeting-3-a-parent-feedback-submission-form-with-a-text-area-for-written-feedback-and-an-improvement-suggestion-text-field-4-a-parent-satisfaction-rating-system-with-a-5-star-rating-input-and-a-submit-button-style-this-panel-as-a-visually-distinct-full-width-bottom-strip-with-a-soft-blue-accent-background-that-clearly-separates-it-from-the-main-content-area",
-      "featureTitle": "Build the persistent Monthly Parent Connect System panel inside ParentInsightPortal that is always visible at the bottom of the dashboard regardless of which menu tab is active. Include: (1) a 'Schedule Monthly Virtual Meeting' section with options to meet the class teacher or optionally the HOD, showing available time slots (mock data) and a confirm/schedule button; (2) a performance discussion notes area showing the agenda topics for the upcoming meeting; (3) a parent feedback submission form with a text area for written feedback and an improvement suggestion text field; (4) a parent satisfaction rating system with a 5-star rating input and a submit button. Style this panel as a visually distinct full-width bottom strip with a soft blue accent background that clearly separates it from the main content area.",
-      "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "frontend/src/components/tabs/parent-insight-portal/MonthlyParentConnectPanel.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-30"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-print-download-monthly-pdf-report-button-to-the-parentinsightportal-header-area-clicking-this-button-should-trigger-the-browser-s-native-print-dialog-window-print-with-print-specific-css-applied-so-that-the-currently-visible-dashboard-content-renders-in-a-clean-report-style-printable-layout-hiding-the-navigation-bars-interactive-controls-and-sidebar-elements-while-preserving-charts-progress-meters-performance-data-and-summary-cards",
-      "featureTitle": "Add a 'Print / Download Monthly PDF Report' button to the ParentInsightPortal header area. Clicking this button should trigger the browser's native print dialog (window.print()) with print-specific CSS applied so that the currently visible dashboard content renders in a clean, report-style printable layout — hiding the navigation bars, interactive controls, and sidebar elements while preserving charts, progress meters, performance data, and summary cards.",
-      "files": [
-        "frontend/src/components/tabs/ParentInsightPortal.tsx",
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-31"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-define-and-apply-css-custom-properties-design-tokens-for-the-parent-insight-portal-in-frontend-src-index-css-use-a-soft-sky-blue-and-white-primary-palette-e-g-oklch-based-tokens-for-parent-primary-parent-surface-parent-accent-parent-text-that-is-distinct-from-the-teal-emerald-student-palette-and-the-dark-blue-institute-palette-apply-these-tokens-throughout-all-parentinsightportal-sub-components-to-achieve-a-clean-emotional-trust-building-premium-aesthetic-ensure-the-theme-respects-the-existing-light-dark-mode-toggle",
-      "featureTitle": "Define and apply CSS custom properties (design tokens) for the Parent Insight Portal in frontend/src/index.css. Use a soft sky blue and white primary palette (e.g., OKLCH-based tokens for parent-primary, parent-surface, parent-accent, parent-text) that is distinct from the teal/emerald student palette and the dark blue institute palette. Apply these tokens throughout all ParentInsightPortal sub-components to achieve a clean, emotional, trust-building premium aesthetic. Ensure the theme respects the existing light/dark mode toggle.",
-      "files": [
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-32"
+        "REQ-3"
       ],
       "confidence": "high"
     }

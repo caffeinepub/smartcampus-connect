@@ -1,17 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Add a "Parent Insight Portal" as the 9th navigation tab in SmartCampus Connect, featuring a full parent-facing dashboard with three sub-menus, a persistent Monthly Parent Connect panel, print/PDF support, and a distinct soft blue/white design theme.
+**Goal:** Add a full-screen welcome landing page branded as "NIRGRANTHA" that appears before the existing role selection/login flow.
 
 **Planned changes:**
-- Add "Parent Insight Portal" as the 9th tab in `Navbar.tsx` and register it in `App.tsx`, following existing tab styling conventions (underline, highlight, smooth transitions, no page reload)
-- Create `frontend/src/components/tabs/ParentInsightPortal.tsx` as the root component with a secondary horizontal tab bar for 3 sub-menus and a soft blue/white premium theme
-- Build **Menu 1 – Student Growth & Activity Report** with four sub-sections: Academic Overview (branch, semester progress, subject performance cards, attendance, assignments, skill progress bars), Activities & Achievements (hackathons, awards, clubs, leadership gallery), Career & Exam Preparation (exam target, placement readiness, internship badge, certifications, coding progress mock), and Monthly Performance Summary (trend graph, strengths/weaknesses, AI recommendation card)
-- Build **Menu 2 – Faculty & Teaching Transparency** with teacher profile cards per subject (name, subject, qualification, experience, specialization, LinkedIn link, background note), class teacher and HOD name cards, per-teacher metrics (engagement score, syllabus completion bar, feedback rating), class performance comparison indicator, and a top-level "Is your child being guided by expert faculty?" trust indicator badge
-- Build **Menu 3 – Institute Development & Environment Report** with four sub-sections: Infrastructure & Facilities (smartboard usage, lab upgrades, new tech/software, industry collaborations), Placement & Industry Exposure (visiting companies, package trend chart, internship tie-ups, workshops), Comparison with Top Colleges (syllabus alignment, curriculum notes, modernization score meter, innovation list), and Campus Environment (satisfaction index, faculty quality index, campus updates, anti-trap safety badge)
-- Build a persistent **Monthly Parent Connect System** panel always visible at the bottom, including virtual meeting scheduling (class teacher / HOD, mock time slots, confirm button), performance discussion agenda, parent feedback form (text area + suggestion field), and a 5-star satisfaction rating with submit button — styled as a visually distinct full-width soft blue accent strip
-- Add a **"Print / Download Monthly Report"** button in the portal header that triggers `window.print()` with print-specific CSS hiding nav bars and controls while preserving charts, cards, and performance data
-- Define CSS custom properties (soft sky blue/white palette tokens: `parent-primary`, `parent-surface`, `parent-accent`, `parent-text`) in `frontend/src/index.css`, distinct from existing palettes, applied throughout all portal components with light/dark mode support
-- All data in the portal uses mock/static values; no backend changes required
+- Create a new `WelcomePage` component displaying "Welcome to NIRGRANTHA" as the hero heading with the brand name styled prominently
+- Apply a visually rich design with deep gradients, elegant typography, and subtle decorative background elements using a hero background image and NIRGRANTHA wordmark logo
+- Add a "Get Started" / "Enter Portal" call-to-action button that navigates to the role selection/login page
+- Update `App.tsx` navigation flow so the initial view state is `welcome`, followed by role selection/login, then role-specific dashboards
+- Ensure logging out returns the user to the welcome page
+- Page is fully responsive for desktop and mobile
 
-**User-visible outcome:** Parents can navigate to a dedicated "Parent Insight Portal" tab that presents a comprehensive, visually premium dashboard showing their child's academic performance, faculty profiles, and institute reports — with an always-visible meeting scheduler and feedback panel at the bottom, and the ability to print a clean monthly report.
+**User-visible outcome:** When users first visit the site, they see a polished NIRGRANTHA branded welcome page. Clicking the CTA takes them to the existing role selection/login page, after which the appropriate dashboard is shown as before.

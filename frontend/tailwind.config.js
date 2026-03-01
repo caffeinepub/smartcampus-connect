@@ -93,23 +93,66 @@ export default {
           'badge-bg': 'oklch(var(--fhub-badge-bg))',
           'ai-badge': 'oklch(var(--fhub-ai-badge))',
         },
-        // Institute Intelligence Command Center design tokens
-        'iicc-blue': 'var(--iicc-blue)',
+        // Institute Intelligence Command Center tokens
+        iicc: {
+          bg: 'var(--iicc-bg)',
+          header: 'var(--iicc-header)',
+          card: 'var(--iicc-card)',
+          border: 'var(--iicc-border)',
+          heading: 'var(--iicc-heading)',
+          muted: 'var(--iicc-muted)',
+          blue: 'var(--iicc-blue)',
+          'blue-dark': 'var(--iicc-blue-dark)',
+          'blue-subtle': 'var(--iicc-blue-subtle)',
+          silver: 'var(--iicc-silver)',
+          'badge-bg': 'var(--iicc-badge-bg)',
+        },
+        // Parent Insight Portal tokens
+        parent: {
+          bg: 'var(--parent-bg)',
+          header: 'var(--parent-header)',
+          card: 'var(--parent-card)',
+          border: 'var(--parent-border)',
+          heading: 'var(--parent-heading)',
+          muted: 'var(--parent-muted)',
+          primary: 'var(--parent-primary)',
+          'primary-dark': 'var(--parent-primary-dark)',
+          'primary-hover': 'var(--parent-primary-hover)',
+          'accent-subtle': 'var(--parent-accent-subtle)',
+          'badge-bg': 'var(--parent-badge-bg)',
+          'connect-bg': 'var(--parent-connect-bg)',
+        },
+        // Student Dashboard tokens
+        student: {
+          bg: 'var(--student-bg)',
+          header: 'var(--student-header)',
+          card: 'var(--student-card)',
+          border: 'var(--student-border)',
+          heading: 'var(--student-heading)',
+          muted: 'var(--student-muted)',
+          primary: 'var(--student-primary)',
+          'primary-dark': 'var(--student-primary-dark)',
+          'primary-hover': 'var(--student-primary-hover)',
+          'accent-subtle': 'var(--student-accent-subtle)',
+          'badge-bg': 'var(--student-badge-bg)',
+        },
+        // NIRGRANTHA Welcome Page tokens
+        nirgrantha: {
+          dark: 'oklch(var(--nirgrantha-dark))',
+          teal: 'oklch(var(--nirgrantha-teal))',
+          'teal-light': 'oklch(var(--nirgrantha-teal-light))',
+          gold: 'oklch(var(--nirgrantha-gold))',
+          'gold-light': 'oklch(var(--nirgrantha-gold-light))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-        xl: '1rem',
-        '2xl': '1.25rem',
-        '3xl': '1.5rem',
+        sm: 'calc(var(--radius) - 4px)'
       },
       boxShadow: {
-        xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-        card: '0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)',
-        'card-hover': '0 8px 24px -4px rgba(0,0,0,0.12), 0 4px 8px -2px rgba(0,0,0,0.08)',
-        teal: '0 4px 14px 0 oklch(0.52 0.14 185 / 0.3)',
-        fhub: 'var(--fhub-shadow)',
+        'card-hover': '0 8px 30px -4px oklch(0.52 0.14 185 / 0.18)',
+        'nirgrantha-glow': 'var(--nirgrantha-glow)',
       },
       keyframes: {
         'accordion-down': {
@@ -119,23 +162,14 @@ export default {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
-        },
-        'fade-in-up': {
-          from: { opacity: '0', transform: 'translateY(12px)' },
-          to: { opacity: '1', transform: 'translateY(0)' }
-        },
-        'slide-in': {
-          from: { opacity: '0', transform: 'translateX(-8px)' },
-          to: { opacity: '1', transform: 'translateX(0)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 0.3s ease-out forwards',
-        'slide-in': 'slide-in 0.25s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.35s ease-out forwards',
       }
     }
   },
-  plugins: [typography, containerQueries, animate]
+  plugins: [typography, containerQueries, animate],
 };
