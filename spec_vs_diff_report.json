@@ -1,46 +1,32 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-03-01T17:50:21.244Z",
-  "summary": "The diff implements the core role-based login system well, covering AuthContext, RoleSelectionLanding, RoleLoginPage, Navbar filtering, and App routing. However, the implementation uses an in-app state machine (landing/login/dashboard views) rather than actual URL routes (/login/student, /login/teacher, etc.), which partially misses the routing-based AC for REQ-1 and REQ-2. Route guarding for dashboard sub-routes is also not explicitly implemented via a router. All existing dashboard components remain intact.",
+  "generatedAt": "2026-03-01T19:49:15.787Z",
+  "summary": "The diff shows branding changes applied to App.tsx (footer updated to Nirgrantha), RoleSelectionLanding.tsx, and RoleLoginPage.tsx. However, the requirement explicitly calls for changes in the dashboard shells (StudentDashboard.tsx, FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, ParentInsightPortal.tsx) and sub-components under frontend/src/components/tabs/. There is no direct diff evidence showing EduManage was removed from FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, ParentInsightPortal.tsx, or the tabs sub-components. The footer in App.tsx is confirmed updated.",
   "missing_requirements": [
     {
       "id": "REQ-1",
-      "requirement": "Each role card/button should navigate to a dedicated login route (e.g., /login/student, /login/teacher, /login/institute, /login/parent)",
-      "reason": "The implementation uses an in-app state machine (pendingRole state) rather than actual URL routes. There is no React Router or URL-based routing to /login/student, /login/teacher, etc. The AC requires each role option to link to its own login route, but navigation is handled via onSelectRole callback and state, not URL changes.",
+      "requirement": "Replace every occurrence of 'EduManage' in dashboard shells FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, and ParentInsightPortal.tsx",
+      "reason": "The diff only shows modifications to App.tsx, frontend-file-summaries.txt, and project_state.json. There is no diff evidence that FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, or ParentInsightPortal.tsx were modified to remove EduManage branding.",
       "evidence": [
         "frontend/src/App.tsx",
-        "frontend/src/components/RoleSelectionLanding.tsx"
+        "frontend-file-summaries.txt"
       ]
     },
     {
-      "id": "REQ-2",
-      "requirement": "Implement per-role login pages at /login/student, /login/teacher, /login/institute, and /login/parent as distinct URL routes",
-      "reason": "The per-role login is implemented as a single RoleLoginPage component rendered conditionally by state (pendingRole), not as separate URL-routed pages. Visiting /login/student directly in the browser would not show the Student-themed login form because URL-based routing is absent.",
+      "id": "REQ-1",
+      "requirement": "Replace every occurrence of 'EduManage' in all sub-components under frontend/src/components/tabs/",
+      "reason": "No files under frontend/src/components/tabs/ appear in the modified files list. The diff does not provide evidence that EduManage was removed from any of the tabs sub-components.",
       "evidence": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/RoleLoginPage.tsx"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "requirement": "App router guards routes — unauthenticated users navigating to any dashboard route are redirected to the login landing page",
-      "reason": "There is no URL-based router in the diff (no React Router setup), so route guarding via redirect for direct URL access to dashboard routes is not implemented. The state-based approach handles in-app flow but does not protect URL routes from direct navigation.",
-      "evidence": [
-        "frontend/src/App.tsx",
-        "frontend/src/contexts/AuthContext.tsx"
+        "frontend-file-summaries.txt"
       ]
     }
   ],
   "hallucinated_features": [],
-  "confidence": 0.82,
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/components/Navbar.tsx",
-    "frontend/src/components/RoleLoginPage.tsx",
-    "frontend/src/components/RoleSelectionLanding.tsx",
-    "frontend/src/contexts/AuthContext.tsx",
     "project_state.json"
   ]
 }

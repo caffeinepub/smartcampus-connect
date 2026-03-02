@@ -131,13 +131,13 @@ export default function RoleLoginPage({ role, onLogin, onBack }: RoleLoginPagePr
 
           <div className="flex items-center gap-4 mb-8">
             <img
-              src="/assets/generated/edumanage-logo.dim_256x256.png"
-              alt="EduManage"
-              className="h-14 w-14 rounded-xl shadow-lg"
+              src="/assets/generated/nirgrantha-logo.dim_512x512.png"
+              alt="NIRGRANTHA"
+              className="h-14 w-14 rounded-xl shadow-lg object-cover"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
             <div>
-              <p className="text-white/60 text-xs uppercase tracking-widest">EduManage</p>
+              <p className="text-white/60 text-xs uppercase tracking-widest">NIRGRANTHA</p>
               <h2 className="text-xl font-bold text-white">{config.fullLabel}</h2>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function RoleLoginPage({ role, onLogin, onBack }: RoleLoginPagePr
         {/* Bottom: Footer note */}
         <div className="relative z-10">
           <p className="text-white/40 text-xs">
-            © {new Date().getFullYear()} EduManage. Secure access portal.
+            © {new Date().getFullYear()} NIRGRANTHA. Secure access portal.
           </p>
         </div>
       </div>

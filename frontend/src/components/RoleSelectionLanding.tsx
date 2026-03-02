@@ -81,8 +81,8 @@ export default function RoleSelectionLanding({ onSelectRole }: RoleSelectionLand
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <img
-              src="/assets/generated/edumanage-logo.dim_256x256.png"
-              alt="EduManage"
+              src="/assets/generated/nirgrantha-logo.dim_512x512.png"
+              alt="Nirgrantha"
               className="h-20 w-20 rounded-2xl shadow-2xl"
               onError={(e) => {
                 const t = e.currentTarget;
@@ -101,7 +101,7 @@ export default function RoleSelectionLanding({ onSelectRole }: RoleSelectionLand
                 backgroundClip: 'text',
               }}
             >
-              EduManage
+              Nirgrantha
             </span>
           </h1>
           <p className="text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
@@ -187,14 +187,14 @@ export default function RoleSelectionLanding({ onSelectRole }: RoleSelectionLand
       <footer className="border-t border-border bg-card">
         <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} EduManage. All rights reserved.
+            © {new Date().getFullYear()} Nirgrantha. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             Built with{' '}
             <span className="text-red-500">♥</span>{' '}
             using{' '}
             <a
-              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'edumanage')}`}
+              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'nirgrantha')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium hover:underline"

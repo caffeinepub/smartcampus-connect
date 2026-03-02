@@ -1,100 +1,158 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Role-based login screen with per-role menu isolation",
+  "title": "Replace all 'EduManage' branding with 'Nirgrantha' across post-login pages and footer",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Create a login landing page with four role-based login entry points (Student, Teacher, Institute, Parents) that navigate to dedicated login routes",
+      "summary": "Replace every occurrence of 'EduManage' with 'Nirgrantha' in all post-login frontend components including footer, dashboard shells, and sub-components",
       "acceptanceCriteria": [
-        "A landing page is shown at the root route (/) with four role login options: Student, Teacher, Institute, Parents.",
-        "Each role option links to its own login route.",
-        "Visual style references the reference URL design with role cards or segmented tabs.",
-        "Role accent colors use existing CSS custom property tokens (student, faculty, institute, parent)."
+        "The post-login footer reads '© 2026 Nirgrantha. All rights reserved.' instead of '© 2026 EduManage. All rights reserved.'",
+        "No text, label, copyright notice, or any UI element anywhere in the app displays 'EduManage' after the change",
+        "All dashboard headers, footers, and sub-pages show 'Nirgrantha' branding consistently",
+        "The SmartCampus Connect logo area in the footer does not reference 'EduManage'",
+        "Searching the entire frontend source for the string 'EduManage' (case-insensitive) returns zero matches in rendered output"
       ],
       "file_operations": [
-        {
-          "path": "frontend/src/components/RoleSelectionLanding.tsx",
-          "operation": "create",
-          "description": "Create a landing page component that presents four role-based login entry points (Student, Teacher, Institute, Parents) as cards or buttons. Each card should display the role name, a distinct icon, and use role-appropriate accent colors from the existing CSS custom properties (--student-*, --faculty-*, --institute-*, --parent-*). Reference the generated logo image at frontend/public/assets/generated/edumanage-logo.dim_256x256.png for branding. Each role card links to its dedicated login route (/login/student, /login/teacher, /login/institute, /login/parent). Use the existing shadcn/ui Card and Button components for UI consistency."
-        },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Update the App component to serve as a router that conditionally renders RoleSelectionLanding at the root route (/) or the appropriate role-specific login page or authenticated dashboard based on the current route and authentication state. The component should consume AuthContext (to be created in REQ-4) to determine if a user is authenticated and which role they have selected. Maintain the existing ThemeProvider wrapper and preserve all existing tab components."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Implement per-role login pages that accept mock credentials and redirect to the main app after storing the active role",
-      "acceptanceCriteria": [
-        "Visiting /login/student shows a Student-themed login form.",
-        "Visiting /login/teacher shows a Teacher-themed login form.",
-        "Visiting /login/institute shows an Institute-themed login form.",
-        "Visiting /login/parent shows a Parent-themed login form.",
-        "Clicking login/enter on each page stores the selected role and redirects to the dashboard."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/RoleLoginPage.tsx",
-          "operation": "create",
-          "description": "Create a reusable role-specific login page component that accepts a role prop ('student' | 'teacher' | 'institute' | 'parent'). The component should display a themed login form with username and password fields or a single 'Enter as [Role]' button (no real authentication required). Use the role prop to apply role-specific accent colors from existing CSS custom properties (--student-*, --faculty-*, --institute-*, --parent-*). On form submission or button click, call the login(role) function from AuthContext (to be created in REQ-4) to store the role and programmatically navigate to the appropriate dashboard route. Include the logo image at frontend/public/assets/generated/edumanage-logo.dim_256x256.png in the header. Use shadcn/ui Input, Label, and Button components."
+          "description": "Search and replace all occurrences of 'EduManage' (case-insensitive) with 'Nirgrantha' in the main app component, including any footer or branding text that appears after authentication"
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/tabs/StudentDashboard.tsx",
           "operation": "modify",
-          "description": "Wire the RoleLoginPage component into the App router to render it at routes /login/student, /login/teacher, /login/institute, and /login/parent, passing the corresponding role prop ('student', 'teacher', 'institute', 'parent') to each route. Ensure the router logic integrates with the AuthContext (to be created in REQ-4) so that authenticated users are redirected away from login routes to their appropriate dashboard."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Render only the menu and dashboard belonging to the authenticated role, hiding all other role tabs from the Navbar",
-      "acceptanceCriteria": [
-        "When logged in as Student, the Navbar shows only the Student tab and its sub-sections; Faculty Hub, Command Center, and Parent Portal tabs are not visible.",
-        "When logged in as Teacher, only Faculty Hub and its sub-sections are shown.",
-        "When logged in as Institute, only the Institute Command Center and its sub-sections are shown.",
-        "When logged in as Parents, only the Parent Insight Portal and its sub-sections are shown.",
-        "A logout button is visible on the Navbar that returns the user to the role selection landing page and clears the active role."
-      ],
-      "file_operations": [
+          "description": "Replace all 'EduManage' references with 'Nirgrantha' in the student dashboard shell, including headers, footers, and any branding elements"
+        },
+        {
+          "path": "frontend/src/components/tabs/FacultyIntelligenceHub.tsx",
+          "operation": "modify",
+          "description": "Replace all 'EduManage' references with 'Nirgrantha' in the faculty dashboard shell, including headers, footers, and any branding elements"
+        },
+        {
+          "path": "frontend/src/components/tabs/InstituteCommandCenter.tsx",
+          "operation": "modify",
+          "description": "Replace all 'EduManage' references with 'Nirgrantha' in the institute dashboard shell, including headers, footers, and any branding elements"
+        },
+        {
+          "path": "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "operation": "modify",
+          "description": "Replace all 'EduManage' references with 'Nirgrantha' in the parent portal shell, including headers, footers, and any branding elements"
+        },
+        {
+          "path": "frontend/src/components/tabs/AcademicRoadmaps.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the academic roadmaps component"
+        },
+        {
+          "path": "frontend/src/components/tabs/AntiTrapFeedback.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the anti-trap feedback component"
+        },
+        {
+          "path": "frontend/src/components/tabs/CompetitiveExamHub.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the competitive exam hub component"
+        },
+        {
+          "path": "frontend/src/components/tabs/SkillBasedTeams.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the skill-based teams component"
+        },
+        {
+          "path": "frontend/src/components/tabs/SmartNotifications.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the smart notifications component"
+        },
+        {
+          "path": "frontend/src/components/tabs/SustainableMarketplace.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the sustainable marketplace component"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/AcademicControl.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the academic control panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/AITeachingAssistant.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the AI teaching assistant panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/ClassTopicTracking.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the class topic tracking dashboard"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/FacultyNetworking.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the faculty networking component"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/Integrations.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the integrations panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/SmartboardTeaching.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the smartboard teaching component"
+        },
+        {
+          "path": "frontend/src/components/tabs/faculty-hub/StudentPerformance.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the student performance component"
+        },
+        {
+          "path": "frontend/src/components/tabs/institute-command/CampusGovernancePanel.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the campus governance panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/institute-command/FacultyStaffOptimization.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the faculty staff optimization component"
+        },
+        {
+          "path": "frontend/src/components/tabs/institute-command/InfrastructurePlacementControl.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the infrastructure placement control component"
+        },
+        {
+          "path": "frontend/src/components/tabs/institute-command/InstitutionalPerformanceAnalytics.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the institutional performance analytics dashboard"
+        },
+        {
+          "path": "frontend/src/components/tabs/institute-command/StudentGrowthTransformation.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the student growth transformation dashboard"
+        },
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/FacultyTeachingTransparency.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the faculty teaching transparency panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/InstituteDevelopmentEnvironmentReport.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the institute development environment report"
+        },
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/MonthlyParentConnectPanel.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the monthly parent connect panel"
+        },
+        {
+          "path": "frontend/src/components/tabs/parent-insight-portal/StudentGrowthActivityReport.tsx",
+          "operation": "modify",
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the student growth activity report"
+        },
         {
           "path": "frontend/src/components/Navbar.tsx",
           "operation": "modify",
-          "description": "Modify the Navbar component to consume AuthContext (to be created in REQ-4) and conditionally render only the tab that corresponds to the currentRole. When currentRole is 'student', show only the Student tab. When 'teacher', show only Faculty Hub. When 'institute', show only Command. When 'parent', show only Parents. Hide all other role tabs. Add a logout button (using shadcn/ui Button) that calls the logout() function from AuthContext, clears the active role, and navigates the user back to the role selection landing page (/). Preserve the existing theme toggle and logo. Ensure the active tab highlighting still uses the existing per-role CSS custom properties."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Update the App component to render only the dashboard component that matches the currentRole from AuthContext. When currentRole is 'student', render StudentDashboard. When 'teacher', render FacultyIntelligenceHub. When 'institute', render InstituteCommandCenter. When 'parent', render ParentInsightPortal. Do not render tabs for roles other than the currentRole. Ensure all existing dashboard components (StudentDashboard, FacultyIntelligenceHub, InstituteCommandCenter, ParentInsightPortal) remain intact and continue to function correctly with their sub-navigation and sub-sections."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Add a role-aware AuthContext that stores the currently logged-in role and guards routes to redirect unauthenticated users",
-      "acceptanceCriteria": [
-        "AuthContext exposes currentRole and login(role) / logout() functions.",
-        "Navigating to / or any dashboard route while unauthenticated redirects to the role selection page.",
-        "Role persists across page refreshes (e.g., via sessionStorage or localStorage).",
-        "Logging out clears the role and redirects to the landing page."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/contexts/AuthContext.tsx",
-          "operation": "create",
-          "description": "Create an AuthContext that manages the currently logged-in role as React state. Export an AuthProvider component that wraps children and provides { currentRole, login, logout } via context. currentRole should be typed as 'student' | 'teacher' | 'institute' | 'parent' | null. The login(role) function should update currentRole state and persist the role to localStorage (or sessionStorage) so it survives page refreshes. The logout() function should clear currentRole state, remove the persisted role from storage, and programmatically navigate to the root route (/). On component mount, read the persisted role from storage and restore it to state if present. Use React.createContext and useContext patterns."
-        },
-        {
-          "path": "frontend/src/main.tsx",
-          "operation": "modify",
-          "description": "Wrap the root App component with the AuthProvider from AuthContext so that all components in the application can access the currentRole and login/logout functions. Preserve the existing QueryClientProvider and InternetIdentityProvider wrappers. Do not modify the file structure or imports for useInternetIdentity or useActor hooks."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Consume AuthContext to implement route guards. If currentRole is null and the user navigates to any route other than /, /login/student, /login/teacher, /login/institute, or /login/parent, redirect them to the role selection landing page (/). If currentRole is set and the user navigates to / or a login route, redirect them to their appropriate dashboard route. Ensure the router logic correctly handles unauthenticated and authenticated states, and that role persistence across page refreshes works as expected by reading currentRole from AuthContext on mount."
+          "description": "Search for and replace any 'EduManage' branding text with 'Nirgrantha' in the navigation bar component"
         }
       ]
     }

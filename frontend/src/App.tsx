@@ -116,21 +116,21 @@ function AppInner() {
             <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <img
-                  src="/assets/generated/logo-smartcampus.dim_320x64.png"
-                  alt="SmartCampus Connect"
+                  src="/assets/generated/nirgrantha-logo.dim_480x120.png"
+                  alt="Nirgrantha"
                   className="h-7 w-auto opacity-80"
                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                © {new Date().getFullYear()} EduManage. All rights reserved.
+                © {new Date().getFullYear()} Nirgrantha. All rights reserved.
               </p>
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 Built with{' '}
                 <span className="text-red-500">♥</span>{' '}
                 using{' '}
                 <a
-                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'edumanage')}`}
+                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'nirgrantha')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline font-medium"

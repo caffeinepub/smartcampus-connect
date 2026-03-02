@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-login-landing-page-inspired-by-https-edumanage-9ftdqajs-manus-space-login-teacher-that-presents-four-role-based-login-entry-points-student-teacher-institute-and-parents-each-role-card-button-should-navigate-to-a-dedicated-login-route-e-g-login-student-login-teacher-login-institute-login-parent-the-visual-design-should-include-a-role-selector-with-distinct-icons-and-role-appropriate-accent-colors-consistent-with-the-existing-per-role-design-tokens-already-defined-in-index-css",
-      "featureTitle": "Create a login landing page (inspired by https://edumanage-9ftdqajs.manus.space/login/teacher) that presents four role-based login entry points: Student, Teacher, Institute, and Parents. Each role card/button should navigate to a dedicated login route (e.g., /login/student, /login/teacher, /login/institute, /login/parent). The visual design should include a role selector with distinct icons and role-appropriate accent colors consistent with the existing per-role design tokens already defined in index.css.",
+      "featureId": "feature-find-and-replace-every-occurrence-of-edumanage-including-variations-like-edumanage-edumanage-with-nirgrantha-in-all-post-login-frontend-components-including-but-not-limited-to-the-footer-component-which-currently-shows-2026-edumanage-all-rights-reserved-the-smartcampus-connect-logo-area-dashboard-shells-studentdashboard-tsx-facultyintelligencehub-tsx-institutecommandcenter-tsx-parentinsightportal-tsx-and-any-sub-components-under-frontend-src-components-tabs-no-instance-of-edumanage-should-appear-anywhere-in-the-rendered-ui-after-login",
+      "featureTitle": "Find and replace every occurrence of 'EduManage' (including variations like 'EduManage.', 'EDUMANAGE') with 'Nirgrantha' in all post-login frontend components, including but not limited to: the footer component (which currently shows '© 2026 EduManage. All rights reserved.'), the SmartCampus Connect logo area, dashboard shells (StudentDashboard.tsx, FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, ParentInsightPortal.tsx), and any sub-components under frontend/src/components/tabs/. No instance of 'EduManage' should appear anywhere in the rendered UI after login.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/RoleSelectionLanding.tsx"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,63 +16,6 @@
       ],
       "testIds": [
         "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-per-role-login-pages-at-login-student-login-teacher-login-institute-and-login-parent-each-page-shows-a-login-form-username-password-fields-with-a-submit-button-no-backend-authentication-required-use-mock-static-credentials-or-simply-a-single-enter-as-role-button-on-successful-login-store-the-active-role-in-react-state-or-context-and-redirect-to-the-main-app",
-      "featureTitle": "Implement per-role login pages at /login/student, /login/teacher, /login/institute, and /login/parent. Each page shows a login form (username/password fields with a Submit button — no backend authentication required, use mock/static credentials or simply a single 'Enter as [Role]' button). On successful login, store the active role in React state or context and redirect to the main app.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/RoleLoginPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-after-login-render-only-the-menu-and-dashboard-that-belongs-to-the-authenticated-role-student-login-show-only-the-student-dashboard-and-its-sub-navigation-academic-roadmaps-exam-hub-goals-teams-marketplace-feedback-teacher-login-show-only-the-faculty-hub-and-its-sub-navigation-institute-login-show-only-the-institute-command-center-and-its-sub-navigation-parents-login-show-only-the-parent-insight-portal-and-its-sub-navigation-all-other-role-tabs-must-be-hidden-from-the-navbar",
-      "featureTitle": "After login, render only the menu and dashboard that belongs to the authenticated role. Student login → show only the Student dashboard and its sub-navigation (Academic Roadmaps, Exam Hub, Goals, Teams, Marketplace, Feedback). Teacher login → show only the Faculty Hub and its sub-navigation. Institute login → show only the Institute Command Center and its sub-navigation. Parents login → show only the Parent Insight Portal and its sub-navigation. All other role tabs must be hidden from the Navbar.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/Navbar.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-role-aware-auth-context-e-g-authcontext-that-stores-the-currently-logged-in-role-student-teacher-institute-parent-null-this-context-should-be-consumed-by-the-navbar-to-conditionally-render-tabs-and-by-the-app-router-to-guard-routes-unauthenticated-users-are-redirected-to-the-login-landing-page",
-      "featureTitle": "Add a role-aware auth context (e.g., AuthContext) that stores the currently logged-in role ('student' | 'teacher' | 'institute' | 'parent' | null). This context should be consumed by the Navbar to conditionally render tabs, and by the App router to guard routes — unauthenticated users are redirected to the login landing page.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/contexts/AuthContext.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
       ],
       "confidence": "high"
     }

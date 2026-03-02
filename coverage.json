@@ -1,65 +1,50 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-01T17:50:21.247Z",
+  "generatedAt": "2026-03-01T19:49:15.790Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 4,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Create a login landing page (inspired by https://edumanage-9ftdqajs.manus.space/login/teacher) that presents four role-based login entry points: Student, Teacher, Institute, and Parents. Each role card/button should navigate to a dedicated login route (e.g., /login/student, /login/teacher, /login/institute, /login/parent). The visual design should include a role selector with distinct icons and role-appropriate accent colors consistent with the existing per-role design tokens already defined in index.css.",
+        "summary": "Find and replace every occurrence of 'EduManage' (including variations like 'EduManage.', 'EDUMANAGE') with 'Nirgrantha' in all post-login frontend components, including but not limited to: the footer component (which currently shows '© 2026 EduManage. All rights reserved.'), the SmartCampus Connect logo area, dashboard shells (StudentDashboard.tsx, FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, ParentInsightPortal.tsx), and any sub-components under frontend/src/components/tabs/. No instance of 'EduManage' should appear anywhere in the rendered UI after login.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/RoleSelectionLanding.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/App.tsx",
+          "frontend/src/components/tabs/StudentDashboard.tsx",
+          "frontend/src/components/tabs/FacultyIntelligenceHub.tsx",
+          "frontend/src/components/tabs/InstituteCommandCenter.tsx",
+          "frontend/src/components/tabs/ParentInsightPortal.tsx",
+          "frontend/src/components/tabs/AcademicRoadmaps.tsx",
+          "frontend/src/components/tabs/AntiTrapFeedback.tsx",
+          "frontend/src/components/tabs/CompetitiveExamHub.tsx",
+          "frontend/src/components/tabs/SkillBasedTeams.tsx",
+          "frontend/src/components/tabs/SmartNotifications.tsx",
+          "frontend/src/components/tabs/SustainableMarketplace.tsx",
+          "frontend/src/components/tabs/faculty-hub/AcademicControl.tsx",
+          "frontend/src/components/tabs/faculty-hub/AITeachingAssistant.tsx",
+          "frontend/src/components/tabs/faculty-hub/ClassTopicTracking.tsx",
+          "frontend/src/components/tabs/faculty-hub/FacultyNetworking.tsx",
+          "frontend/src/components/tabs/faculty-hub/Integrations.tsx",
+          "frontend/src/components/tabs/faculty-hub/SmartboardTeaching.tsx",
+          "frontend/src/components/tabs/faculty-hub/StudentPerformance.tsx",
+          "frontend/src/components/tabs/institute-command/CampusGovernancePanel.tsx",
+          "frontend/src/components/tabs/institute-command/FacultyStaffOptimization.tsx",
+          "frontend/src/components/tabs/institute-command/InfrastructurePlacementControl.tsx",
+          "frontend/src/components/tabs/institute-command/InstitutionalPerformanceAnalytics.tsx",
+          "frontend/src/components/tabs/institute-command/StudentGrowthTransformation.tsx",
+          "frontend/src/components/tabs/parent-insight-portal/FacultyTeachingTransparency.tsx",
+          "frontend/src/components/tabs/parent-insight-portal/InstituteDevelopmentEnvironmentReport.tsx",
+          "frontend/src/components/tabs/parent-insight-portal/MonthlyParentConnectPanel.tsx",
+          "frontend/src/components/tabs/parent-insight-portal/StudentGrowthActivityReport.tsx",
+          "frontend/src/components/Navbar.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/RoleSelectionLanding.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-2",
-        "summary": "Implement per-role login pages at /login/student, /login/teacher, /login/institute, and /login/parent. Each page shows a login form (username/password fields with a Submit button — no backend authentication required, use mock/static credentials or simply a single 'Enter as [Role]' button). On successful login, store the active role in React state or context and redirect to the main app.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/RoleLoginPage.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/RoleLoginPage.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "After login, render only the menu and dashboard that belongs to the authenticated role. Student login → show only the Student dashboard and its sub-navigation (Academic Roadmaps, Exam Hub, Goals, Teams, Marketplace, Feedback). Teacher login → show only the Faculty Hub and its sub-navigation. Institute login → show only the Institute Command Center and its sub-navigation. Parents login → show only the Parent Insight Portal and its sub-navigation. All other role tabs must be hidden from the Navbar.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Navbar.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/Navbar.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-4",
-        "summary": "Add a role-aware auth context (e.g., AuthContext) that stores the currently logged-in role ('student' | 'teacher' | 'institute' | 'parent' | null). This context should be consumed by the Navbar to conditionally render tabs, and by the App router to guard routes — unauthenticated users are redirected to the login landing page.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/contexts/AuthContext.tsx",
-          "frontend/src/main.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/contexts/AuthContext.tsx",
           "frontend/src/App.tsx"
         ]
       }
@@ -70,12 +55,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/edumanage-logo.dim_256x256.png",
     "frontend/src/App.tsx",
-    "frontend/src/components/Navbar.tsx",
-    "frontend/src/components/RoleLoginPage.tsx",
-    "frontend/src/components/RoleSelectionLanding.tsx",
-    "frontend/src/contexts/AuthContext.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,15 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Add a role-based login flow with per-role menu isolation so that each user type (Student, Teacher, Institute, Parent) sees only their relevant dashboard and navigation after logging in.
+**Goal:** Replace all occurrences of "EduManage" branding with "Nirgrantha" across all post-login pages, including the footer, dashboard shells, and sub-components.
 
 **Planned changes:**
-- Create a landing page at `/` with four role selection cards (Student, Teacher, Institute, Parents), each linking to its own login route (`/login/student`, `/login/teacher`, `/login/institute`, `/login/parent`), using existing role accent color tokens and distinct icons.
-- Create per-role login pages at each route, each showing a role-themed login form (username/password fields or a single "Enter as [Role]" button) with no real backend authentication.
-- Add an `AuthContext` that stores the current role (`student | teacher | institute | parent | null`), exposes `login(role)` and `logout()` functions, and persists the role in `localStorage` or `sessionStorage`.
-- Protect all dashboard routes so unauthenticated users are redirected to the landing page.
-- Update the Navbar to conditionally render only the tab and sub-navigation belonging to the logged-in role; all other role tabs are hidden.
-- Add a logout button to the Navbar that clears the role and redirects to the landing page.
-- All existing dashboard components (StudentDashboard, FacultyIntelligenceHub, InstituteCommandCenter, ParentInsightPortal) remain intact.
+- Update the footer copyright text from "© 2026 EduManage. All rights reserved." to "© 2026 Nirgrantha. All rights reserved."
+- Replace every instance of "EduManage" (in any casing or variation) with "Nirgrantha" in all post-login frontend components including StudentDashboard.tsx, FacultyIntelligenceHub.tsx, InstituteCommandCenter.tsx, and ParentInsightPortal.tsx
+- Replace "EduManage" references in all components under frontend/src/components/tabs/
+- Ensure no rendered UI element anywhere in the app displays "EduManage" after login
 
-**User-visible outcome:** Users land on a role selection page, pick their role, log in with a simple form, and then see only the dashboard and navigation menus relevant to their role. Logging out returns them to the role selection page.
+**User-visible outcome:** After login, all pages and the footer consistently show "Nirgrantha" branding with zero occurrences of "EduManage" anywhere in the UI.
