@@ -59,6 +59,21 @@ const roleLabels: Record<UserRole, string> = {
   parent: "Parent",
 };
 
+// Portal header colors per role
+const roleHeaderBg: Record<UserRole, string> = {
+  student: "var(--student-header)",
+  teacher: "oklch(var(--fhub-header))",
+  institute: "var(--iicc-header)",
+  parent: "var(--parent-header)",
+};
+
+const _roleActiveColor: Record<UserRole, string> = {
+  student: "var(--student-muted)",
+  teacher: "oklch(var(--fhub-muted))",
+  institute: "var(--iicc-muted)",
+  parent: "var(--parent-muted)",
+};
+
 interface NavbarProps {
   onLogout: () => void;
 }
@@ -71,8 +86,17 @@ export default function Navbar({ onLogout }: NavbarProps) {
   // Only show the tab that matches the current role
   const visibleTabs = tabs.filter((tab) => tab.forRole === currentRole);
 
+  const headerBg = currentRole ? roleHeaderBg[currentRole] : undefined;
+  const isColored = !!currentRole;
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-xs">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b shadow-xs"
+      style={{
+        background: headerBg ?? "oklch(var(--card))",
+        borderBottomColor: isColored ? "rgba(255,255,255,0.15)" : undefined,
+      }}
+    >
       <div className="max-w-[1600px] mx-auto px-3">
         <div className="flex items-center h-[72px] gap-2">
           {/* Logo */}
@@ -80,7 +104,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
             <img
               src="/assets/generated/logo-smartcampus.dim_320x64.png"
               alt="NIRGRANTHA"
-              className="h-8 w-auto"
+              className={`h-8 w-auto ${isColored ? "brightness-0 invert" : ""}`}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";
@@ -92,10 +116,23 @@ export default function Navbar({ onLogout }: NavbarProps) {
               className="hidden items-center gap-1.5 font-display font-bold text-lg"
               style={{ display: "none" }}
             >
-              <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-teal to-emerald flex items-center justify-center text-white text-sm font-bold">
+              <span
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold"
+                style={{
+                  background: isColored
+                    ? "rgba(255,255,255,0.2)"
+                    : "linear-gradient(135deg, oklch(var(--teal)), oklch(var(--emerald)))",
+                  color: "white",
+                }}
+              >
                 N
               </span>
-              <span className="gradient-text">NIRGRANTHA</span>
+              <span
+                className="font-bold"
+                style={{ color: isColored ? "white" : undefined }}
+              >
+                NIRGRANTHA
+              </span>
             </span>
           </div>
 
@@ -105,25 +142,6 @@ export default function Navbar({ onLogout }: NavbarProps) {
               {visibleTabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
-                const isCommand = tab.id === "institute-command";
-                const isParent = tab.id === "parent-insight-portal";
-                const isStudent = tab.id === "student-dashboard";
-
-                const activeColor = isCommand
-                  ? "var(--iicc-blue)"
-                  : isParent
-                    ? "var(--parent-primary)"
-                    : isStudent
-                      ? "var(--student-primary)"
-                      : "oklch(var(--fhub-accent))";
-
-                const activeBg = isCommand
-                  ? "var(--iicc-blue-subtle)"
-                  : isParent
-                    ? "var(--parent-accent-subtle)"
-                    : isStudent
-                      ? "var(--student-accent-subtle)"
-                      : "oklch(var(--fhub-badge-bg))";
 
                 return (
                   <li key={tab.id}>
@@ -131,28 +149,33 @@ export default function Navbar({ onLogout }: NavbarProps) {
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
                       data-ocid={`nav.${tab.id}.tab`}
-                      className={`
+                      className="
                         relative flex flex-col items-center justify-end gap-1.5 px-5 pb-3 pt-2 h-[72px]
                         text-sm font-medium whitespace-nowrap transition-all duration-200
                         group cursor-pointer rounded-t-xl
-                        ${isActive ? "font-semibold" : "text-muted-foreground hover:text-foreground"}
-                      `}
-                      style={isActive ? { color: activeColor } : {}}
+                      "
+                      style={{
+                        color: isColored
+                          ? isActive
+                            ? "white"
+                            : "rgba(255,255,255,0.7)"
+                          : isActive
+                            ? undefined
+                            : undefined,
+                        fontWeight: isActive ? 600 : 400,
+                      }}
                       title={tab.label}
                     >
                       {/* Active background highlight */}
                       {isActive && (
                         <span
                           className="absolute inset-0 rounded-t-xl"
-                          style={{ background: activeBg, opacity: 0.6 }}
+                          style={{ background: "rgba(255,255,255,0.15)" }}
                         />
                       )}
 
                       {/* Icon */}
-                      <span
-                        className="relative z-10 flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                        style={isActive ? { color: activeColor } : {}}
-                      >
+                      <span className="relative z-10 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                         <Icon className="w-5 h-5" />
                       </span>
 
@@ -163,15 +186,10 @@ export default function Navbar({ onLogout }: NavbarProps) {
                       {/* Active underline */}
                       <span
                         className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
-                        style={
-                          isActive
-                            ? {
-                                background: activeColor,
-                                opacity: 1,
-                                transform: "scaleX(1)",
-                              }
-                            : { opacity: 0, transform: "scaleX(0)" }
-                        }
+                        style={{
+                          background: isActive ? "white" : "transparent",
+                          opacity: isActive ? 0.8 : 0,
+                        }}
                       />
                     </button>
                   </li>
@@ -184,7 +202,13 @@ export default function Navbar({ onLogout }: NavbarProps) {
           <div className="flex-shrink-0 flex items-center gap-2 ml-2">
             {/* Role badge */}
             {currentRole && (
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
+              <div
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
+                style={{
+                  background: "rgba(255,255,255,0.18)",
+                  color: "white",
+                }}
+              >
                 <User className="w-3.5 h-3.5" />
                 {roleLabels[currentRole]}
               </div>
@@ -195,7 +219,10 @@ export default function Navbar({ onLogout }: NavbarProps) {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-xl hover:bg-muted"
+              className="rounded-xl"
+              style={{
+                color: isColored ? "white" : undefined,
+              }}
               aria-label="Toggle theme"
               data-ocid="nav.theme.toggle"
             >
@@ -207,16 +234,24 @@ export default function Navbar({ onLogout }: NavbarProps) {
             </Button>
 
             {/* Logout Button */}
-            <Button
-              variant="outline"
-              size="sm"
+            <button
+              type="button"
               onClick={onLogout}
               data-ocid="nav.logout.button"
-              className="rounded-xl gap-1.5 text-xs font-medium h-8 px-3"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 h-8 cursor-pointer"
+              style={{
+                background: isColored
+                  ? "rgba(255,255,255,0.18)"
+                  : "transparent",
+                color: isColored ? "white" : undefined,
+                border: isColored
+                  ? "1px solid rgba(255,255,255,0.3)"
+                  : "1px solid oklch(var(--border))",
+              }}
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Logout</span>
-            </Button>
+            </button>
           </div>
         </div>
       </div>

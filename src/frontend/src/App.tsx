@@ -41,6 +41,13 @@ const tabComponents: Record<TabId, React.ComponentType> = {
   "parent-insight-portal": ParentInsightPortal,
 };
 
+const roleFooterBg: Record<UserRole, string> = {
+  student: "var(--student-header)",
+  teacher: "oklch(var(--fhub-header))",
+  institute: "var(--iicc-header)",
+  parent: "var(--parent-header)",
+};
+
 type AppView = "landing" | "login" | "dashboard";
 
 function AppInner() {
@@ -101,6 +108,7 @@ function AppInner() {
   const tabForRole = currentRole ? roleToTab[currentRole] : activeTab;
   const effectiveTab = tabForRole;
   const ActiveComponent = tabComponents[effectiveTab];
+  const footerBg = currentRole ? roleFooterBg[currentRole] : undefined;
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -112,29 +120,41 @@ function AppInner() {
               <ActiveComponent />
             </div>
           </main>
-          <footer className="border-t border-border bg-card mt-16">
+          <footer
+            className="border-t mt-0"
+            style={{
+              background: footerBg ?? "oklch(var(--card))",
+              borderTopColor: footerBg ? "rgba(255,255,255,0.15)" : undefined,
+            }}
+          >
             <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <img
                   src="/assets/generated/nirgrantha-logo.dim_480x120.png"
                   alt="Nirgrantha"
-                  className="h-7 w-auto opacity-80"
+                  className="h-7 w-auto opacity-80 brightness-0 invert"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                   }}
                 />
+                <span className="font-bold text-white text-lg">NIRGRANTHA</span>
               </div>
-              <p className="text-sm text-muted-foreground text-center">
+              <p
+                className="text-sm text-center"
+                style={{ color: "rgba(255,255,255,0.75)" }}
+              >
                 © {new Date().getFullYear()} Nirgrantha. All rights reserved.
               </p>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                Built with <span className="text-red-500">♥</span> using{" "}
+              <p
+                className="text-sm flex items-center gap-1"
+                style={{ color: "rgba(255,255,255,0.75)" }}
+              >
+                Built with <span className="text-red-300">♥</span> using{" "}
                 <a
                   href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "nirgrantha")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline font-medium"
-                  style={{ color: "var(--student-primary)" }}
+                  className="font-medium hover:underline text-white"
                 >
                   caffeine.ai
                 </a>

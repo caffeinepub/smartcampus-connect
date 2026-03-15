@@ -49,7 +49,7 @@
     --emerald-light: 0.92 0.08 160;
 
     /* Faculty Hub tokens — vibrant indigo/blue */
-    --fhub-bg: 0.97 0.01 220;
+    --fhub-bg: 0.91 0.07 240;
     --fhub-header: 0.3 0.22 260;
     --fhub-card: 1 0 0;
     --fhub-border: 0.25 0.1 250;
@@ -62,7 +62,7 @@
     --fhub-shadow: 0 2px 12px 0 oklch(0.46 0.22 245 / 0.15);
 
     /* Institute Intelligence Command Center tokens — vibrant navy blue */
-    --iicc-bg: oklch(0.97 0.008 245);
+    --iicc-bg: oklch(0.89 0.08 250);
     --iicc-header: oklch(0.28 0.18 258);
     --iicc-card: oklch(1 0 0);
     --iicc-border: oklch(0.24 0.1 250);
@@ -75,7 +75,7 @@
     --iicc-badge-bg: oklch(0.93 0.06 255);
 
     /* Parent Insight Portal tokens — vibrant sky blue */
-    --parent-bg: oklch(0.975 0.01 228);
+    --parent-bg: oklch(0.9 0.08 228);
     --parent-header: oklch(0.35 0.17 238);
     --parent-card: oklch(1 0 0);
     --parent-border: oklch(0.28 0.1 232);
@@ -89,7 +89,7 @@
     --parent-connect-bg: oklch(0.96 0.03 228);
 
     /* Student Dashboard tokens — vibrant emerald/teal */
-    --student-bg: oklch(0.975 0.012 165);
+    --student-bg: oklch(0.92 0.09 165);
     --student-header: oklch(0.34 0.19 160);
     --student-card: oklch(1 0 0);
     --student-border: oklch(0.28 0.12 162);

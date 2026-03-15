@@ -12,10 +12,10 @@ interface RoleCard {
   label: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
-  accentColor: string;
-  subtleColor: string;
-  borderColor: string;
+  bgColor: string;
+  bgGradient: string;
   badgeText: string;
+  badgeBg: string;
 }
 
 const roleCards: RoleCard[] = [
@@ -25,10 +25,11 @@ const roleCards: RoleCard[] = [
     description:
       "Access your academics, exams, goals, teams, marketplace, and feedback.",
     icon: GraduationCap,
-    accentColor: "var(--student-primary)",
-    subtleColor: "var(--student-accent-subtle)",
-    borderColor: "var(--student-border)",
+    bgColor: "var(--student-header)",
+    bgGradient:
+      "linear-gradient(135deg, var(--student-header) 0%, oklch(0.42 0.21 160) 100%)",
     badgeText: "Academic Portal",
+    badgeBg: "rgba(255,255,255,0.18)",
   },
   {
     role: "teacher",
@@ -36,10 +37,11 @@ const roleCards: RoleCard[] = [
     description:
       "Manage classes, AI teaching tools, student performance, and faculty resources.",
     icon: BrainCircuit,
-    accentColor: "oklch(var(--fhub-accent))",
-    subtleColor: "oklch(var(--fhub-badge-bg))",
-    borderColor: "oklch(var(--fhub-border))",
+    bgColor: "oklch(var(--fhub-header))",
+    bgGradient:
+      "linear-gradient(135deg, oklch(0.3 0.22 260) 0%, oklch(0.4 0.2 280) 100%)",
     badgeText: "Faculty Hub",
+    badgeBg: "rgba(255,255,255,0.18)",
   },
   {
     role: "institute",
@@ -47,10 +49,11 @@ const roleCards: RoleCard[] = [
     description:
       "Oversee campus governance, infrastructure, placements, and analytics.",
     icon: Building2,
-    accentColor: "var(--iicc-blue)",
-    subtleColor: "var(--iicc-blue-subtle)",
-    borderColor: "var(--iicc-border)",
+    bgColor: "var(--iicc-header)",
+    bgGradient:
+      "linear-gradient(135deg, oklch(0.28 0.18 258) 0%, oklch(0.38 0.2 270) 100%)",
     badgeText: "Command Center",
+    badgeBg: "rgba(255,255,255,0.18)",
   },
   {
     role: "parent",
@@ -58,10 +61,11 @@ const roleCards: RoleCard[] = [
     description:
       "Track your child's progress, attendance, fees, and connect with teachers.",
     icon: HeartHandshake,
-    accentColor: "var(--parent-primary)",
-    subtleColor: "var(--parent-accent-subtle)",
-    borderColor: "var(--parent-border)",
+    bgColor: "var(--parent-header)",
+    bgGradient:
+      "linear-gradient(135deg, oklch(0.35 0.17 238) 0%, oklch(0.45 0.18 225) 100%)",
     badgeText: "Insight Portal",
+    badgeBg: "rgba(255,255,255,0.18)",
   },
 ];
 
@@ -140,57 +144,49 @@ export default function RoleSelectionLanding({
                 key={card.role}
                 onClick={() => onSelectRole(card.role)}
                 data-ocid={`role.${card.role}.button`}
-                className="group relative flex flex-col items-start p-6 rounded-2xl border bg-card text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group relative flex flex-col items-start p-6 rounded-2xl text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 overflow-hidden"
                 style={{
-                  borderColor: card.borderColor,
+                  background: card.bgGradient,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
                 }}
               >
-                {/* Always-visible colored background */}
+                {/* Shimmer effect overlay */}
                 <div
-                  className="absolute inset-0 rounded-2xl opacity-100 transition-opacity duration-300"
-                  style={{ background: card.subtleColor }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "rgba(255,255,255,0.07)" }}
                 />
 
                 {/* Icon */}
                 <div
                   className="relative z-10 w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: card.subtleColor }}
+                  style={{ background: "rgba(255,255,255,0.18)" }}
                 >
-                  {/* Wrap icon in span to apply color without passing style to the icon component */}
-                  <span style={{ color: card.accentColor }}>
-                    <Icon className="w-7 h-7" />
-                  </span>
+                  <Icon className="w-7 h-7 text-white" />
                 </div>
 
                 {/* Badge */}
                 <span
                   className="relative z-10 text-xs font-semibold px-2.5 py-1 rounded-full mb-3"
                   style={{
-                    background: card.subtleColor,
-                    color: card.accentColor,
+                    background: card.badgeBg,
+                    color: "rgba(255,255,255,0.9)",
                   }}
                 >
                   {card.badgeText}
                 </span>
 
                 {/* Label */}
-                <h3
-                  className="relative z-10 text-xl font-bold mb-2"
-                  style={{ color: card.accentColor }}
-                >
+                <h3 className="relative z-10 text-xl font-bold mb-2 text-white">
                   {card.label}
                 </h3>
 
                 {/* Description */}
-                <p className="relative z-10 text-sm text-muted-foreground leading-relaxed flex-1">
+                <p className="relative z-10 text-sm text-white/75 leading-relaxed flex-1">
                   {card.description}
                 </p>
 
                 {/* Arrow */}
-                <div
-                  className="relative z-10 mt-5 flex items-center gap-1.5 text-sm font-semibold transition-all duration-200 group-hover:gap-2.5"
-                  style={{ color: card.accentColor }}
-                >
+                <div className="relative z-10 mt-5 flex items-center gap-1.5 text-sm font-semibold text-white transition-all duration-200 group-hover:gap-2.5">
                   Login
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </div>
