@@ -79,7 +79,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
           <div className="flex-shrink-0 flex items-center gap-2 mr-4">
             <img
               src="/assets/generated/logo-smartcampus.dim_320x64.png"
-              alt="SmartCampus Connect"
+              alt="NIRGRANTHA"
               className="h-8 w-auto"
               onError={(e) => {
                 const target = e.currentTarget;
@@ -93,9 +93,9 @@ export default function Navbar({ onLogout }: NavbarProps) {
               style={{ display: "none" }}
             >
               <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-teal to-emerald flex items-center justify-center text-white text-sm font-bold">
-                S
+                N
               </span>
-              <span className="gradient-text">EduManage</span>
+              <span className="gradient-text">NIRGRANTHA</span>
             </span>
           </div>
 
@@ -130,6 +130,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
                     <button
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
+                      data-ocid={`nav.${tab.id}.tab`}
                       className={`
                         relative flex flex-col items-center justify-end gap-1.5 px-5 pb-3 pt-2 h-[72px]
                         text-sm font-medium whitespace-nowrap transition-all duration-200
@@ -196,6 +197,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="rounded-xl hover:bg-muted"
               aria-label="Toggle theme"
+              data-ocid="nav.theme.toggle"
             >
               {theme === "dark" ? (
                 <Sun className="w-4 h-4" />
@@ -209,6 +211,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
               variant="outline"
               size="sm"
               onClick={onLogout}
+              data-ocid="nav.logout.button"
               className="rounded-xl gap-1.5 text-xs font-medium h-8 px-3"
             >
               <LogOut className="w-3.5 h-3.5" />

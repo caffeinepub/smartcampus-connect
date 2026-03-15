@@ -107,55 +107,48 @@ export default function ParentInsightPortal() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Body: Sidebar + Content */}
-      <div className="flex flex-1 max-w-[1400px] mx-auto w-full">
-        {/* Left Sidebar Navigation */}
-        <aside
-          className="w-56 flex-shrink-0 flex flex-col py-4 gap-1 no-print"
-          style={{
-            background: "var(--parent-header)",
-            borderRight: "1px solid var(--parent-border)",
-          }}
-        >
-          {subNavItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveSection(item.id)}
-                data-ocid={`parent.${item.id}.tab`}
-                type="button"
-                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer text-left"
-                style={{
-                  color: isActive
-                    ? "var(--parent-primary)"
-                    : "var(--parent-muted)",
-                  background: isActive
-                    ? "var(--parent-accent-subtle)"
-                    : "transparent",
-                  borderLeft: isActive
-                    ? "3px solid var(--parent-primary)"
-                    : "3px solid transparent",
-                }}
-              >
-                <Icon className="w-4 h-4 flex-shrink-0" />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </aside>
-
-        {/* Main Content */}
-        <main className="flex-1 min-w-0">
-          <div key={activeSection} className="animate-fade-in-up">
-            <ActiveSubComponent />
+        {/* Horizontal Top Tab Navigation */}
+        <div className="max-w-[1400px] mx-auto px-6 no-print">
+          <div className="flex items-end gap-1 overflow-x-auto scrollbar-none">
+            {subNavItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveSection(item.id)}
+                  data-ocid={`parent.${item.id}.tab`}
+                  type="button"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer rounded-t-xl border-b-2"
+                  style={{
+                    color: isActive
+                      ? "var(--parent-primary)"
+                      : "var(--parent-muted)",
+                    borderBottomColor: isActive
+                      ? "var(--parent-primary)"
+                      : "transparent",
+                    background: isActive
+                      ? "var(--parent-accent-subtle)"
+                      : "transparent",
+                  }}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
           </div>
-          <MonthlyParentConnectPanel />
-        </main>
+        </div>
       </div>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        <div key={activeSection} className="animate-fade-in-up">
+          <ActiveSubComponent />
+        </div>
+        <MonthlyParentConnectPanel />
+      </main>
     </div>
   );
 }

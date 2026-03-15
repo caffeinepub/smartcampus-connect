@@ -115,7 +115,7 @@ export default function RoleSelectionLanding({
                 backgroundClip: "text",
               }}
             >
-              Nirgrantha
+              NIRGRANTHA
             </span>
           </h1>
           <p className="text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
@@ -139,14 +139,15 @@ export default function RoleSelectionLanding({
                 type="button"
                 key={card.role}
                 onClick={() => onSelectRole(card.role)}
+                data-ocid={`role.${card.role}.button`}
                 className="group relative flex flex-col items-start p-6 rounded-2xl border bg-card text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 style={{
                   borderColor: card.borderColor,
                 }}
               >
-                {/* Hover background glow */}
+                {/* Always-visible colored background */}
                 <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute inset-0 rounded-2xl opacity-100 transition-opacity duration-300"
                   style={{ background: card.subtleColor }}
                 />
 
@@ -203,7 +204,7 @@ export default function RoleSelectionLanding({
       <footer className="border-t border-border bg-card">
         <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Nirgrantha. All rights reserved.
+            © {new Date().getFullYear()} NIRGRANTHA. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             Built with <span className="text-red-500">♥</span> using{" "}

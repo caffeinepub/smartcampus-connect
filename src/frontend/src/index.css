@@ -50,11 +50,11 @@
 
     /* Faculty Hub tokens — vibrant indigo/blue */
     --fhub-bg: 0.97 0.01 220;
-    --fhub-header: 1 0 0;
+    --fhub-header: 0.3 0.22 260;
     --fhub-card: 1 0 0;
-    --fhub-border: 0.88 0.025 220;
-    --fhub-heading: 0.18 0.04 240;
-    --fhub-muted: 0.52 0.025 220;
+    --fhub-border: 0.25 0.1 250;
+    --fhub-heading: 0.96 0.01 240;
+    --fhub-muted: 0.78 0.05 240;
     --fhub-accent: 0.46 0.22 245;
     --fhub-accent-dark: 0.36 0.22 245;
     --fhub-badge-bg: 0.93 0.06 240;
@@ -63,11 +63,11 @@
 
     /* Institute Intelligence Command Center tokens — vibrant navy blue */
     --iicc-bg: oklch(0.97 0.008 245);
-    --iicc-header: oklch(1 0 0);
+    --iicc-header: oklch(0.28 0.18 258);
     --iicc-card: oklch(1 0 0);
-    --iicc-border: oklch(0.88 0.018 245);
-    --iicc-heading: oklch(0.14 0.05 255);
-    --iicc-muted: oklch(0.5 0.03 245);
+    --iicc-border: oklch(0.24 0.1 250);
+    --iicc-heading: oklch(0.96 0.01 240);
+    --iicc-muted: oklch(0.75 0.04 245);
     --iicc-blue: oklch(0.4 0.22 258);
     --iicc-blue-dark: oklch(0.3 0.22 258);
     --iicc-blue-subtle: oklch(0.93 0.06 255);
@@ -76,11 +76,11 @@
 
     /* Parent Insight Portal tokens — vibrant sky blue */
     --parent-bg: oklch(0.975 0.01 228);
-    --parent-header: oklch(1 0 0);
+    --parent-header: oklch(0.35 0.17 238);
     --parent-card: oklch(1 0 0);
-    --parent-border: oklch(0.88 0.022 225);
-    --parent-heading: oklch(0.16 0.04 235);
-    --parent-muted: oklch(0.52 0.03 225);
+    --parent-border: oklch(0.28 0.1 232);
+    --parent-heading: oklch(0.96 0.01 230);
+    --parent-muted: oklch(0.78 0.05 230);
     --parent-primary: oklch(0.48 0.18 238);
     --parent-primary-dark: oklch(0.36 0.2 242);
     --parent-primary-hover: oklch(0.42 0.19 239);
@@ -90,16 +90,16 @@
 
     /* Student Dashboard tokens — vibrant emerald/teal */
     --student-bg: oklch(0.975 0.012 165);
-    --student-header: oklch(1 0 0);
+    --student-header: oklch(0.34 0.19 160);
     --student-card: oklch(1 0 0);
-    --student-border: oklch(0.88 0.025 165);
-    --student-heading: oklch(0.16 0.06 170);
-    --student-muted: oklch(0.52 0.03 165);
+    --student-border: oklch(0.28 0.12 162);
+    --student-heading: oklch(0.97 0.02 165);
+    --student-muted: oklch(0.8 0.07 162);
     --student-primary: oklch(0.48 0.2 165);
     --student-primary-dark: oklch(0.36 0.22 168);
     --student-primary-hover: oklch(0.42 0.21 166);
     --student-accent-subtle: oklch(0.92 0.08 165);
-    --student-badge-bg: oklch(0.91 0.09 163);
+    --student-badge-bg: oklch(0.26 0.14 160);
   }
 
   .dark {

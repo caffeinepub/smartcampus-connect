@@ -14,7 +14,7 @@ interface AuthContextType {
   logout: () => void;
 }
 
-const STORAGE_KEY = "edumanage_role";
+const STORAGE_KEY = "nirgrantha_role";
 
 export const AuthContext = createContext<AuthContextType>({
   currentRole: null,

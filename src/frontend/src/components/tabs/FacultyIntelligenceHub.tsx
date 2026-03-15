@@ -87,46 +87,45 @@ export default function FacultyIntelligenceHub() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Body: Sidebar + Content */}
-      <div className="flex flex-1 max-w-[1400px] mx-auto w-full">
-        {/* Left Sidebar Navigation */}
-        <aside className="w-56 flex-shrink-0 flex flex-col py-4 gap-1 bg-fhub-header border-r border-fhub-border">
-          {subNavItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveSection(item.id)}
-                data-ocid={`faculty.${item.id}.tab`}
-                type="button"
-                className={`flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer text-left ${
-                  isActive
-                    ? "text-fhub-accent bg-fhub-accent/10 border-l-[3px] border-fhub-accent"
-                    : "text-fhub-muted border-l-[3px] border-transparent hover:text-fhub-heading"
-                }`}
-              >
-                <Icon className="w-4 h-4 flex-shrink-0" />
-                <span className="flex-1">{item.label}</span>
-                {item.badge && (
-                  <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-fhub-ai-badge text-white">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </aside>
-
-        {/* Main Content */}
-        <main className="flex-1 min-w-0">
-          <div key={activeSection} className="animate-fade-in-up">
-            <ActiveSubComponent />
+        {/* Horizontal Top Tab Navigation */}
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="flex items-end gap-1 overflow-x-auto scrollbar-none">
+            {subNavItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveSection(item.id)}
+                  data-ocid={`faculty.${item.id}.tab`}
+                  type="button"
+                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer rounded-t-xl border-b-2 ${
+                    isActive
+                      ? "text-fhub-accent bg-fhub-accent/10 border-fhub-accent"
+                      : "text-fhub-muted border-transparent hover:text-fhub-heading"
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-fhub-ai-badge text-white">
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
-        </main>
+        </div>
       </div>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        <div key={activeSection} className="animate-fade-in-up">
+          <ActiveSubComponent />
+        </div>
+      </main>
     </div>
   );
 }
