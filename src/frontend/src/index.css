@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Teal/Emerald primary palette */
+    --background: 0.98 0.005 200;
+    --foreground: 0.15 0.02 240;
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 240;
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 240;
+    --primary: 0.52 0.17 185;
+    --primary-foreground: 0.99 0 0;
+    --secondary: 0.94 0.03 185;
+    --secondary-foreground: 0.25 0.06 185;
+    --muted: 0.95 0.01 200;
+    --muted-foreground: 0.5 0.03 220;
+    --accent: 0.92 0.05 185;
+    --accent-foreground: 0.25 0.08 185;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.02 200;
+    --input: 0.88 0.02 200;
+    --ring: 0.52 0.17 185;
+    --chart-1: 0.52 0.17 185;
+    --chart-2: 0.6 0.19 160;
+    --chart-3: 0.65 0.21 145;
+    --chart-4: 0.7 0.15 200;
+    --chart-5: 0.55 0.2 170;
+    --sidebar: 0.97 0.01 200;
+    --sidebar-foreground: 0.15 0.02 240;
+    --sidebar-primary: 0.52 0.17 185;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent: 0.92 0.05 185;
+    --sidebar-accent-foreground: 0.25 0.08 185;
+    --sidebar-border: 0.88 0.02 200;
+    --sidebar-ring: 0.52 0.17 185;
+
+    /* Custom tokens */
+    --teal: 0.52 0.17 185;
+    --emerald: 0.58 0.2 160;
+    --teal-light: 0.92 0.08 185;
+    --emerald-light: 0.92 0.08 160;
+
+    /* Faculty Hub tokens — vibrant indigo/blue */
+    --fhub-bg: 0.97 0.01 220;
+    --fhub-header: 1 0 0;
+    --fhub-card: 1 0 0;
+    --fhub-border: 0.88 0.025 220;
+    --fhub-heading: 0.18 0.04 240;
+    --fhub-muted: 0.52 0.025 220;
+    --fhub-accent: 0.46 0.22 245;
+    --fhub-accent-dark: 0.36 0.22 245;
+    --fhub-badge-bg: 0.93 0.06 240;
+    --fhub-ai-badge: 0.52 0.24 285;
+    --fhub-shadow: 0 2px 12px 0 oklch(0.46 0.22 245 / 0.15);
+
+    /* Institute Intelligence Command Center tokens — vibrant navy blue */
+    --iicc-bg: oklch(0.97 0.008 245);
+    --iicc-header: oklch(1 0 0);
+    --iicc-card: oklch(1 0 0);
+    --iicc-border: oklch(0.88 0.018 245);
+    --iicc-heading: oklch(0.14 0.05 255);
+    --iicc-muted: oklch(0.5 0.03 245);
+    --iicc-blue: oklch(0.4 0.22 258);
+    --iicc-blue-dark: oklch(0.3 0.22 258);
+    --iicc-blue-subtle: oklch(0.93 0.06 255);
+    --iicc-silver: oklch(0.78 0.01 240);
+    --iicc-badge-bg: oklch(0.93 0.06 255);
+
+    /* Parent Insight Portal tokens — vibrant sky blue */
+    --parent-bg: oklch(0.975 0.01 228);
+    --parent-header: oklch(1 0 0);
+    --parent-card: oklch(1 0 0);
+    --parent-border: oklch(0.88 0.022 225);
+    --parent-heading: oklch(0.16 0.04 235);
+    --parent-muted: oklch(0.52 0.03 225);
+    --parent-primary: oklch(0.48 0.18 238);
+    --parent-primary-dark: oklch(0.36 0.2 242);
+    --parent-primary-hover: oklch(0.42 0.19 239);
+    --parent-accent-subtle: oklch(0.93 0.06 230);
+    --parent-badge-bg: oklch(0.92 0.07 228);
+    --parent-connect-bg: oklch(0.96 0.03 228);
+
+    /* Student Dashboard tokens — vibrant emerald/teal */
+    --student-bg: oklch(0.975 0.012 165);
+    --student-header: oklch(1 0 0);
+    --student-card: oklch(1 0 0);
+    --student-border: oklch(0.88 0.025 165);
+    --student-heading: oklch(0.16 0.06 170);
+    --student-muted: oklch(0.52 0.03 165);
+    --student-primary: oklch(0.48 0.2 165);
+    --student-primary-dark: oklch(0.36 0.22 168);
+    --student-primary-hover: oklch(0.42 0.21 166);
+    --student-accent-subtle: oklch(0.92 0.08 165);
+    --student-badge-bg: oklch(0.91 0.09 163);
+  }
+
+  .dark {
+    --background: 0.1 0.01 240;
+    --foreground: 0.95 0.01 200;
+    --card: 0.14 0.015 240;
+    --card-foreground: 0.95 0.01 200;
+    --popover: 0.17 0.015 240;
+    --popover-foreground: 0.95 0.01 200;
+    --primary: 0.62 0.17 185;
+    --primary-foreground: 0.1 0.01 240;
+    --secondary: 0.2 0.02 240;
+    --secondary-foreground: 0.9 0.01 200;
+    --muted: 0.18 0.015 240;
+    --muted-foreground: 0.6 0.02 220;
+    --accent: 0.22 0.03 200;
+    --accent-foreground: 0.9 0.01 200;
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.25 0.02 240;
+    --input: 0.25 0.02 240;
+    --ring: 0.62 0.17 185;
+    --chart-1: 0.62 0.17 185;
+    --chart-2: 0.67 0.2 160;
+    --chart-3: 0.72 0.21 145;
+    --chart-4: 0.57 0.15 200;
+    --chart-5: 0.62 0.2 170;
+    --sidebar: 0.14 0.015 240;
+    --sidebar-foreground: 0.95 0.01 200;
+    --sidebar-primary: 0.62 0.17 185;
+    --sidebar-primary-foreground: 0.1 0.01 240;
+    --sidebar-accent: 0.22 0.04 200;
+    --sidebar-accent-foreground: 0.9 0.01 200;
+    --sidebar-border: 0.25 0.02 240;
+    --sidebar-ring: 0.62 0.17 185;
+
+    --teal: 0.62 0.17 185;
+    --emerald: 0.67 0.2 160;
+    --teal-light: 0.2 0.05 185;
+    --emerald-light: 0.2 0.05 160;
+
+    /* Faculty Hub tokens - dark */
+    --fhub-bg: 0.12 0.015 240;
+    --fhub-header: 0.15 0.02 240;
+    --fhub-card: 0.17 0.02 240;
+    --fhub-border: 0.28 0.025 240;
+    --fhub-heading: 0.92 0.01 220;
+    --fhub-muted: 0.58 0.02 220;
+    --fhub-accent: 0.64 0.22 245;
+    --fhub-accent-dark: 0.56 0.22 245;
+    --fhub-badge-bg: 0.22 0.06 240;
+    --fhub-ai-badge: 0.55 0.24 285;
+    --fhub-shadow: 0 2px 12px 0 oklch(0 0 0 / 0.3);
+
+    /* Institute Intelligence Command Center tokens - dark */
+    --iicc-bg: oklch(0.11 0.015 250);
+    --iicc-header: oklch(0.15 0.02 250);
+    --iicc-card: oklch(0.17 0.02 250);
+    --iicc-border: oklch(0.28 0.025 250);
+    --iicc-heading: oklch(0.92 0.01 220);
+    --iicc-muted: oklch(0.58 0.02 240);
+    --iicc-blue: oklch(0.64 0.22 258);
+    --iicc-blue-dark: oklch(0.52 0.22 258);
+    --iicc-blue-subtle: oklch(0.22 0.07 255);
+    --iicc-silver: oklch(0.55 0.01 240);
+    --iicc-badge-bg: oklch(0.22 0.07 255);
+
+    /* Parent Insight Portal tokens - dark mode */
+    --parent-bg: oklch(0.11 0.015 235);
+    --parent-header: oklch(0.15 0.02 235);
+    --parent-card: oklch(0.17 0.02 235);
+    --parent-border: oklch(0.28 0.025 230);
+    --parent-heading: oklch(0.92 0.01 220);
+    --parent-muted: oklch(0.58 0.02 225);
+    --parent-primary: oklch(0.67 0.18 238);
+    --parent-primary-dark: oklch(0.54 0.2 242);
+    --parent-primary-hover: oklch(0.72 0.16 235);
+    --parent-accent-subtle: oklch(0.2 0.06 230);
+    --parent-badge-bg: oklch(0.22 0.07 228);
+    --parent-connect-bg: oklch(0.14 0.025 230);
+
+    /* Student Dashboard tokens - dark mode */
+    --student-bg: oklch(0.11 0.015 165);
+    --student-header: oklch(0.15 0.02 165);
+    --student-card: oklch(0.17 0.02 165);
+    --student-border: oklch(0.28 0.025 165);
+    --student-heading: oklch(0.92 0.01 165);
+    --student-muted: oklch(0.58 0.02 165);
+    --student-primary: oklch(0.67 0.2 165);
+    --student-primary-dark: oklch(0.54 0.22 168);
+    --student-primary-hover: oklch(0.72 0.18 166);
+    --student-accent-subtle: oklch(0.2 0.07 165);
+    --student-badge-bg: oklch(0.22 0.08 163);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .tab-active {
+    @apply text-teal border-b-2 border-teal font-semibold;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-teal to-emerald bg-clip-text text-transparent;
+  }
+
+  .section-fade-in {
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+
+  .badge-skill {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-light text-teal;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 oklch(0.52 0.17 185 / 0.4);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px oklch(0.52 0.17 185 / 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 oklch(0.52 0.17 185 / 0);
+    }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2s infinite;
+  }
+}
+
+/* ============================================
+   Print Styles for Parent Insight Portal
+   ============================================ */
+@media print {
+  /* Hide navigation and interactive elements */
+  header,
+  .no-print,
+  .print-btn,
+  .parent-subnav {
+    display: none !important;
+  }
+
+  /* Reset page layout */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  /* Ensure portal content fills page */
+  .parent-portal-theme {
+    min-height: auto !important;
+  }
+
+  /* Card print styles */
+  .card,
+  [class*="rounded"] {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+}
