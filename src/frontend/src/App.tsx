@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 import Navbar from "./components/Navbar";
 import RoleLoginPage from "./components/RoleLoginPage";
 import RoleSelectionLanding from "./components/RoleSelectionLanding";
+import WelcomePage from "./components/WelcomePage";
 import FacultyIntelligenceHub from "./components/tabs/FacultyIntelligenceHub";
 import InstituteCommandCenter from "./components/tabs/InstituteCommandCenter";
 import ParentInsightPortal from "./components/tabs/ParentInsightPortal";
@@ -48,19 +49,22 @@ const roleFooterBg: Record<UserRole, string> = {
   parent: "var(--parent-header)",
 };
 
-type AppView = "landing" | "login" | "dashboard";
+type AppView = "welcome" | "landing" | "login" | "dashboard";
 
 function AppInner() {
   const { currentRole, login, logout } = useAuth();
   const [pendingRole, setPendingRole] = useState<UserRole | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>("student-dashboard");
+  const [hasEnteredPlatform, setHasEnteredPlatform] = useState(false);
 
   // Determine current view
-  let view: AppView = "landing";
+  let view: AppView = "welcome";
   if (currentRole) {
     view = "dashboard";
   } else if (pendingRole) {
     view = "login";
+  } else if (hasEnteredPlatform) {
+    view = "landing";
   }
 
   const handleSelectRole = (role: UserRole) => {
@@ -81,6 +85,15 @@ function AppInner() {
     logout();
     setPendingRole(null);
   };
+
+  // Welcome page
+  if (view === "welcome") {
+    return (
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <WelcomePage onEnter={() => setHasEnteredPlatform(true)} />
+      </ThemeProvider>
+    );
+  }
 
   // Landing page
   if (view === "landing") {
@@ -129,14 +142,6 @@ function AppInner() {
           >
             <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2">
-                <img
-                  src="/assets/generated/nirgrantha-logo.dim_480x120.png"
-                  alt="Nirgrantha"
-                  className="h-7 w-auto opacity-80 brightness-0 invert"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
                 <span className="font-bold text-white text-lg">NIRGRANTHA</span>
               </div>
               <p

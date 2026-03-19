@@ -100,6 +100,48 @@
     --student-primary-hover: oklch(0.42 0.21 166);
     --student-accent-subtle: oklch(0.92 0.08 165);
     --student-badge-bg: oklch(0.26 0.14 160);
+
+    /* ============================================
+       Semantic Module Accent Tokens
+       ============================================ */
+
+    /* Academic / Learning — emerald */
+    --mod-academic: oklch(0.52 0.18 165);
+    --mod-academic-bg: oklch(0.94 0.06 165);
+    --mod-academic-glow: oklch(0.52 0.18 165 / 0.2);
+
+    /* Exams & Assessments — amber */
+    --mod-exam: oklch(0.68 0.18 55);
+    --mod-exam-bg: oklch(0.96 0.05 60);
+    --mod-exam-glow: oklch(0.68 0.18 55 / 0.2);
+
+    /* Goals & Productivity — violet */
+    --mod-goals: oklch(0.55 0.22 290);
+    --mod-goals-bg: oklch(0.94 0.06 290);
+    --mod-goals-glow: oklch(0.55 0.22 290 / 0.2);
+
+    /* Collaboration / Teams — sky blue */
+    --mod-teams: oklch(0.6 0.18 220);
+    --mod-teams-bg: oklch(0.94 0.05 220);
+    --mod-teams-glow: oklch(0.6 0.18 220 / 0.2);
+
+    /* Marketplace / Resources — rose */
+    --mod-market: oklch(0.6 0.2 20);
+    --mod-market-bg: oklch(0.96 0.05 20);
+    --mod-market-glow: oklch(0.6 0.2 20 / 0.2);
+
+    /* Alerts / Feedback / Risk — red */
+    --mod-alert: oklch(0.58 0.22 27);
+    --mod-alert-bg: oklch(0.96 0.04 27);
+    --mod-alert-glow: oklch(0.58 0.22 27 / 0.2);
+
+    /* Status / Progress */
+    --status-low: oklch(0.6 0.2 27);
+    --status-medium: oklch(0.72 0.17 55);
+    --status-high: oklch(0.62 0.2 155);
+    --status-low-bg: oklch(0.95 0.04 27);
+    --status-medium-bg: oklch(0.97 0.04 55);
+    --status-high-bg: oklch(0.94 0.06 155);
   }
 
   .dark {
@@ -236,6 +278,82 @@
   .badge-warning {
     @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700;
   }
+
+  /* ============================================
+     Glass card surface
+     ============================================ */
+  .glass-card {
+    background: oklch(1 0 0 / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(1 0 0 / 0.3);
+    box-shadow: 0 4px 24px -4px oklch(0 0 0 / 0.12), 0 1px 4px
+      oklch(0 0 0 / 0.06);
+  }
+
+  /* Gradient progress bar fills */
+  .progress-low {
+    background: linear-gradient(90deg, oklch(0.65 0.22 27), oklch(0.6 0.2 35));
+  }
+  .progress-medium {
+    background: linear-gradient(90deg, oklch(0.72 0.17 55), oklch(0.75 0.18 65));
+  }
+  .progress-high {
+    background: linear-gradient(90deg, oklch(0.55 0.2 155), oklch(0.62 0.2 175));
+  }
+  .progress-brand {
+    background: linear-gradient(
+      90deg,
+      oklch(0.52 0.17 185),
+      oklch(0.58 0.2 160),
+      oklch(0.55 0.22 290)
+    );
+  }
+
+  /* Module accent border left */
+  .module-border-academic {
+    border-left: 4px solid oklch(0.52 0.18 165);
+  }
+  .module-border-exam {
+    border-left: 4px solid oklch(0.68 0.18 55);
+  }
+  .module-border-goals {
+    border-left: 4px solid oklch(0.55 0.22 290);
+  }
+  .module-border-teams {
+    border-left: 4px solid oklch(0.6 0.18 220);
+  }
+  .module-border-market {
+    border-left: 4px solid oklch(0.6 0.2 20);
+  }
+  .module-border-alert {
+    border-left: 4px solid oklch(0.58 0.22 27);
+  }
+
+  /* Card hover glow */
+  .card-glow-hover {
+    transition: all 0.2s ease-out;
+  }
+  .card-glow-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px oklch(0 0 0 / 0.15), 0 4px 12px -4px
+      oklch(0 0 0 / 0.08);
+  }
+
+  /* Module section hero bar */
+  .module-hero {
+    @apply relative px-8 py-6 mb-0 text-white overflow-hidden;
+  }
+  .module-hero-content {
+    @apply relative z-10;
+  }
+  .module-hero h1,
+  .module-hero h2 {
+    @apply text-white font-bold;
+  }
+  .module-hero p {
+    @apply text-white/80;
+  }
 }
 
 @layer utilities {
@@ -274,7 +392,6 @@
    Print Styles for Parent Insight Portal
    ============================================ */
 @media print {
-  /* Hide navigation and interactive elements */
   header,
   .no-print,
   .print-btn,
@@ -282,7 +399,6 @@
     display: none !important;
   }
 
-  /* Reset page layout */
   body {
     background: white !important;
     color: black !important;
@@ -293,19 +409,16 @@
     padding-top: 0 !important;
   }
 
-  /* Ensure portal content fills page */
   .parent-portal-theme {
     min-height: auto !important;
   }
 
-  /* Card print styles */
   .card,
   [class*="rounded"] {
     box-shadow: none !important;
     border: 1px solid #ddd !important;
   }
 
-  /* Page breaks */
   section {
     page-break-inside: avoid;
   }

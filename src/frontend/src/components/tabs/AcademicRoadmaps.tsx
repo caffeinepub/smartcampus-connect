@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import {
   Select,
   SelectContent,
@@ -16,10 +15,12 @@ import {
   Code2,
   ExternalLink,
   Github,
+  GraduationCap,
   Linkedin,
   Phone,
 } from "lucide-react";
 import { useState } from "react";
+import GradientProgress from "../GradientProgress";
 
 const branches = [
   "CSE",
@@ -340,22 +341,39 @@ export default function AcademicRoadmaps() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-      {/* Header */}
-      <div className="relative rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-teal/90 to-emerald/80" />
-        <img
-          src="/assets/generated/hero-bg.dim_1920x400.png"
-          alt=""
-          className="w-full h-40 object-cover opacity-20"
-        />
-        <div className="absolute inset-0 flex items-center px-8">
-          <div>
-            <h1 className="font-display text-2xl font-bold text-white mb-1">
-              Personalized Academic Roadmaps
-            </h1>
-            <p className="text-white/80 text-sm">
-              Track your academic journey, subjects, and progress
-            </p>
+      {/* Module Hero Bar */}
+      <div
+        className="rounded-2xl overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, oklch(0.34 0.19 160), oklch(0.42 0.18 175))",
+        }}
+      >
+        <div className="px-8 py-6 relative">
+          <div
+            className="absolute top-0 right-0 w-64 h-full opacity-10"
+            style={{
+              background:
+                "radial-gradient(circle at right, oklch(0.8 0.15 165), transparent)",
+            }}
+          />
+          <div className="relative z-10 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center">
+              <GraduationCap className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="font-bold text-2xl text-white mb-1">
+                Academic Roadmaps
+              </h1>
+              <p className="text-white/75 text-sm">
+                Track your subjects, progress, exams, and faculty details
+              </p>
+            </div>
+            <div className="ml-auto">
+              <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-white/15 text-white">
+                Semester {selectedSem} Active
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -365,12 +383,13 @@ export default function AcademicRoadmaps() {
         <div className="flex items-center gap-3">
           <label
             htmlFor="roadmap-branch"
-            className="text-sm font-medium text-muted-foreground"
+            className="text-sm font-semibold"
+            style={{ color: "var(--mod-academic)" }}
           >
             Branch:
           </label>
           <Select value={selectedBranch} onValueChange={setSelectedBranch}>
-            <SelectTrigger className="w-40 rounded-xl">
+            <SelectTrigger className="w-40 rounded-xl" id="roadmap-branch">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -384,16 +403,24 @@ export default function AcademicRoadmaps() {
         </div>
         <Badge
           variant="outline"
-          className="text-teal border-teal/30 bg-teal-light px-3 py-1"
+          className="px-3 py-1 text-sm font-semibold"
+          style={{
+            color: "var(--mod-academic)",
+            borderColor: "var(--mod-academic)",
+            background: "var(--mod-academic-bg)",
+          }}
         >
           {selectedBranch} — Semester {selectedSem}
         </Badge>
       </div>
 
       {/* Semester Timeline */}
-      <Card className="rounded-2xl shadow-card">
+      <Card className="rounded-2xl shadow-card module-border-academic">
         <CardHeader className="pb-2">
-          <CardTitle className="text-base font-semibold">
+          <CardTitle
+            className="text-base font-semibold"
+            style={{ color: "var(--mod-academic)" }}
+          >
             Semester Timeline
           </CardTitle>
         </CardHeader>
@@ -404,23 +431,35 @@ export default function AcademicRoadmaps() {
                 <button
                   type="button"
                   onClick={() => setSelectedSem(sem)}
-                  className={`
-                    flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition-all duration-200
-                    ${
+                  className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition-all duration-200"
+                  style={{
+                    background:
                       selectedSem === sem
-                        ? "bg-teal text-white shadow-teal scale-105"
+                        ? "var(--mod-academic)"
                         : sem < selectedSem
-                          ? "bg-emerald-light text-emerald hover:bg-emerald/20"
-                          : "bg-muted text-muted-foreground hover:bg-accent"
-                    }
-                  `}
+                          ? "var(--mod-academic-bg)"
+                          : "var(--muted)",
+                    color:
+                      selectedSem === sem
+                        ? "white"
+                        : sem < selectedSem
+                          ? "var(--mod-academic)"
+                          : "var(--muted-foreground)",
+                    transform: selectedSem === sem ? "scale(1.05)" : "scale(1)",
+                  }}
                 >
                   <span className="text-xs font-bold">S{sem}</span>
                   <span className="text-[10px] opacity-80">Sem {sem}</span>
                 </button>
                 {idx < 7 && (
                   <div
-                    className={`h-0.5 w-6 flex-shrink-0 ${sem < selectedSem ? "bg-emerald" : "bg-border"}`}
+                    className="h-0.5 w-6 flex-shrink-0"
+                    style={{
+                      background:
+                        sem < selectedSem
+                          ? "var(--mod-academic)"
+                          : "var(--border)",
+                    }}
                   />
                 )}
               </div>
@@ -431,7 +470,10 @@ export default function AcademicRoadmaps() {
 
       {/* Subjects Grid */}
       <div>
-        <h2 className="font-display font-semibold text-lg mb-4">
+        <h2
+          className="font-display font-semibold text-lg mb-4"
+          style={{ color: "var(--mod-academic)" }}
+        >
           Semester {selectedSem} Subjects
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -441,11 +483,14 @@ export default function AcademicRoadmaps() {
             return (
               <Card
                 key={subject.name}
-                className="rounded-2xl shadow-card card-hover"
+                className="rounded-2xl shadow-card card-glow-hover module-border-academic"
               >
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-3">
-                    <BookOpen className="w-5 h-5 text-teal mt-0.5" />
+                    <BookOpen
+                      className="w-5 h-5 mt-0.5"
+                      style={{ color: "var(--mod-academic)" }}
+                    />
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
                     >
@@ -453,7 +498,7 @@ export default function AcademicRoadmaps() {
                       {cfg.label}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-sm leading-snug mb-1">
+                  <h3 className="font-semibold text-sm leading-snug mb-1 text-gray-900">
                     {subject.name}
                   </h3>
                   <p className="text-xs text-muted-foreground mb-3">
@@ -462,9 +507,14 @@ export default function AcademicRoadmaps() {
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs text-muted-foreground">
                       <span>Progress</span>
-                      <span>{subject.progress}%</span>
+                      <span
+                        className="font-semibold"
+                        style={{ color: "var(--mod-academic)" }}
+                      >
+                        {subject.progress}%
+                      </span>
                     </div>
-                    <Progress value={subject.progress} className="h-1.5" />
+                    <GradientProgress value={subject.progress} />
                   </div>
                 </CardContent>
               </Card>
@@ -477,7 +527,10 @@ export default function AcademicRoadmaps() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Teachers */}
         <div>
-          <h2 className="font-display font-semibold text-lg mb-4">
+          <h2
+            className="font-display font-semibold text-lg mb-4"
+            style={{ color: "var(--mod-academic)" }}
+          >
             Faculty Details
           </h2>
           {semData.teachers.length > 0 ? (
@@ -485,11 +538,17 @@ export default function AcademicRoadmaps() {
               {semData.teachers.map((teacher) => (
                 <Card
                   key={teacher.name}
-                  className="rounded-2xl shadow-card card-hover"
+                  className="rounded-2xl shadow-card card-glow-hover module-border-academic"
                 >
                   <CardContent className="p-5">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal to-emerald flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, var(--mod-academic), oklch(0.42 0.18 175))",
+                        }}
+                      >
                         {teacher.name
                           .split(" ")
                           .map((n) => n[0])
@@ -510,7 +569,10 @@ export default function AcademicRoadmaps() {
                             <Linkedin className="w-4 h-4" />
                           </a>
                         </div>
-                        <p className="text-xs text-teal font-medium mt-0.5">
+                        <p
+                          className="text-xs font-medium mt-0.5"
+                          style={{ color: "var(--mod-academic)" }}
+                        >
                           {teacher.subject}
                         </p>
                         <p className="text-xs text-muted-foreground mt-1">
@@ -537,7 +599,10 @@ export default function AcademicRoadmaps() {
 
         {/* Exam Tracker */}
         <div>
-          <h2 className="font-display font-semibold text-lg mb-4">
+          <h2
+            className="font-display font-semibold text-lg mb-4"
+            style={{ color: "var(--mod-academic)" }}
+          >
             Exam Tracker
           </h2>
           <div className="space-y-3">
@@ -548,7 +613,7 @@ export default function AcademicRoadmaps() {
               return (
                 <Card
                   key={exam.name}
-                  className="rounded-2xl shadow-card card-hover"
+                  className="rounded-2xl shadow-card card-glow-hover module-border-academic"
                 >
                   <CardContent className="p-4 flex items-center gap-4">
                     <div
@@ -580,12 +645,15 @@ export default function AcademicRoadmaps() {
 
       {/* Integrations */}
       <div>
-        <h2 className="font-display font-semibold text-lg mb-4">
+        <h2
+          className="font-display font-semibold text-lg mb-4"
+          style={{ color: "var(--mod-academic)" }}
+        >
           Integrations
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* Google Classroom */}
-          <Card className="rounded-2xl shadow-card card-hover border-l-4 border-l-blue-500">
+          <Card className="rounded-2xl shadow-card card-glow-hover border-l-4 border-l-blue-500">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center">
@@ -623,7 +691,7 @@ export default function AcademicRoadmaps() {
           </Card>
 
           {/* LeetCode */}
-          <Card className="rounded-2xl shadow-card card-hover border-l-4 border-l-orange-500">
+          <Card className="rounded-2xl shadow-card card-glow-hover border-l-4 border-l-orange-500">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-xl bg-orange-100 flex items-center justify-center">
@@ -656,11 +724,11 @@ export default function AcademicRoadmaps() {
           </Card>
 
           {/* GitHub */}
-          <Card className="rounded-2xl shadow-card card-hover border-l-4 border-l-gray-700">
+          <Card className="rounded-2xl shadow-card card-glow-hover border-l-4 border-l-gray-700">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center">
+                  <Github className="w-5 h-5 text-gray-700" />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">GitHub</p>

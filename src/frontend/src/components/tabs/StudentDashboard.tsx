@@ -26,15 +26,54 @@ interface SubNav {
   id: SubSection;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
+  moduleColor: string;
+  moduleBg: string;
 }
 
+// Per-module accent colors matching semantic system
 const subNavItems: SubNav[] = [
-  { id: "academic", label: "Academic Roadmaps", icon: GraduationCap },
-  { id: "exam-hub", label: "Competitive Exam Hub", icon: Trophy },
-  { id: "goals", label: "Goals & Notifications", icon: Target },
-  { id: "teams", label: "Skill-Based Teams", icon: Users },
-  { id: "marketplace", label: "Marketplace", icon: ShoppingBag },
-  { id: "feedback", label: "Anti-Trap Feedback", icon: ShieldAlert },
+  {
+    id: "academic",
+    label: "Academic Roadmaps",
+    icon: GraduationCap,
+    moduleColor: "oklch(0.52 0.18 165)",
+    moduleBg: "oklch(0.92 0.07 165 / 0.5)",
+  },
+  {
+    id: "exam-hub",
+    label: "Competitive Exam Hub",
+    icon: Trophy,
+    moduleColor: "oklch(0.62 0.18 55)",
+    moduleBg: "oklch(0.95 0.06 60 / 0.5)",
+  },
+  {
+    id: "goals",
+    label: "Goals & Notifications",
+    icon: Target,
+    moduleColor: "oklch(0.55 0.22 290)",
+    moduleBg: "oklch(0.93 0.06 290 / 0.5)",
+  },
+  {
+    id: "teams",
+    label: "Skill-Based Teams",
+    icon: Users,
+    moduleColor: "oklch(0.6 0.18 220)",
+    moduleBg: "oklch(0.93 0.06 220 / 0.5)",
+  },
+  {
+    id: "marketplace",
+    label: "Marketplace",
+    icon: ShoppingBag,
+    moduleColor: "oklch(0.6 0.2 20)",
+    moduleBg: "oklch(0.95 0.05 20 / 0.5)",
+  },
+  {
+    id: "feedback",
+    label: "Anti-Trap Feedback",
+    icon: ShieldAlert,
+    moduleColor: "oklch(0.58 0.22 27)",
+    moduleBg: "oklch(0.95 0.04 27 / 0.5)",
+  },
 ];
 
 const subComponents: Record<SubSection, React.ComponentType> = {
@@ -50,11 +89,15 @@ export default function StudentDashboard() {
   const [activeSection, setActiveSection] = useState<SubSection>("academic");
 
   const ActiveSubComponent = subComponents[activeSection];
+  const activeNav = subNavItems.find((n) => n.id === activeSection)!;
 
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ background: "var(--student-bg)" }}
+      style={{
+        background:
+          "linear-gradient(160deg, var(--student-bg) 0%, oklch(0.90 0.07 175) 50%, var(--student-bg) 100%)",
+      }}
     >
       {/* Dashboard Header */}
       <div
@@ -101,7 +144,7 @@ export default function StudentDashboard() {
           </div>
         </div>
 
-        {/* Horizontal Top Tab Navigation */}
+        {/* Horizontal Top Tab Navigation — per-module accent colors */}
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="flex items-end gap-1 overflow-x-auto scrollbar-none">
             {subNavItems.map((item) => {
@@ -115,15 +158,14 @@ export default function StudentDashboard() {
                   type="button"
                   className="flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer rounded-t-xl border-b-2"
                   style={{
-                    color: isActive
-                      ? "var(--student-primary)"
-                      : "var(--student-muted)",
+                    color: isActive ? item.moduleColor : "var(--student-muted)",
                     borderBottomColor: isActive
-                      ? "var(--student-primary)"
+                      ? item.moduleColor
                       : "transparent",
-                    background: isActive
-                      ? "var(--student-accent-subtle)"
-                      : "transparent",
+                    background: isActive ? item.moduleBg : "transparent",
+                    boxShadow: isActive
+                      ? `0 -1px 8px ${item.moduleColor}30`
+                      : "none",
                   }}
                 >
                   <Icon className="w-4 h-4" />
@@ -134,6 +176,14 @@ export default function StudentDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Active module color bar */}
+      <div
+        className="h-1"
+        style={{
+          background: `linear-gradient(90deg, ${activeNav.moduleColor}, transparent)`,
+        }}
+      />
 
       {/* Main Content */}
       <main className="flex-1">

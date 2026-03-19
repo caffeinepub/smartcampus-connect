@@ -196,7 +196,13 @@ export default function SkillBasedTeams() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
       <div className="relative rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-teal/90 to-cyan-600/80" />
+        <div
+          style={{
+            background:
+              "linear-gradient(135deg, oklch(0.38 0.18 220), oklch(0.48 0.17 230))",
+          }}
+          className="absolute inset-0"
+        />
         <img
           src="/assets/generated/hero-bg.dim_1920x400.png"
           alt=""

@@ -291,7 +291,13 @@ export default function AntiTrapFeedback() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
       <div className="relative rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600/90 to-orange-600/80" />
+        <div
+          style={{
+            background:
+              "linear-gradient(135deg, oklch(0.42 0.22 27), oklch(0.5 0.2 35))",
+          }}
+          className="absolute inset-0"
+        />
         <img
           src="/assets/generated/hero-bg.dim_1920x400.png"
           alt=""
