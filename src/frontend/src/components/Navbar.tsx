@@ -67,13 +67,6 @@ const roleHeaderBg: Record<UserRole, string> = {
   parent: "var(--parent-header)",
 };
 
-const _roleActiveColor: Record<UserRole, string> = {
-  student: "var(--student-muted)",
-  teacher: "oklch(var(--fhub-muted))",
-  institute: "var(--iicc-muted)",
-  parent: "var(--parent-muted)",
-};
-
 interface NavbarProps {
   onLogout: () => void;
 }
@@ -83,9 +76,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const { currentRole } = useAuth();
 
-  // Only show the tab that matches the current role
   const visibleTabs = tabs.filter((tab) => tab.forRole === currentRole);
-
   const headerBg = currentRole ? roleHeaderBg[currentRole] : undefined;
   const isColored = !!currentRole;
 
@@ -99,12 +90,13 @@ export default function Navbar({ onLogout }: NavbarProps) {
     >
       <div className="max-w-[1600px] mx-auto px-3">
         <div className="flex items-center h-[72px] gap-2">
-          {/* Logo */}
+          {/* NIRGRANTHA Logo */}
           <div className="flex-shrink-0 flex items-center gap-2 mr-4">
             <img
-              src="/assets/generated/logo-smartcampus.dim_320x64.png"
+              src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
               alt="NIRGRANTHA"
-              className={`h-8 w-auto ${isColored ? "brightness-0 invert" : ""}`}
+              className="h-10 w-auto"
+              style={{ filter: isColored ? "brightness(0) invert(1)" : "none" }}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";
@@ -121,7 +113,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
                 style={{
                   background: isColored
                     ? "rgba(255,255,255,0.2)"
-                    : "linear-gradient(135deg, oklch(var(--teal)), oklch(var(--emerald)))",
+                    : "linear-gradient(135deg, #10b981, #059669)",
                   color: "white",
                 }}
               >
@@ -136,7 +128,7 @@ export default function Navbar({ onLogout }: NavbarProps) {
             </span>
           </div>
 
-          {/* Nav Tabs — only the role-specific tab */}
+          {/* Nav Tabs */}
           <nav className="flex-1 flex items-end h-full overflow-x-auto scrollbar-none">
             <ul className="flex items-end h-full min-w-max gap-1">
               {visibleTabs.map((tab) => {
@@ -149,41 +141,29 @@ export default function Navbar({ onLogout }: NavbarProps) {
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
                       data-ocid={`nav.${tab.id}.tab`}
-                      className="
-                        relative flex flex-col items-center justify-end gap-1.5 px-5 pb-3 pt-2 h-[72px]
-                        text-sm font-medium whitespace-nowrap transition-all duration-200
-                        group cursor-pointer rounded-t-xl
-                      "
+                      className="relative flex flex-col items-center justify-end gap-1.5 px-5 pb-3 pt-2 h-[72px] text-sm font-medium whitespace-nowrap transition-all duration-200 group cursor-pointer rounded-t-xl"
                       style={{
                         color: isColored
                           ? isActive
                             ? "white"
                             : "rgba(255,255,255,0.7)"
-                          : isActive
-                            ? undefined
-                            : undefined,
+                          : undefined,
                         fontWeight: isActive ? 600 : 400,
                       }}
                       title={tab.label}
                     >
-                      {/* Active background highlight */}
                       {isActive && (
                         <span
                           className="absolute inset-0 rounded-t-xl"
                           style={{ background: "rgba(255,255,255,0.15)" }}
                         />
                       )}
-
-                      {/* Icon */}
                       <span className="relative z-10 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                         <Icon className="w-5 h-5" />
                       </span>
-
                       <span className="relative z-10 text-xs sm:text-sm">
                         {tab.shortLabel}
                       </span>
-
-                      {/* Active underline */}
                       <span
                         className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
                         style={{
@@ -198,31 +178,23 @@ export default function Navbar({ onLogout }: NavbarProps) {
             </ul>
           </nav>
 
-          {/* Right side: Role badge + Theme Toggle + Logout */}
+          {/* Right: Role badge + Theme + Logout */}
           <div className="flex-shrink-0 flex items-center gap-2 ml-2">
-            {/* Role badge */}
             {currentRole && (
               <div
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                style={{
-                  background: "rgba(255,255,255,0.18)",
-                  color: "white",
-                }}
+                style={{ background: "rgba(255,255,255,0.18)", color: "white" }}
               >
                 <User className="w-3.5 h-3.5" />
                 {roleLabels[currentRole]}
               </div>
             )}
-
-            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="rounded-xl"
-              style={{
-                color: isColored ? "white" : undefined,
-              }}
+              style={{ color: isColored ? "white" : undefined }}
               aria-label="Toggle theme"
               data-ocid="nav.theme.toggle"
             >
@@ -232,8 +204,6 @@ export default function Navbar({ onLogout }: NavbarProps) {
                 <Moon className="w-4 h-4" />
               )}
             </Button>
-
-            {/* Logout Button */}
             <button
               type="button"
               onClick={onLogout}

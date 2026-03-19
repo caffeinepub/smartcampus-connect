@@ -25,14 +25,46 @@ interface SubNav {
   id: SubSection;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
+  gradient: string;
+  glow: string;
 }
 
 const subNavItems: SubNav[] = [
-  { id: "analytics", label: "Performance Analytics", icon: BarChart3 },
-  { id: "faculty", label: "Faculty & Staff Optimization", icon: Users },
-  { id: "students", label: "Student Growth Engine", icon: GraduationCap },
-  { id: "infrastructure", label: "Infra & Placement Control", icon: Building2 },
-  { id: "bulkimport", label: "Bulk Data Import", icon: Upload },
+  {
+    id: "analytics",
+    label: "Performance Analytics",
+    icon: BarChart3,
+    gradient: "linear-gradient(135deg, #60a5fa, #2563eb)",
+    glow: "0 4px 15px rgba(37,99,235,0.55)",
+  },
+  {
+    id: "faculty",
+    label: "Faculty & Staff Optimization",
+    icon: Users,
+    gradient: "linear-gradient(135deg, #a78bfa, #7c3aed)",
+    glow: "0 4px 15px rgba(124,58,237,0.5)",
+  },
+  {
+    id: "students",
+    label: "Student Growth Engine",
+    icon: GraduationCap,
+    gradient: "linear-gradient(135deg, #34d399, #059669)",
+    glow: "0 4px 15px rgba(5,150,105,0.5)",
+  },
+  {
+    id: "infrastructure",
+    label: "Infra & Placement Control",
+    icon: Building2,
+    gradient: "linear-gradient(135deg, #fbbf24, #b45309)",
+    glow: "0 4px 15px rgba(180,83,9,0.5)",
+  },
+  {
+    id: "bulkimport",
+    label: "Bulk Data Import",
+    icon: Upload,
+    gradient: "linear-gradient(135deg, #fb7185, #e11d48)",
+    glow: "0 4px 15px rgba(225,29,72,0.5)",
+  },
 ];
 
 const subComponents: Record<SubSection, React.ComponentType> = {
@@ -50,9 +82,48 @@ export default function InstituteCommandCenter() {
 
   return (
     <div
-      className="iicc-theme min-h-screen flex flex-col"
-      style={{ background: "var(--iicc-bg)" }}
+      className="iicc-theme min-h-screen flex flex-col relative overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(160deg, #0c1a3a 0%, #1e3a5f 20%, #1e40af 40%, #2563eb 65%, #3b82f6 85%, #60a5fa 100%)",
+      }}
     >
+      {/* Floating ambient orbs */}
+      <div
+        className="orb animate-float-slow"
+        style={{
+          width: 460,
+          height: 460,
+          top: "-10%",
+          right: "-8%",
+          background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)",
+          opacity: 0.18,
+        }}
+      />
+      <div
+        className="orb animate-float-mid"
+        style={{
+          width: 300,
+          height: 300,
+          bottom: "5%",
+          left: "-5%",
+          background: "radial-gradient(circle, #6366f1 0%, transparent 70%)",
+          opacity: 0.12,
+          animationDelay: "3s",
+        }}
+      />
+      <div
+        className="orb animate-float-fast"
+        style={{
+          width: 200,
+          height: 200,
+          top: "50%",
+          right: "5%",
+          background: "radial-gradient(circle, #38bdf8 0%, transparent 70%)",
+          opacity: 0.1,
+          animationDelay: "1.2s",
+        }}
+      />
       {/* Command Center Header */}
       <div
         style={{
@@ -71,16 +142,28 @@ export default function InstituteCommandCenter() {
             >
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <div>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-1">
+                <img
+                  src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+                  alt="NIRGRANTHA"
+                  className="h-7 w-auto"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display =
+                      "none";
+                  }}
+                />
+              </div>
               <h1
                 className="text-xl font-display font-bold tracking-tight"
-                style={{ color: "var(--iicc-heading)" }}
+                style={{ color: "white" }}
               >
                 Institute Intelligence Command Center
               </h1>
               <p
                 className="text-xs mt-0.5"
-                style={{ color: "var(--iicc-muted)" }}
+                style={{ color: "rgba(255,255,255,0.8)" }}
               >
                 National Smart Education Monitoring Authority · Academic Year
                 2025–26
@@ -110,9 +193,9 @@ export default function InstituteCommandCenter() {
           </div>
         </div>
 
-        {/* Horizontal Top Tab Navigation */}
+        {/* Vibrant Gradient Pill Tab Navigation */}
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="flex items-end gap-1 overflow-x-auto scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-3">
             {subNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -122,15 +205,18 @@ export default function InstituteCommandCenter() {
                   onClick={() => setActiveSection(item.id)}
                   data-ocid={`institute.${item.id}.tab`}
                   type="button"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer rounded-t-xl border-b-2"
+                  className="flex items-center gap-2 px-4 py-2 text-sm whitespace-nowrap transition-all duration-200 cursor-pointer rounded-full"
                   style={{
-                    color: isActive ? "var(--iicc-blue)" : "var(--iicc-muted)",
-                    borderBottomColor: isActive
-                      ? "var(--iicc-blue)"
-                      : "transparent",
                     background: isActive
-                      ? "var(--iicc-blue-subtle)"
-                      : "transparent",
+                      ? item.gradient
+                      : "rgba(255,255,255,0.12)",
+                    color: isActive ? "#111827" : "rgba(255,255,255,1)",
+                    fontWeight: isActive ? 700 : 600,
+                    boxShadow: isActive ? item.glow : "none",
+                    transform: isActive ? "scale(1.03)" : "scale(1)",
+                    border: isActive
+                      ? "2px solid rgba(255,255,255,0.4)"
+                      : "2px solid rgba(255,255,255,0.15)",
                   }}
                 >
                   <Icon className="w-4 h-4" />
@@ -142,8 +228,14 @@ export default function InstituteCommandCenter() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="flex-1">
+      {/* Main Content with lighter gradient */}
+      <main
+        className="flex-1"
+        style={{
+          background:
+            "linear-gradient(160deg, #f0f7ff 0%, #e8f0fe 25%, #dbeafe 50%, #bfdbfe 75%, #dbeafe 100%)",
+        }}
+      >
         <div key={activeSection} className="animate-fade-in-up">
           <ActiveSubComponent />
         </div>

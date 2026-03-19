@@ -9,6 +9,7 @@ import {
   ChevronDown,
   ChevronUp,
   Flag,
+  MapPin,
   MessageCircle,
   ShieldAlert,
   ShieldCheck,
@@ -16,6 +17,7 @@ import {
   Upload,
 } from "lucide-react";
 import { useState } from "react";
+import SafeCityExploration from "./SafeCityExploration";
 
 interface Comment {
   id: number;
@@ -129,6 +131,31 @@ const initialReports: Report[] = [
   },
 ];
 
+type InnerTab = "reports" | "safe-city";
+
+const innerTabs: {
+  id: InnerTab;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  gradient: string;
+  glow: string;
+}[] = [
+  {
+    id: "reports",
+    label: "Feedback & Scam Alerts",
+    icon: ShieldAlert,
+    gradient: "linear-gradient(135deg, #f87171, #ef4444)",
+    glow: "0 4px 15px rgba(239,68,68,0.4)",
+  },
+  {
+    id: "safe-city",
+    label: "Safe City Exploration (Solapur)",
+    icon: MapPin,
+    gradient: "linear-gradient(135deg, #34d399, #0891b2)",
+    glow: "0 4px 15px rgba(8,145,178,0.4)",
+  },
+];
+
 function ReportCard({ report }: { report: Report }) {
   const [expanded, setExpanded] = useState(false);
   const [upvoted, setUpvoted] = useState(false);
@@ -138,14 +165,20 @@ function ReportCard({ report }: { report: Report }) {
 
   return (
     <Card
-      className={`rounded-2xl shadow-card card-hover overflow-hidden border-l-4 ${isVerified ? "border-l-emerald-500" : "border-l-orange-500"}`}
+      className={`rounded-2xl shadow-card card-hover overflow-hidden border-l-4 ${
+        isVerified ? "border-l-emerald-500" : "border-l-orange-500"
+      }`}
     >
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
               <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${isVerified ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400" : "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-400"}`}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
+                  isVerified
+                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
+                    : "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-400"
+                }`}
               >
                 {isVerified ? (
                   <ShieldCheck className="w-3 h-3" />
@@ -179,7 +212,11 @@ function ReportCard({ report }: { report: Report }) {
                 setUpvoted(!upvoted);
                 setUpvotes((v) => (upvoted ? v - 1 : v + 1));
               }}
-              className={`flex items-center gap-1.5 text-xs font-medium transition-colors ${upvoted ? "text-teal" : "text-muted-foreground hover:text-foreground"}`}
+              className={`flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                upvoted
+                  ? "text-teal"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               <ThumbsUp
                 className={`w-3.5 h-3.5 ${upvoted ? "fill-teal" : ""}`}
@@ -208,7 +245,6 @@ function ReportCard({ report }: { report: Report }) {
           </button>
         </div>
 
-        {/* Comments */}
         {expanded && (
           <div className="mt-4 pt-4 border-t border-border space-y-3 animate-fade-in-up">
             {report.comments.map((comment) => (
@@ -250,7 +286,7 @@ function ReportCard({ report }: { report: Report }) {
   );
 }
 
-export default function AntiTrapFeedback() {
+function ReportsDashboard() {
   const [reports, setReports] = useState<Report[]>(initialReports);
   const [form, setForm] = useState({
     title: "",
@@ -290,11 +326,11 @@ export default function AntiTrapFeedback() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
-      <div className="relative rounded-2xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden bg-pattern-mesh">
         <div
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.42 0.22 27), oklch(0.5 0.2 35))",
+              "linear-gradient(135deg, #7f1d1d 0%, #991b1b 35%, #b91c1c 65%, #dc2626 100%)",
           }}
           className="absolute inset-0"
         />
@@ -305,6 +341,14 @@ export default function AntiTrapFeedback() {
         />
         <div className="absolute inset-0 flex items-center px-8">
           <div>
+            <img
+              src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+              alt="NIRGRANTHA"
+              className="nirgrantha-section-logo mb-1"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
             <h1 className="font-display text-2xl font-bold text-white mb-1">
               Anti-Trap Feedback
             </h1>
@@ -339,7 +383,15 @@ export default function AntiTrapFeedback() {
         ].map((stat) => {
           const Icon = stat.icon;
           return (
-            <Card key={stat.label} className="rounded-2xl shadow-card">
+            <Card
+              key={stat.label}
+              className="rounded-2xl shadow-card"
+              style={{
+                background:
+                  "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%)",
+                borderLeft: "4px solid #e11d48",
+              }}
+            >
               <CardContent className="p-4 flex items-center gap-3">
                 <div
                   className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${stat.color}`}
@@ -388,6 +440,7 @@ export default function AntiTrapFeedback() {
                     }
                     className="rounded-xl"
                     required
+                    data-ocid="atf.input"
                   />
                 </div>
                 <div>
@@ -425,6 +478,7 @@ export default function AntiTrapFeedback() {
                     className="rounded-xl resize-none"
                     rows={4}
                     required
+                    data-ocid="atf.textarea"
                   />
                 </div>
                 <div>
@@ -459,6 +513,7 @@ export default function AntiTrapFeedback() {
                 <Button
                   type="submit"
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-semibold"
+                  data-ocid="atf.submit_button"
                 >
                   Submit Report
                 </Button>
@@ -494,6 +549,76 @@ export default function AntiTrapFeedback() {
             <ReportCard key={report.id} report={report} />
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+export default function AntiTrapFeedback() {
+  const [activeTab, setActiveTab] = useState<InnerTab>("reports");
+
+  return (
+    <div>
+      {/* Inner Tab Bar */}
+      <div
+        className="sticky top-0 z-20 px-6 py-3"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(127,29,29,0.95) 0%, rgba(153,27,27,0.95) 50%, rgba(185,28,28,0.95) 100%)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.15)",
+        }}
+      >
+        <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto scrollbar-none">
+          {innerTabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                data-ocid={`atf.${tab.id}.tab`}
+                onClick={() => setActiveTab(tab.id)}
+                className="flex items-center gap-2 px-4 py-2 text-sm whitespace-nowrap transition-all duration-200 cursor-pointer rounded-full"
+                style={{
+                  background: isActive
+                    ? tab.gradient
+                    : "rgba(255,255,255,0.15)",
+                  color: "#111827",
+                  fontWeight: isActive ? 700 : 600,
+                  boxShadow: isActive ? tab.glow : "none",
+                  transform: isActive ? "scale(1.03)" : "scale(1)",
+                  border: isActive
+                    ? "2px solid rgba(255,255,255,0.4)"
+                    : "2px solid rgba(255,255,255,0.2)",
+                }}
+              >
+                <Icon className="w-4 h-4" />
+                <span>{tab.label}</span>
+                {tab.id === "safe-city" && (
+                  <span
+                    className="ml-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                    style={{
+                      background: "linear-gradient(135deg, #dcfce7, #bbf7d0)",
+                      color: "#15803d",
+                    }}
+                  >
+                    NEW
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Tab Content */}
+      <div key={activeTab} className="animate-fade-in-up">
+        {activeTab === "reports" ? (
+          <ReportsDashboard />
+        ) : (
+          <SafeCityExploration />
+        )}
       </div>
     </div>
   );

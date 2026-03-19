@@ -253,6 +253,41 @@ export default function StudentPerformance() {
     ...Array.from(new Set(mockStudents.map((s) => s.subject))),
   ];
 
+  const handleExport = () => {
+    const headers = [
+      "Name",
+      "Branch",
+      "Division",
+      "Subject",
+      "Attendance%",
+      "Performance%",
+      "Assignments%",
+      "Participation%",
+      "Achievements",
+      "Hackathons",
+    ];
+    const rows = filtered.map((s) => [
+      s.name,
+      s.branch,
+      s.division,
+      s.subject,
+      s.attendance,
+      s.performance,
+      s.assignments,
+      s.participation,
+      s.achievements,
+      s.hackathons,
+    ]);
+    const csv = [headers, ...rows].map((row) => row.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "student-performance-report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const avgAttendance = filtered.length
     ? Math.round(
         filtered.reduce((s, st) => s + st.attendance, 0) / filtered.length,
@@ -311,7 +346,10 @@ export default function StudentPerformance() {
             onChange={(e) => setSearchStudent(e.target.value)}
             className="w-44 border-fhub-border bg-fhub-bg text-fhub-heading text-sm"
           />
-          <Button className="ml-auto bg-fhub-accent hover:bg-fhub-accent-dark text-white text-sm rounded-xl">
+          <Button
+            onClick={handleExport}
+            className="ml-auto bg-fhub-accent hover:bg-fhub-accent-dark text-white text-sm rounded-xl"
+          >
             <Download className="w-4 h-4 mr-1.5" /> Export Report
           </Button>
         </div>

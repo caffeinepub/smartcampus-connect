@@ -7,15 +7,10 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
-export interface Teacher {
-    subject: string;
-    name: string;
-    email: string;
-    employeeId: string;
-    department: string;
-}
-export interface UserProfile {
-    name: string;
+export interface http_request_result {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
 }
 export interface Student {
     branch: string;
@@ -24,6 +19,43 @@ export interface Student {
     email: string;
     rollNumber: string;
     phone: string;
+}
+export interface TransformationOutput {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
+}
+export type GitHubProfileResult = {
+    __kind__: "ok";
+    ok: string;
+} | {
+    __kind__: "error";
+    error: string;
+};
+export interface TransformationInput {
+    context: Uint8Array;
+    response: http_request_result;
+}
+export interface Teacher {
+    subject: string;
+    name: string;
+    email: string;
+    employeeId: string;
+    department: string;
+}
+export type LeetCodeStatsResult = {
+    __kind__: "ok";
+    ok: string;
+} | {
+    __kind__: "error";
+    error: string;
+};
+export interface UserProfile {
+    name: string;
+}
+export interface http_header {
+    value: string;
+    name: string;
 }
 export enum UserRole {
     admin = "admin",
@@ -36,6 +68,8 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     bulkAddStudents(newStudents: Array<Student>): Promise<void>;
     bulkAddTeachers(newTeachers: Array<Teacher>): Promise<void>;
+    fetchGitHubProfile(username: string): Promise<GitHubProfileResult>;
+    fetchLeetCodeStats(username: string): Promise<LeetCodeStatsResult>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getStudent(rollNumber: string): Promise<Student | null>;
@@ -45,4 +79,5 @@ export interface backendInterface {
     listAllStudents(): Promise<Array<Student>>;
     listAllTeachers(): Promise<Array<Teacher>>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    transform(input: TransformationInput): Promise<TransformationOutput>;
 }

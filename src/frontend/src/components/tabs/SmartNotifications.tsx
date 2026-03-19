@@ -333,9 +333,16 @@ export default function SmartNotifications() {
 
           {/* Upcoming Exams + Assignments */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card className="rounded-2xl shadow-card">
+            <Card
+              className="rounded-2xl shadow-card"
+              style={{
+                background:
+                  "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 60%, #c4b5fd 100%)",
+                borderLeft: "4px solid #7c3aed",
+              }}
+            >
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold">
+                <CardTitle className="text-sm font-semibold text-purple-900">
                   Upcoming Exams
                 </CardTitle>
               </CardHeader>

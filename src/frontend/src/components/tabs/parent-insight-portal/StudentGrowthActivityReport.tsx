@@ -274,12 +274,21 @@ export default function StudentGrowthActivityReport() {
     <div className="max-w-[1400px] mx-auto px-6 py-8 space-y-8">
       {/* Student Identity Card */}
       <div
-        className="rounded-2xl p-6 flex flex-wrap items-center gap-6"
+        className="rounded-2xl p-6 flex flex-wrap items-center gap-6 relative"
         style={{
           background:
-            "linear-gradient(135deg, var(--parent-primary) 0%, var(--parent-primary-dark) 100%)",
+            "linear-gradient(135deg, #0c4a6e 0%, #075985 35%, #0369a1 65%, #0284c7 100%)",
         }}
       >
+        <img
+          src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+          alt="NIRGRANTHA"
+          className="absolute top-4 right-6 h-5 w-auto"
+          style={{ filter: "brightness(0) invert(1)", opacity: 0.7 }}
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.display = "none";
+          }}
+        />
         <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl font-bold text-white">
           {studentData.name.charAt(0)}
         </div>
@@ -329,14 +338,15 @@ export default function StudentGrowthActivityReport() {
           <div
             className="rounded-2xl p-5 flex flex-col gap-3"
             style={{
-              background: "var(--parent-card)",
-              border: "1px solid var(--parent-border)",
+              background:
+                "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 60%, #7dd3fc 100%)",
+              borderLeft: "4px solid #0284c7",
             }}
           >
             <div className="flex items-center justify-between">
               <span
                 className="text-sm font-semibold"
-                style={{ color: "var(--parent-heading)" }}
+                style={{ color: "#0c4a6e" }}
               >
                 Semester Progress
               </span>
@@ -362,13 +372,14 @@ export default function StudentGrowthActivityReport() {
           <div
             className="rounded-2xl p-5 flex flex-col gap-3"
             style={{
-              background: "var(--parent-card)",
-              border: "1px solid var(--parent-border)",
+              background:
+                "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%, #bbf7d0 100%)",
+              borderLeft: "4px solid #16a34a",
             }}
           >
             <span
               className="text-sm font-semibold"
-              style={{ color: "var(--parent-heading)" }}
+              style={{ color: "#14532d" }}
             >
               Attendance
             </span>

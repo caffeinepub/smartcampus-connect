@@ -326,10 +326,9 @@ export default function RoleLoginPage({
           {/* Credentials notice — only for student, teacher, parent */}
           {role !== "institute" && (
             <div
-              className="flex items-start gap-3 px-4 py-3 rounded-xl mb-6 border-l-4"
+              className="credential-notice flex items-start gap-3 px-4 py-3 rounded-xl mb-6"
               style={{
                 backgroundColor: "oklch(0.97 0.02 27)",
-                borderLeftColor: "oklch(0.58 0.22 27)",
               }}
               data-ocid="login.credential_notice.panel"
             >
@@ -339,7 +338,7 @@ export default function RoleLoginPage({
               />
               <p
                 className="text-xs leading-relaxed font-medium"
-                style={{ color: "oklch(0.4 0.18 27)" }}
+                style={{ color: "#1a1a1a", fontWeight: 600 }}
               >
                 🔐 Your login credentials are provided by your{" "}
                 <strong>Institute</strong>. Contact your college admin if you

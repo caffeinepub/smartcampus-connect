@@ -1,9 +1,10 @@
 import Map "mo:core/Map";
-import Text "mo:core/Text";
 import Principal "mo:core/Principal";
 import Runtime "mo:core/Runtime";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
+import Text "mo:core/Text";
+import OutCall "http-outcalls/outcall";
 
 actor {
   let accessControlState = AccessControl.initState();
@@ -114,5 +115,55 @@ actor {
       Runtime.trap("Unauthorized: Only users can view teacher records");
     };
     teachers.values().toArray();
+  };
+
+  type GitHubProfileResult = {
+    #ok : Text;
+    #error : Text;
+  };
+
+  type LeetCodeStatsResult = {
+    #ok : Text;
+    #error : Text;
+  };
+
+  public query func transform(input : OutCall.TransformationInput) : async OutCall.TransformationOutput {
+    OutCall.transform(input);
+  };
+
+  // Public: fetches GitHub user profile via public API (no auth required)
+  public shared func fetchGitHubProfile(username : Text) : async GitHubProfileResult {
+    let url = "https://api.github.com/users/" # username;
+    let extraHeaders = [
+      { name = "Accept"; value = "application/vnd.github.v3+json" },
+      { name = "User-Agent"; value = "NIRGRANTHA-App" }
+    ];
+
+    let response = await OutCall.httpGetRequest(url, extraHeaders, transform);
+
+    if (response.contains(#text("Not Found"))) {
+      return #error("GitHub user not found");
+    };
+
+    #ok(response);
+  };
+
+  // Public: fetches LeetCode stats via GraphQL API (no auth required)
+  public shared func fetchLeetCodeStats(username : Text) : async LeetCodeStatsResult {
+    let url = "https://leetcode.com/graphql";
+    let extraHeaders = [
+      { name = "Content-Type"; value = "application/json" },
+      { name = "Referer"; value = "https://leetcode.com" },
+      { name = "User-Agent"; value = "Mozilla/5.0 (compatible; NIRGRANTHA/1.0)" }
+    ];
+    let queryBody = "{\"query\":\"query getUserProfile($username: String!) { matchedUser(username: $username) { submitStats: submitStatsGlobal { acSubmissionNum { difficulty count submissions } } profile { ranking realName } } }\",\"variables\":{\"username\":\"" # username # "\"}}";
+
+    let response = await OutCall.httpPostRequest(url, extraHeaders, queryBody, transform);
+
+    if (response.contains(#text("\"matchedUser\":null"))) {
+      return #error("LeetCode user not found");
+    };
+
+    #ok(response);
   };
 };

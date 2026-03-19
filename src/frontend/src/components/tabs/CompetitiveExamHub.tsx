@@ -143,11 +143,11 @@ export default function CompetitiveExamHub() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
-      <div className="relative rounded-2xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden bg-pattern-lines">
         <div
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.55 0.18 55), oklch(0.62 0.2 65))",
+              "linear-gradient(135deg, #92400e 0%, #b45309 35%, #d97706 65%, #f59e0b 100%)",
           }}
           className="absolute inset-0"
         />
@@ -158,6 +158,14 @@ export default function CompetitiveExamHub() {
         />
         <div className="absolute inset-0 flex items-center justify-between px-8">
           <div>
+            <img
+              src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+              alt="NIRGRANTHA"
+              className="nirgrantha-section-logo mb-1"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
             <h1 className="font-display text-2xl font-bold text-white mb-1">
               Competitive Exam Hub
             </h1>

@@ -1,16 +1,13 @@
 import {
   AlertTriangle,
   Award,
-  BookOpen,
   ChevronDown,
   ChevronUp,
   FlaskConical,
-  Minus,
   Target,
   TrendingDown,
   TrendingUp,
   Users,
-  Zap,
 } from "lucide-react";
 
 const kpiCards = [
@@ -21,7 +18,8 @@ const kpiCards = [
     trend: "+0.3",
     up: true,
     icon: Award,
-    color: "var(--iicc-blue)",
+    color: "#2563eb",
+    borderColor: "#1d4ed8",
   },
   {
     label: "Attendance Rate",
@@ -30,7 +28,8 @@ const kpiCards = [
     trend: "+2%",
     up: true,
     icon: Users,
-    color: "oklch(0.52 0.16 160)",
+    color: "#059669",
+    borderColor: "#047857",
   },
   {
     label: "Placement Rate",
@@ -39,7 +38,8 @@ const kpiCards = [
     trend: "+5%",
     up: true,
     icon: Target,
-    color: "oklch(0.55 0.18 280)",
+    color: "#7c3aed",
+    borderColor: "#6d28d9",
   },
   {
     label: "Research Output",
@@ -48,7 +48,8 @@ const kpiCards = [
     trend: "+12",
     up: true,
     icon: FlaskConical,
-    color: "oklch(0.60 0.18 50)",
+    color: "#d97706",
+    borderColor: "#b45309",
   },
   {
     label: "Weak Students",
@@ -57,7 +58,8 @@ const kpiCards = [
     trend: "-28",
     up: false,
     icon: AlertTriangle,
-    color: "oklch(0.60 0.22 25)",
+    color: "#dc2626",
+    borderColor: "#b91c1c",
   },
   {
     label: "Dropout Risk",
@@ -66,7 +68,8 @@ const kpiCards = [
     trend: "-1.1%",
     up: false,
     icon: TrendingDown,
-    color: "oklch(0.55 0.20 30)",
+    color: "#9f1239",
+    borderColor: "#881337",
   },
 ];
 
@@ -261,30 +264,45 @@ export default function InstitutionalPerformanceAnalytics() {
     <div className="max-w-[1400px] mx-auto px-6 py-8 space-y-10">
       {/* KPI Cards */}
       <section>
-        <h2
-          className="text-lg font-display font-bold mb-4"
-          style={{ color: "var(--iicc-heading)" }}
-        >
-          Overall Academic Performance Dashboard
-        </h2>
+        <div className="flex items-center gap-3 mb-4">
+          <img
+            src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+            alt="NIRGRANTHA"
+            className="h-6 w-auto"
+            style={{
+              filter: "invert(1) sepia(1) saturate(5) hue-rotate(175deg)",
+              opacity: 0.9,
+            }}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
+          />
+          <h2
+            className="text-lg font-display font-bold"
+            style={{ color: "var(--iicc-heading)" }}
+          >
+            Overall Academic Performance Dashboard
+          </h2>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {kpiCards.map((kpi) => {
             const Icon = kpi.icon;
             return (
               <div
                 key={kpi.label}
-                className="rounded-xl p-4 border"
+                className="rounded-xl p-4"
                 style={{
-                  background: "var(--iicc-card)",
-                  borderColor: "var(--iicc-border)",
+                  background: "#ffffff",
+                  border: `2px solid ${kpi.borderColor}`,
+                  boxShadow: `0 4px 16px ${kpi.color}30, 0 1px 4px rgba(0,0,0,0.08)`,
                 }}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: `${kpi.color}20` }}
+                    className="w-9 h-9 rounded-lg flex items-center justify-center"
+                    style={{ background: `${kpi.color}18` }}
                   >
-                    <Icon className="w-4 h-4" style={{ color: kpi.color }} />
+                    <Icon className="w-5 h-5" style={{ color: kpi.color }} />
                   </div>
                   <span
                     className={`text-xs font-semibold flex items-center gap-0.5 ${kpi.up ? "text-green-600" : "text-red-500"}`}
@@ -299,7 +317,7 @@ export default function InstitutionalPerformanceAnalytics() {
                 </div>
                 <div
                   className="text-2xl font-bold font-display"
-                  style={{ color: "var(--iicc-heading)" }}
+                  style={{ color: kpi.color }}
                 >
                   {kpi.value}
                   <span
@@ -310,8 +328,8 @@ export default function InstitutionalPerformanceAnalytics() {
                   </span>
                 </div>
                 <div
-                  className="text-xs mt-1"
-                  style={{ color: "var(--iicc-muted)" }}
+                  className="text-xs font-semibold mt-1"
+                  style={{ color: "#1e293b" }}
                 >
                   {kpi.label}
                 </div>
@@ -331,10 +349,12 @@ export default function InstitutionalPerformanceAnalytics() {
             Branch-wise Performance Comparison
           </h2>
           <div
-            className="rounded-xl border p-5 space-y-3"
+            className="rounded-xl p-5 space-y-3"
             style={{
-              background: "var(--iicc-card)",
-              borderColor: "var(--iicc-border)",
+              background:
+                "linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #bfdbfe 100%)",
+              border: "2px solid #1d4ed8",
+              boxShadow: "0 4px 16px rgba(29,78,216,0.15)",
             }}
           >
             {branchData.map((b) => (
@@ -392,10 +412,11 @@ export default function InstitutionalPerformanceAnalytics() {
             Division-wise Performance
           </h2>
           <div
-            className="rounded-xl border p-5 space-y-4"
+            className="rounded-xl p-5 space-y-4"
             style={{
               background: "var(--iicc-card)",
-              borderColor: "var(--iicc-border)",
+              border: "2px solid var(--iicc-border)",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.07)",
             }}
           >
             {divisionData.map((d) => (
@@ -481,10 +502,11 @@ export default function InstitutionalPerformanceAnalytics() {
           Teacher Performance Ranking
         </h2>
         <div
-          className="rounded-xl border overflow-hidden"
+          className="rounded-xl overflow-hidden"
           style={{
             background: "var(--iicc-card)",
-            borderColor: "var(--iicc-border)",
+            border: "2px solid var(--iicc-border)",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.07)",
           }}
         >
           <table className="w-full text-sm">
@@ -628,10 +650,11 @@ export default function InstitutionalPerformanceAnalytics() {
             Weak Student Detection & Dropout Risk
           </h2>
           <div
-            className="rounded-xl border overflow-hidden"
+            className="rounded-xl overflow-hidden"
             style={{
               background: "var(--iicc-card)",
-              borderColor: "var(--iicc-border)",
+              border: "2px solid var(--iicc-border)",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.07)",
             }}
           >
             <table className="w-full text-sm">
@@ -741,10 +764,11 @@ export default function InstitutionalPerformanceAnalytics() {
               Hackathon Participation
             </h2>
             <div
-              className="rounded-xl border p-4 space-y-3"
+              className="rounded-xl p-4 space-y-3"
               style={{
                 background: "var(--iicc-card)",
-                borderColor: "var(--iicc-border)",
+                border: "2px solid #d97706",
+                boxShadow: "0 4px 16px rgba(217,119,6,0.15)",
               }}
             >
               {[
@@ -783,10 +807,11 @@ export default function InstitutionalPerformanceAnalytics() {
               Research Contributions
             </h2>
             <div
-              className="rounded-xl border p-4 space-y-3"
+              className="rounded-xl p-4 space-y-3"
               style={{
                 background: "var(--iicc-card)",
-                borderColor: "var(--iicc-border)",
+                border: "2px solid #7c3aed",
+                boxShadow: "0 4px 16px rgba(124,58,237,0.15)",
               }}
             >
               {[
@@ -835,10 +860,11 @@ export default function InstitutionalPerformanceAnalytics() {
           </h2>
         </div>
         <div
-          className="rounded-xl border overflow-hidden"
+          className="rounded-xl overflow-hidden"
           style={{
             background: "var(--iicc-card)",
-            borderColor: "var(--iicc-border)",
+            border: "2px solid var(--iicc-border)",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.07)",
           }}
         >
           <table className="w-full text-sm">
@@ -927,10 +953,19 @@ export default function InstitutionalPerformanceAnalytics() {
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: static list
               key={i}
-              className="rounded-xl border p-4 flex gap-3"
+              className="rounded-xl p-4 flex gap-3"
               style={{
                 background: "var(--iicc-card)",
-                borderColor: "var(--iicc-border)",
+                border: `2px solid ${
+                  rec.priority === "Critical"
+                    ? "#dc2626"
+                    : rec.priority === "High"
+                      ? "#d97706"
+                      : rec.priority === "Medium"
+                        ? "var(--iicc-blue)"
+                        : "#059669"
+                }`,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
               }}
             >
               <span
@@ -978,32 +1013,45 @@ export default function InstitutionalPerformanceAnalytics() {
               label: "Total Placed",
               value: "1,428",
               sub: "out of 2,240 eligible",
+              color: "#2563eb",
             },
             {
               label: "Average CTC",
-              value: "₹6.2 LPA",
-              sub: "up from ₹5.8 last year",
+              value: "\u20B96.2 LPA",
+              sub: "up from \u20B95.8 last year",
+              color: "#059669",
             },
-            { label: "Highest CTC", value: "₹42 LPA", sub: "CSE — Google" },
-            { label: "Top Recruiters", value: "48", sub: "companies visited" },
+            {
+              label: "Highest CTC",
+              value: "\u20B942 LPA",
+              sub: "CSE \u2014 Google",
+              color: "#7c3aed",
+            },
+            {
+              label: "Top Recruiters",
+              value: "48",
+              sub: "companies visited",
+              color: "#d97706",
+            },
           ].map((p) => (
             <div
               key={p.label}
-              className="rounded-xl border p-4 text-center"
+              className="rounded-xl p-4 text-center"
               style={{
-                background: "var(--iicc-card)",
-                borderColor: "var(--iicc-border)",
+                background: "#ffffff",
+                border: `2px solid ${p.color}`,
+                boxShadow: `0 4px 16px ${p.color}25`,
               }}
             >
               <div
                 className="text-2xl font-bold font-display mb-1"
-                style={{ color: "var(--iicc-blue)" }}
+                style={{ color: p.color }}
               >
                 {p.value}
               </div>
               <div
                 className="text-sm font-semibold"
-                style={{ color: "var(--iicc-heading)" }}
+                style={{ color: "#1e293b" }}
               >
                 {p.label}
               </div>

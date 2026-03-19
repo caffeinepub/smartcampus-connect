@@ -195,11 +195,11 @@ export default function SkillBasedTeams() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
-      <div className="relative rounded-2xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden bg-pattern-dots">
         <div
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.38 0.18 220), oklch(0.48 0.17 230))",
+              "linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 35%, #2563eb 65%, #3b82f6 100%)",
           }}
           className="absolute inset-0"
         />
@@ -210,6 +210,14 @@ export default function SkillBasedTeams() {
         />
         <div className="absolute inset-0 flex items-center px-8">
           <div>
+            <img
+              src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+              alt="NIRGRANTHA"
+              className="nirgrantha-section-logo mb-1"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
             <h1 className="font-display text-2xl font-bold text-white mb-1">
               Skill-Based Team Selection
             </h1>
@@ -262,6 +270,11 @@ export default function SkillBasedTeams() {
           <Card
             key={student.id}
             className="rounded-2xl shadow-card card-hover overflow-hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)",
+              borderLeft: "4px solid #2563eb",
+            }}
           >
             <div className={`h-1.5 bg-gradient-to-r ${student.color}`} />
             <CardContent className="p-5">
@@ -335,7 +348,15 @@ export default function SkillBasedTeams() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {hackathons.map((h) => (
-            <Card key={h.name} className="rounded-2xl shadow-card card-hover">
+            <Card
+              key={h.name}
+              className="rounded-2xl shadow-card card-hover"
+              style={{
+                background:
+                  "linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #bfdbfe 100%)",
+                borderLeft: "4px solid #3b82f6",
+              }}
+            >
               <CardContent className="p-5">
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>

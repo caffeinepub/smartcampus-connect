@@ -3,15 +3,19 @@ import {
   BookOpen,
   Brain,
   BrainCircuit,
+  Cpu,
   Monitor,
   Network,
   Plug,
   Settings,
+  ShieldCheck,
 } from "lucide-react";
 import { useState } from "react";
 import AITeachingAssistant from "./faculty-hub/AITeachingAssistant";
 import AcademicControl from "./faculty-hub/AcademicControl";
+import AgenticAIHub from "./faculty-hub/AgenticAIHub";
 import ClassTopicTracking from "./faculty-hub/ClassTopicTracking";
+import CybersecurityCommand from "./faculty-hub/CybersecurityCommand";
 import FacultyNetworking from "./faculty-hub/FacultyNetworking";
 import Integrations from "./faculty-hub/Integrations";
 import SmartboardTeaching from "./faculty-hub/SmartboardTeaching";
@@ -24,27 +28,84 @@ type SubSection =
   | "networking"
   | "integrations"
   | "control"
-  | "ai-assistant";
+  | "ai-assistant"
+  | "ai-agents"
+  | "cybersecurity";
 
 interface SubNav {
   id: SubSection;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
+  gradient: string;
+  glow: string;
 }
 
 const subNavItems: SubNav[] = [
-  { id: "smartboard", label: "Smartboard Teaching", icon: Monitor },
-  { id: "tracking", label: "Class & Topic Tracking", icon: BookOpen },
-  { id: "performance", label: "Student Performance", icon: BarChart3 },
-  { id: "networking", label: "Faculty Networking", icon: Network },
-  { id: "integrations", label: "Integrations", icon: Plug },
-  { id: "control", label: "Academic Control Panel", icon: Settings },
+  {
+    id: "smartboard",
+    label: "Smartboard Teaching",
+    icon: Monitor,
+    gradient: "linear-gradient(135deg, #818cf8, #6366f1)",
+    glow: "0 4px 15px rgba(99,102,241,0.55)",
+  },
+  {
+    id: "tracking",
+    label: "Class & Topic Tracking",
+    icon: BookOpen,
+    gradient: "linear-gradient(135deg, #34d399, #059669)",
+    glow: "0 4px 15px rgba(5,150,105,0.5)",
+  },
+  {
+    id: "performance",
+    label: "Student Performance",
+    icon: BarChart3,
+    gradient: "linear-gradient(135deg, #fb923c, #ea580c)",
+    glow: "0 4px 15px rgba(234,88,12,0.5)",
+  },
+  {
+    id: "networking",
+    label: "Faculty Networking",
+    icon: Network,
+    gradient: "linear-gradient(135deg, #e879f9, #d946ef)",
+    glow: "0 4px 15px rgba(217,70,239,0.5)",
+  },
+  {
+    id: "integrations",
+    label: "Integrations",
+    icon: Plug,
+    gradient: "linear-gradient(135deg, #22d3ee, #0891b2)",
+    glow: "0 4px 15px rgba(8,145,178,0.5)",
+  },
+  {
+    id: "control",
+    label: "Academic Control Panel",
+    icon: Settings,
+    gradient: "linear-gradient(135deg, #fbbf24, #d97706)",
+    glow: "0 4px 15px rgba(217,119,6,0.5)",
+  },
   {
     id: "ai-assistant",
     label: "AI Teaching Assistant",
     icon: Brain,
     badge: "AI",
+    gradient: "linear-gradient(135deg, #4ade80, #16a34a)",
+    glow: "0 4px 15px rgba(22,163,74,0.5)",
+  },
+  {
+    id: "ai-agents",
+    label: "AI Agents",
+    icon: Cpu,
+    badge: "NEW",
+    gradient: "linear-gradient(135deg, #f97316, #7c3aed)",
+    glow: "0 4px 15px rgba(124,58,237,0.5)",
+  },
+  {
+    id: "cybersecurity",
+    label: "Cybersecurity",
+    icon: ShieldCheck,
+    gradient: "linear-gradient(135deg, #0f172a, #1e40af)",
+    glow: "0 4px 15px rgba(30,64,175,0.5)",
   },
 ];
 
@@ -56,6 +117,8 @@ const subComponents: Record<SubSection, React.ComponentType> = {
   integrations: Integrations,
   control: AcademicControl,
   "ai-assistant": AITeachingAssistant,
+  "ai-agents": AgenticAIHub,
+  cybersecurity: CybersecurityCommand,
 };
 
 export default function FacultyIntelligenceHub() {
@@ -64,7 +127,49 @@ export default function FacultyIntelligenceHub() {
   const ActiveSubComponent = subComponents[activeSection];
 
   return (
-    <div className="min-h-screen flex flex-col bg-fhub-bg">
+    <div
+      className="min-h-screen flex flex-col relative overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, #1e1b4b 0%, #312e81 20%, #3730a3 50%, #4338ca 75%, #6366f1 100%)",
+      }}
+    >
+      {/* Floating ambient orbs */}
+      <div
+        className="orb animate-float-slow"
+        style={{
+          width: 480,
+          height: 480,
+          top: "-12%",
+          right: "-10%",
+          background: "radial-gradient(circle, #818cf8 0%, transparent 70%)",
+          opacity: 0.18,
+        }}
+      />
+      <div
+        className="orb animate-float-mid"
+        style={{
+          width: 320,
+          height: 320,
+          bottom: "5%",
+          left: "-6%",
+          background: "radial-gradient(circle, #a855f7 0%, transparent 70%)",
+          opacity: 0.14,
+          animationDelay: "2.5s",
+        }}
+      />
+      <div
+        className="orb animate-float-fast"
+        style={{
+          width: 220,
+          height: 220,
+          top: "45%",
+          right: "8%",
+          background: "radial-gradient(circle, #60a5fa 0%, transparent 70%)",
+          opacity: 0.1,
+          animationDelay: "1.5s",
+        }}
+      />
       {/* Hub Header */}
       <div className="bg-fhub-header border-b border-fhub-border">
         <div className="max-w-[1400px] mx-auto px-6 py-5">
@@ -72,11 +177,29 @@ export default function FacultyIntelligenceHub() {
             <div className="w-10 h-10 rounded-xl bg-fhub-accent flex items-center justify-center shadow-fhub">
               <BrainCircuit className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-display font-bold text-fhub-heading tracking-tight">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-1">
+                <img
+                  src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+                  alt="NIRGRANTHA"
+                  className="h-7 w-auto"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display =
+                      "none";
+                  }}
+                />
+              </div>
+              <h1
+                className="text-xl font-display font-bold tracking-tight"
+                style={{ color: "white" }}
+              >
                 Faculty Intelligence Hub
               </h1>
-              <p className="text-xs text-fhub-muted mt-0.5">
+              <p
+                className="text-xs mt-0.5"
+                style={{ color: "rgba(255,255,255,0.8)" }}
+              >
                 National Smart Education Control System · Academic Year 2025–26
               </p>
             </div>
@@ -88,9 +211,9 @@ export default function FacultyIntelligenceHub() {
           </div>
         </div>
 
-        {/* Horizontal Top Tab Navigation */}
+        {/* Vibrant Gradient Pill Tab Navigation */}
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="flex items-end gap-1 overflow-x-auto scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-3">
             {subNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -100,16 +223,32 @@ export default function FacultyIntelligenceHub() {
                   onClick={() => setActiveSection(item.id)}
                   data-ocid={`faculty.${item.id}.tab`}
                   type="button"
-                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer rounded-t-xl border-b-2 ${
-                    isActive
-                      ? "text-fhub-accent bg-fhub-accent/10 border-fhub-accent"
-                      : "text-fhub-muted border-transparent hover:text-fhub-heading"
-                  }`}
+                  className="flex items-center gap-2 px-4 py-2 text-sm whitespace-nowrap transition-all duration-200 cursor-pointer rounded-full"
+                  style={{
+                    background: isActive
+                      ? item.gradient
+                      : "rgba(255,255,255,0.12)",
+                    color: isActive ? "#111827" : "rgba(255,255,255,1)",
+                    fontWeight: isActive ? 700 : 600,
+                    boxShadow: isActive ? item.glow : "none",
+                    transform: isActive ? "scale(1.03)" : "scale(1)",
+                    border: isActive
+                      ? "2px solid rgba(255,255,255,0.4)"
+                      : "2px solid rgba(255,255,255,0.15)",
+                  }}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-fhub-ai-badge text-white">
+                    <span
+                      className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold"
+                      style={{
+                        background: isActive
+                          ? "rgba(0,0,0,0.2)"
+                          : "rgba(255,255,255,0.3)",
+                        color: isActive ? "#111827" : "white",
+                      }}
+                    >
                       {item.badge}
                     </span>
                   )}
@@ -120,8 +259,14 @@ export default function FacultyIntelligenceHub() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="flex-1">
+      {/* Main Content with lighter gradient */}
+      <main
+        className="flex-1"
+        style={{
+          background:
+            "linear-gradient(160deg, #f5f3ff 0%, #ede9fe 25%, #ddd6fe 50%, #c4b5fd 75%, #ede9fe 100%)",
+        }}
+      >
         <div key={activeSection} className="animate-fade-in-up">
           <ActiveSubComponent />
         </div>

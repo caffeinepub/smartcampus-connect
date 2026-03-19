@@ -53,8 +53,8 @@
     --fhub-header: 0.3 0.22 260;
     --fhub-card: 1 0 0;
     --fhub-border: 0.25 0.1 250;
-    --fhub-heading: 0.96 0.01 240;
-    --fhub-muted: 0.78 0.05 240;
+    --fhub-heading: 0.15 0.02 240;
+    --fhub-muted: 0.4 0.04 240;
     --fhub-accent: 0.46 0.22 245;
     --fhub-accent-dark: 0.36 0.22 245;
     --fhub-badge-bg: 0.93 0.06 240;
@@ -66,8 +66,8 @@
     --iicc-header: oklch(0.28 0.18 258);
     --iicc-card: oklch(1 0 0);
     --iicc-border: oklch(0.24 0.1 250);
-    --iicc-heading: oklch(0.96 0.01 240);
-    --iicc-muted: oklch(0.75 0.04 245);
+    --iicc-heading: oklch(0.15 0.02 250);
+    --iicc-muted: oklch(0.4 0.04 245);
     --iicc-blue: oklch(0.4 0.22 258);
     --iicc-blue-dark: oklch(0.3 0.22 258);
     --iicc-blue-subtle: oklch(0.93 0.06 255);
@@ -79,8 +79,8 @@
     --parent-header: oklch(0.35 0.17 238);
     --parent-card: oklch(1 0 0);
     --parent-border: oklch(0.28 0.1 232);
-    --parent-heading: oklch(0.96 0.01 230);
-    --parent-muted: oklch(0.78 0.05 230);
+    --parent-heading: oklch(0.15 0.02 230);
+    --parent-muted: oklch(0.4 0.04 228);
     --parent-primary: oklch(0.48 0.18 238);
     --parent-primary-dark: oklch(0.36 0.2 242);
     --parent-primary-hover: oklch(0.42 0.19 239);
@@ -421,5 +421,585 @@
 
   section {
     page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   NIRGRANTHA Design Patterns & Gradient Utilities
+   ============================================ */
+.bg-pattern-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+.bg-pattern-lines {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.06) 10px,
+    rgba(255, 255, 255, 0.06) 11px
+  );
+}
+.bg-pattern-mesh {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    ), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.bg-pattern-grid {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.gradient-card-emerald {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+  border-left: 4px solid #10b981;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-amber {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+  border-left: 4px solid #f59e0b;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-violet {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%);
+  border-left: 4px solid #7c3aed;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  border-left: 4px solid #2563eb;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-rose {
+  background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 50%, #fda4af 100%);
+  border-left: 4px solid #e11d48;
+  box-shadow: 0 4px 20px rgba(225, 29, 72, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-navy {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  border-left: 4px solid #1e3a8a;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.gradient-card-sky {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  border-left: 4px solid #0284c7;
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.5);
+}
+.nirgrantha-section-logo {
+  height: 24px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* ============================================
+   NIRGRANTHA Animation System v2
+   ============================================ */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-22px) scale(1.04);
+  }
+}
+@keyframes float-mid {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(8px) rotate(-2deg);
+  }
+}
+@keyframes float-fast {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes glow-pulse-green {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px rgba(0, 200, 150, 0.35), 0 0 0 0
+      rgba(0, 200, 150, 0.4);
+  }
+  50% {
+    box-shadow: 0 12px 48px rgba(0, 200, 150, 0.6), 0 0 20px 8px
+      rgba(0, 200, 150, 0.2);
+  }
+}
+@keyframes glow-pulse-red {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5), inset 0 0 0 0
+      rgba(239, 68, 68, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.15), inset 0 0 12px
+      rgba(239, 68, 68, 0.08);
+  }
+}
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.3);
+  }
+}
+@keyframes gradient-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes shimmer-slide {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+.animate-float-mid {
+  animation: float-mid 9s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: float-fast 5s ease-in-out infinite;
+}
+.animate-glow-green {
+  animation: glow-pulse-green 2.5s ease-in-out infinite;
+}
+.animate-glow-red {
+  animation: glow-pulse-red 2s ease-in-out infinite;
+}
+.animate-twinkle {
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+.animate-bounce-sub {
+  animation: bounce-subtle 2.5s ease-in-out infinite;
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer-slide 2.5s linear infinite;
+}
+
+/* Glassmorphism dark (for dark gradient backgrounds) */
+.glass-dark {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0
+    rgba(255, 255, 255, 0.1);
+}
+/* Glassmorphism light (for light gradient backgrounds) */
+.glass-light {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0
+    rgba(255, 255, 255, 0.8);
+}
+/* Role card hover gradient border */
+.role-card-hover {
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.role-card-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+.role-card-hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.role-card-hover:hover::before {
+  opacity: 1;
+}
+
+/* Credential notice glow */
+.credential-notice {
+  animation: glow-pulse-red 2s ease-in-out infinite;
+  border: 2px solid rgba(239, 68, 68, 0.6) !important;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 50%, #fee2e2 100%) !important;
+}
+/* Floating orb base */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ============================================
+   IMMERSIVE ANIMATION SYSTEM — Extended
+   ============================================ */
+
+/* Ripple expand */
+@keyframes ripple-expand {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Cursor blink for typewriter */
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 3D spin for floating shapes */
+@keyframes spin-3d {
+  0% {
+    transform: rotate3d(1, 1, 0, 0deg);
+  }
+  100% {
+    transform: rotate3d(1, 1, 0, 360deg);
+  }
+}
+
+/* Gradient morphing background */
+@keyframes gradient-morph {
+  0% {
+    opacity: 0.4;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    opacity: 0.7;
+    filter: hue-rotate(20deg);
+  }
+  100% {
+    opacity: 0.4;
+    filter: hue-rotate(-10deg);
+  }
+}
+
+/* Blob morph using border-radius */
+@keyframes blob-morph {
+  0% {
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  }
+  25% {
+    border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;
+  }
+  50% {
+    border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+  }
+  75% {
+    border-radius: 30% 70% 60% 40% / 70% 30% 60% 40%;
+  }
+  100% {
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  }
+}
+
+/* Card slide-in from below */
+@keyframes card-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Pill float for feature badges */
+@keyframes pill-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Icon bob */
+@keyframes bob-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Fade in up (used in dashboard transitions) */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer skeleton */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Neon pulse for active tabs */
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 12px
+      rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8), 0 0 24px
+      rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Glowing dot pulse */
+@keyframes dot-glow {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px currentColor;
+  }
+}
+
+/* Slide in from right (tab transition) */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from left */
+@keyframes slide-in-left-fade {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Section reveal classes */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger helpers */
+.stagger-1 {
+  transition-delay: 80ms;
+}
+.stagger-2 {
+  transition-delay: 160ms;
+}
+.stagger-3 {
+  transition-delay: 240ms;
+}
+.stagger-4 {
+  transition-delay: 320ms;
+}
+.stagger-5 {
+  transition-delay: 400ms;
+}
+
+/* Stat card flip */
+.flip-card {
+  perspective: 800px;
+}
+.flip-card-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  position: relative;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  inset: 0;
+}
+
+/* Magnetic button wrapper */
+.magnetic-btn {
+  transition: transform 0.15s ease, box-shadow 0.3s ease !important;
+  display: inline-block;
+}
+
+/* Active tab neon glow */
+.tab-neon-active {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* Skeleton loading shimmer */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+/* Animated gradient border */
+.gradient-border-anim {
+  position: relative;
+}
+.gradient-border-anim::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #00e5a0, #6366f1, #38bdf8, #00e5a0);
+  background-size: 300% 300%;
+  animation: gradient-morph 4s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border-anim:hover::after {
+  opacity: 1;
+}
+
+/* Tab slide transition */
+.animate-fade-in-up {
+  animation: fade-in-up 0.45s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s ease forwards;
+}
+
+/* Card hover lift + glow (enhanced) */
+.card-hover-lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.card-hover-lift:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress bar animated fill */
+.progress-anim {
+  animation: progress-fill 1.2s ease forwards;
+}
+@keyframes progress-fill {
+  from {
+    width: 0%;
   }
 }

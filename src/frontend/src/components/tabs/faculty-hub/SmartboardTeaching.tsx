@@ -215,20 +215,32 @@ export default function SmartboardTeaching() {
   return (
     <div
       className="min-h-screen"
-      style={{ background: "oklch(var(--fhub-bg))" }}
+      style={{
+        background:
+          "linear-gradient(160deg, #1e1b4b 0%, #312e81 30%, #3730a3 60%, #1e1b4b 100%)",
+      }}
     >
       {/* Session Status Bar */}
       <div
         className="sticky top-0 z-30 px-6 py-3 flex items-center justify-between border-b"
         style={{
           background: classStarted
-            ? "oklch(0.18 0.08 160)"
-            : "oklch(var(--fhub-header))",
+            ? "linear-gradient(135deg, #064e3b, #065f46)"
+            : "linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)",
           borderColor: "rgba(255,255,255,0.1)",
           transition: "background 0.5s",
         }}
       >
         <div className="flex items-center gap-4">
+          <img
+            src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+            alt="NIRGRANTHA"
+            className="h-5 w-auto mr-2"
+            style={{ filter: "brightness(0) invert(1)", opacity: 0.8 }}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
+          />
           {classStarted ? (
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
@@ -298,8 +310,9 @@ export default function SmartboardTeaching() {
           <div
             className="lg:col-span-3 rounded-2xl p-5 border space-y-4"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background:
+                "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%)",
+              borderColor: "rgba(255,255,255,0.15)",
             }}
           >
             <div className="flex items-center gap-2 mb-1">

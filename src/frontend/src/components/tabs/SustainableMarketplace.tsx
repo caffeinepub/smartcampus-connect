@@ -186,11 +186,11 @@ export default function SustainableMarketplace() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
-      <div className="relative rounded-2xl overflow-hidden">
+      <div className="relative rounded-2xl overflow-hidden bg-pattern-lines">
         <div
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.42 0.2 20), oklch(0.5 0.18 30))",
+              "linear-gradient(135deg, #7f1d1d 0%, #991b1b 35%, #dc2626 65%, #ef4444 100%)",
           }}
           className="absolute inset-0"
         />
@@ -201,6 +201,14 @@ export default function SustainableMarketplace() {
         />
         <div className="absolute inset-0 flex items-center justify-between px-8">
           <div>
+            <img
+              src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
+              alt="NIRGRANTHA"
+              className="nirgrantha-section-logo mb-1"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
             <h1 className="font-display text-2xl font-bold text-white mb-1">
               Sustainable Marketplace
             </h1>
@@ -248,6 +256,11 @@ export default function SustainableMarketplace() {
           <Card
             key={product.id}
             className="rounded-2xl shadow-card card-hover overflow-hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 60%, #fecdd3 100%)",
+              borderLeft: "4px solid #e11d48",
+            }}
           >
             {/* Product Image Placeholder */}
             <div

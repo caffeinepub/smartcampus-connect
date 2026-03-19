@@ -10,6 +10,10 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export type GitHubProfileResult = { 'ok' : string } |
+  { 'error' : string };
+export type LeetCodeStatsResult = { 'ok' : string } |
+  { 'error' : string };
 export interface Student {
   'branch' : string,
   'semester' : string,
@@ -25,10 +29,25 @@ export interface Teacher {
   'employeeId' : string,
   'department' : string,
 }
+export interface TransformationInput {
+  'context' : Uint8Array,
+  'response' : http_request_result,
+}
+export interface TransformationOutput {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
+}
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
+export interface http_header { 'value' : string, 'name' : string }
+export interface http_request_result {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
+}
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'addStudent' : ActorMethod<[Student], undefined>,
@@ -36,6 +55,8 @@ export interface _SERVICE {
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'bulkAddStudents' : ActorMethod<[Array<Student>], undefined>,
   'bulkAddTeachers' : ActorMethod<[Array<Teacher>], undefined>,
+  'fetchGitHubProfile' : ActorMethod<[string], GitHubProfileResult>,
+  'fetchLeetCodeStats' : ActorMethod<[string], LeetCodeStatsResult>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getStudent' : ActorMethod<[string], [] | [Student]>,
@@ -45,6 +66,7 @@ export interface _SERVICE {
   'listAllStudents' : ActorMethod<[], Array<Student>>,
   'listAllTeachers' : ActorMethod<[], Array<Teacher>>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'transform' : ActorMethod<[TransformationInput], TransformationOutput>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

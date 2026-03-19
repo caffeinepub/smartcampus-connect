@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 import Navbar from "./components/Navbar";
 import RoleLoginPage from "./components/RoleLoginPage";
 import RoleSelectionLanding from "./components/RoleSelectionLanding";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 import WelcomePage from "./components/WelcomePage";
 import FacultyIntelligenceHub from "./components/tabs/FacultyIntelligenceHub";
 import InstituteCommandCenter from "./components/tabs/InstituteCommandCenter";
@@ -49,6 +50,13 @@ const roleFooterBg: Record<UserRole, string> = {
   parent: "var(--parent-header)",
 };
 
+const roleProgressColor: Record<UserRole, string> = {
+  student: "#00e5a0",
+  teacher: "#818cf8",
+  institute: "#60a5fa",
+  parent: "#38bdf8",
+};
+
 type AppView = "welcome" | "landing" | "login" | "dashboard";
 
 function AppInner() {
@@ -57,7 +65,6 @@ function AppInner() {
   const [activeTab, setActiveTab] = useState<TabId>("student-dashboard");
   const [hasEnteredPlatform, setHasEnteredPlatform] = useState(false);
 
-  // Determine current view
   let view: AppView = "welcome";
   if (currentRole) {
     view = "dashboard";
@@ -70,23 +77,19 @@ function AppInner() {
   const handleSelectRole = (role: UserRole) => {
     setPendingRole(role);
   };
-
   const handleLogin = (role: UserRole) => {
     login(role);
     setActiveTab(roleToTab[role]);
     setPendingRole(null);
   };
-
   const handleBack = () => {
     setPendingRole(null);
   };
-
   const handleLogout = () => {
     logout();
     setPendingRole(null);
   };
 
-  // Welcome page
   if (view === "welcome") {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -95,7 +98,6 @@ function AppInner() {
     );
   }
 
-  // Landing page
   if (view === "landing") {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -104,7 +106,6 @@ function AppInner() {
     );
   }
 
-  // Login page for selected role
   if (view === "login" && pendingRole) {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -117,16 +118,19 @@ function AppInner() {
     );
   }
 
-  // Dashboard (authenticated)
   const tabForRole = currentRole ? roleToTab[currentRole] : activeTab;
   const effectiveTab = tabForRole;
   const ActiveComponent = tabComponents[effectiveTab];
   const footerBg = currentRole ? roleFooterBg[currentRole] : undefined;
+  const progressColor = currentRole
+    ? roleProgressColor[currentRole]
+    : "#00e5a0";
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       <TabContext.Provider value={{ activeTab: effectiveTab, setActiveTab }}>
         <div className="min-h-screen bg-background text-foreground">
+          <ScrollProgressBar color={progressColor} />
           <Navbar onLogout={handleLogout} />
           <main className="pt-[72px]">
             <div key={effectiveTab} className="animate-fade-in-up">
