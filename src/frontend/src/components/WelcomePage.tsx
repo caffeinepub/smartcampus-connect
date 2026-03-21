@@ -1,14 +1,15 @@
-import { BarChart2, BookOpen, Compass, Users, Zap } from "lucide-react";
+import { BarChart2, BookOpen, Brain, Compass, Users, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ParticleCanvas from "./ParticleCanvas";
 
 interface WelcomePageProps {
   onEnter: () => void;
+  onMLLab?: () => void;
 }
 
 const TITLE_FULL = "Connecting Students, Teachers, Parents & Institutes";
 
-export default function WelcomePage({ onEnter }: WelcomePageProps) {
+export default function WelcomePage({ onEnter, onMLLab }: WelcomePageProps) {
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
   const [logoVisible, setLogoVisible] = useState(false);
@@ -300,6 +301,19 @@ export default function WelcomePage({ onEnter }: WelcomePageProps) {
           />
         </div>
 
+        {/* Tagline */}
+        <p
+          className="text-sm font-semibold tracking-widest uppercase mb-4"
+          style={{
+            color: "#4a9eff",
+            opacity: logoVisible ? 1 : 0,
+            transition: "opacity 0.6s ease 0.5s",
+            letterSpacing: "0.25em",
+          }}
+        >
+          The Foundation of Trust
+        </p>
+
         {/* Typewriter */}
         <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-10 min-h-[5rem]">
           <span style={{ color: "#00e5a0" }}>{typedText}</span>
@@ -313,7 +327,7 @@ export default function WelcomePage({ onEnter }: WelcomePageProps) {
 
         {/* Feature pills */}
         <div
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-10"
           style={{
             opacity: featuresVisible ? 1 : 0,
             transform: featuresVisible ? "translateY(0)" : "translateY(20px)",
@@ -337,35 +351,48 @@ export default function WelcomePage({ onEnter }: WelcomePageProps) {
           ))}
         </div>
 
-        {/* Enter button */}
-        <button
-          ref={btnRef}
-          type="button"
-          onClick={handleEnterClick}
-          data-ocid="welcome.primary_button"
-          className="px-16 py-4 rounded-2xl text-lg font-bold text-white shadow-2xl mb-6 animate-glow-green relative overflow-hidden"
+        {/* CTA buttons */}
+        <div
+          className="flex flex-col sm:flex-row items-center gap-4 mb-6"
           style={{
-            background: "linear-gradient(135deg, #00c896 0%, #00a8cc 100%)",
             opacity: btnVisible ? 1 : 0,
             transform: btnVisible ? "scale(1)" : "scale(0.85)",
             transition:
-              "opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease",
+              "opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)",
           }}
         >
-          <span className="relative z-10">Enter Platform</span>
-        </button>
+          {/* Enter button */}
+          <button
+            ref={btnRef}
+            type="button"
+            onClick={handleEnterClick}
+            data-ocid="welcome.primary_button"
+            className="px-16 py-4 rounded-2xl text-lg font-bold text-white shadow-2xl animate-glow-green relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #00c896 0%, #00a8cc 100%)",
+            }}
+          >
+            <span className="relative z-10">Enter Platform</span>
+          </button>
 
-        <p
-          className="text-sm"
-          style={{
-            color: "#7788aa",
-            opacity: btnVisible ? 1 : 0,
-            transition: "opacity 0.5s ease 0.2s",
-          }}
-        >
-          Trusted by <span className="text-white font-semibold">1,200+</span>{" "}
-          students across India
-        </p>
+          {/* AI/ML Lab button */}
+          {onMLLab && (
+            <button
+              type="button"
+              onClick={onMLLab}
+              data-ocid="welcome.secondary_button"
+              className="flex items-center gap-2 px-8 py-4 rounded-2xl text-sm font-bold transition-all"
+              style={{
+                background: "rgba(99,102,241,0.15)",
+                border: "1px solid rgba(99,102,241,0.4)",
+                color: "#a5b4fc",
+              }}
+            >
+              <Brain className="w-4 h-4" />
+              How AI Works
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="absolute bottom-6 text-xs">

@@ -1,5 +1,6 @@
 import { ThemeProvider } from "next-themes";
 import { createContext, useContext, useState } from "react";
+import MLLabPage from "./components/MLLabPage";
 import Navbar from "./components/Navbar";
 import RoleLoginPage from "./components/RoleLoginPage";
 import RoleSelectionLanding from "./components/RoleSelectionLanding";
@@ -57,16 +58,19 @@ const roleProgressColor: Record<UserRole, string> = {
   parent: "#38bdf8",
 };
 
-type AppView = "welcome" | "landing" | "login" | "dashboard";
+type AppView = "welcome" | "landing" | "login" | "dashboard" | "ml-lab";
 
 function AppInner() {
   const { currentRole, login, logout } = useAuth();
   const [pendingRole, setPendingRole] = useState<UserRole | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>("student-dashboard");
   const [hasEnteredPlatform, setHasEnteredPlatform] = useState(false);
+  const [showMLLab, setShowMLLab] = useState(false);
 
   let view: AppView = "welcome";
-  if (currentRole) {
+  if (showMLLab) {
+    view = "ml-lab";
+  } else if (currentRole) {
     view = "dashboard";
   } else if (pendingRole) {
     view = "login";
@@ -90,10 +94,21 @@ function AppInner() {
     setPendingRole(null);
   };
 
+  if (view === "ml-lab") {
+    return (
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <MLLabPage onBack={() => setShowMLLab(false)} />
+      </ThemeProvider>
+    );
+  }
+
   if (view === "welcome") {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <WelcomePage onEnter={() => setHasEnteredPlatform(true)} />
+        <WelcomePage
+          onEnter={() => setHasEnteredPlatform(true)}
+          onMLLab={() => setShowMLLab(true)}
+        />
       </ThemeProvider>
     );
   }
@@ -101,7 +116,10 @@ function AppInner() {
   if (view === "landing") {
     return (
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <RoleSelectionLanding onSelectRole={handleSelectRole} />
+        <RoleSelectionLanding
+          onSelectRole={handleSelectRole}
+          onMLLab={() => setShowMLLab(true)}
+        />
       </ThemeProvider>
     );
   }
@@ -153,20 +171,6 @@ function AppInner() {
                 style={{ color: "rgba(255,255,255,0.75)" }}
               >
                 © {new Date().getFullYear()} Nirgrantha. All rights reserved.
-              </p>
-              <p
-                className="text-sm flex items-center gap-1"
-                style={{ color: "rgba(255,255,255,0.75)" }}
-              >
-                Built with <span className="text-red-300">♥</span> using{" "}
-                <a
-                  href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "nirgrantha")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium hover:underline text-white"
-                >
-                  caffeine.ai
-                </a>
               </p>
             </div>
           </footer>

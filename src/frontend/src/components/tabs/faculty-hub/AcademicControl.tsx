@@ -102,6 +102,23 @@ export default function AcademicControl() {
   const [reportGenerated, setReportGenerated] = useState(false);
   const [quizTitle, setQuizTitle] = useState("");
   const [taskTitle, setTaskTitle] = useState("");
+  const [syllabusFile, setSyllabusFile] = useState<File | null>(null);
+  const [syllabusUploading, setSyllabusUploading] = useState(false);
+  const [syllabusUploaded, setSyllabusUploaded] = useState(false);
+  const [syllabusError, setSyllabusError] = useState("");
+
+  const handleSyllabusUpload = () => {
+    if (!syllabusFile) {
+      setSyllabusError("Please select a file first.");
+      return;
+    }
+    setSyllabusError("");
+    setSyllabusUploading(true);
+    setTimeout(() => {
+      setSyllabusUploading(false);
+      setSyllabusUploaded(true);
+    }, 1500);
+  };
 
   const handleSendNotif = () => {
     if (notifMsg.trim()) {
@@ -178,11 +195,53 @@ export default function AcademicControl() {
                 type="file"
                 accept=".pdf,.doc,.docx"
                 className="border-fhub-border bg-fhub-bg text-fhub-heading text-xs h-9 cursor-pointer"
+                onChange={(e) => {
+                  setSyllabusFile(e.target.files?.[0] ?? null);
+                  setSyllabusUploaded(false);
+                  setSyllabusError("");
+                }}
               />
             </div>
-            <Button className="w-full bg-fhub-accent hover:bg-fhub-accent-dark text-white text-sm rounded-xl h-9">
-              <Upload className="w-3.5 h-3.5 mr-1.5" /> Upload
-            </Button>
+            {syllabusError && (
+              <p className="text-xs text-red-500">{syllabusError}</p>
+            )}
+            {syllabusUploaded ? (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-green-50 border border-green-200">
+                  <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span className="text-xs text-green-700 font-medium truncate">
+                    Uploaded: {syllabusFile?.name}
+                  </span>
+                </div>
+                <Button
+                  onClick={() => {
+                    setSyllabusUploaded(false);
+                    setSyllabusFile(null);
+                  }}
+                  variant="outline"
+                  className="w-full text-sm rounded-xl h-9 border-fhub-border text-fhub-heading"
+                >
+                  Re-upload
+                </Button>
+              </div>
+            ) : (
+              <Button
+                onClick={handleSyllabusUpload}
+                disabled={syllabusUploading}
+                className="w-full bg-fhub-accent hover:bg-fhub-accent-dark text-white text-sm rounded-xl h-9"
+              >
+                {syllabusUploading ? (
+                  <>
+                    <span className="w-3.5 h-3.5 mr-1.5 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />{" "}
+                    Uploading…
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-3.5 h-3.5 mr-1.5" /> Upload
+                  </>
+                )}
+              </Button>
+            )}
           </div>
         </div>
 

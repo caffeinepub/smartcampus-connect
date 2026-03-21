@@ -31,7 +31,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useState } from "react";
-import { useActor } from "../../hooks/useActor";
 import GradientProgress from "../GradientProgress";
 
 const branches = [
@@ -609,8 +608,6 @@ function computeSkillMatch(
 export default function AcademicRoadmaps() {
   const [selectedBranch, setSelectedBranch] = useState("CSE");
   const [selectedSem, setSelectedSem] = useState(3);
-  const { actor } = useActor();
-
   // GitHub state
   const [githubInput, setGithubInput] = useState("");
   const [githubData, setGithubData] = useState<GitHubData | null>(null);
@@ -635,25 +632,41 @@ export default function AcademicRoadmaps() {
   const semData = semesterData[selectedSem];
 
   const handleGitHubConnect = async () => {
-    if (!githubInput.trim() || !actor) return;
+    if (!githubInput.trim()) return;
     setGithubLoading(true);
     setGithubError("");
     try {
-      const result = await actor.fetchGitHubProfile(githubInput.trim());
-      if (result.__kind__ === "ok") {
-        const parsed = JSON.parse(result.ok) as GitHubData;
-        // Derive top_languages from top_repos if not already present
-        if (!parsed.top_languages || parsed.top_languages.length === 0) {
-          const langs = (parsed.top_repos ?? [])
-            .map((r: { language: string }) => r.language)
-            .filter(Boolean);
-          parsed.top_languages = [...new Set(langs)] as string[];
-        }
-        setGithubData(parsed);
-        setGithubConnected(true);
-      } else {
-        setGithubError(result.error || "Failed to fetch GitHub profile.");
-      }
+      const [userRes, reposRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${githubInput.trim()}`),
+        fetch(
+          `https://api.github.com/users/${githubInput.trim()}/repos?sort=updated&per_page=20`,
+        ),
+      ]);
+      if (!userRes.ok) throw new Error("User not found");
+      const user = await userRes.json();
+      const repos = reposRes.ok ? await reposRes.json() : [];
+      const langs = [
+        ...new Set(repos.map((r: any) => r.language).filter(Boolean)),
+      ] as string[];
+      const parsed: GitHubData = {
+        login: user.login,
+        name: user.name,
+        bio: user.bio,
+        avatar_url: user.avatar_url,
+        public_repos: user.public_repos,
+        followers: user.followers,
+        following: user.following,
+        top_languages: langs,
+        top_repos: repos.slice(0, 6).map((r: any) => ({
+          name: r.name,
+          language: r.language,
+          stargazers_count: r.stargazers_count,
+          html_url: r.html_url,
+          description: r.description,
+        })),
+      };
+      setGithubData(parsed);
+      setGithubConnected(true);
     } catch (_e) {
       setGithubError("Could not connect to GitHub. Please check the username.");
     } finally {
@@ -662,37 +675,51 @@ export default function AcademicRoadmaps() {
   };
 
   const handleLeetCodeConnect = async () => {
-    if (!leetcodeInput.trim() || !actor) return;
+    if (!leetcodeInput.trim()) return;
     setLeetcodeLoading(true);
     setLeetcodeError("");
     try {
-      const result = await actor.fetchLeetCodeStats(leetcodeInput.trim());
-      if (result.__kind__ === "ok") {
-        const raw = JSON.parse(result.ok);
-        const matchedUser = raw?.data?.matchedUser;
-        if (!matchedUser) {
-          setLeetcodeError("LeetCode user not found.");
-          return;
+      const username = leetcodeInput.trim();
+      // Use CORS-friendly public LeetCode stats API
+      let data: Record<string, unknown> | null = null;
+      try {
+        const res1 = await fetch(
+          `https://leetcode-stats-api.herokuapp.com/${username}`,
+          { headers: { Accept: "application/json" } },
+        );
+        if (res1.ok) {
+          const j = await res1.json();
+          if (j && j.status !== "error") data = j;
         }
-        const acStats = matchedUser?.submitStats?.acSubmissionNum ?? [];
-        const allStats = acStats.find((s: any) => s.difficulty === "All");
-        const easyStats = acStats.find((s: any) => s.difficulty === "Easy");
-        const mediumStats = acStats.find((s: any) => s.difficulty === "Medium");
-        const hardStats = acStats.find((s: any) => s.difficulty === "Hard");
-        const parsed: LeetCodeData = {
-          totalSolved: allStats?.count ?? 0,
-          easySolved: easyStats?.count ?? 0,
-          mediumSolved: mediumStats?.count ?? 0,
-          hardSolved: hardStats?.count ?? 0,
-          ranking: matchedUser?.profile?.ranking ?? 0,
-          acceptanceRate: 0,
-          username: leetcodeInput.trim(),
-        };
-        setLeetcodeData(parsed);
-        setLeetcodeConnected(true);
-      } else {
-        setLeetcodeError(result.error || "Failed to fetch LeetCode stats.");
+      } catch (_) {
+        /* try fallback */
       }
+      if (!data) {
+        const res2 = await fetch(
+          `https://alfa-leetcode-api.onrender.com/${username}`,
+          { headers: { Accept: "application/json" } },
+        );
+        if (!res2.ok) throw new Error("Username not found on LeetCode");
+        const j2 = await res2.json();
+        if (!j2 || j2.errors) throw new Error("Username not found on LeetCode");
+        data = j2;
+      }
+      const d = data!;
+      const parsed: LeetCodeData = {
+        totalSolved:
+          (d.totalSolved as number) ?? (d.solvedProblem as number) ?? 0,
+        easySolved:
+          (d.easySolved as number) ?? (d.easySolvedProblem as number) ?? 0,
+        mediumSolved:
+          (d.mediumSolved as number) ?? (d.mediumSolvedProblem as number) ?? 0,
+        hardSolved:
+          (d.hardSolved as number) ?? (d.hardSolvedProblem as number) ?? 0,
+        ranking: (d.ranking as number) ?? 0,
+        acceptanceRate: (d.acceptanceRate as number) ?? 0,
+        username,
+      };
+      setLeetcodeData(parsed);
+      setLeetcodeConnected(true);
     } catch (_e) {
       setLeetcodeError(
         "Could not connect to LeetCode. Please check the username.",
@@ -704,7 +731,9 @@ export default function AcademicRoadmaps() {
 
   const handleLinkedInSave = () => {
     if (!linkedinInputUrl.trim()) return;
-    setLinkedinUrl(linkedinInputUrl.trim());
+    let url = linkedinInputUrl.trim();
+    if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+    setLinkedinUrl(url);
     setLinkedinName(linkedinInputName.trim() || "My LinkedIn Profile");
     setLinkedinSaved(true);
   };
@@ -1114,7 +1143,7 @@ export default function AcademicRoadmaps() {
                   <Button
                     size="sm"
                     onClick={handleGitHubConnect}
-                    disabled={githubLoading || !githubInput.trim() || !actor}
+                    disabled={githubLoading || !githubInput.trim()}
                     className="w-full h-8 text-xs rounded-lg bg-gray-900 hover:bg-gray-800 text-white"
                     data-ocid="github.primary_button"
                   >
@@ -1303,9 +1332,7 @@ export default function AcademicRoadmaps() {
                   <Button
                     size="sm"
                     onClick={handleLeetCodeConnect}
-                    disabled={
-                      leetcodeLoading || !leetcodeInput.trim() || !actor
-                    }
+                    disabled={leetcodeLoading || !leetcodeInput.trim()}
                     className="w-full h-8 text-xs rounded-lg bg-orange-500 hover:bg-orange-600 text-white"
                     data-ocid="leetcode.primary_button"
                   >

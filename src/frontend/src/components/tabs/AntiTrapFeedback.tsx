@@ -16,7 +16,7 @@ import {
   ThumbsUp,
   Upload,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SafeCityExploration from "./SafeCityExploration";
 
 interface Comment {
@@ -288,6 +288,7 @@ function ReportCard({ report }: { report: Report }) {
 
 function ReportsDashboard() {
   const [reports, setReports] = useState<Report[]>(initialReports);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     title: "",
     company: "",
@@ -482,33 +483,37 @@ function ReportsDashboard() {
                   />
                 </div>
                 <div>
+                  <span className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                    Upload Proof
+                  </span>
                   <label
                     htmlFor="atf-proof"
-                    className="text-xs font-medium text-muted-foreground mb-1.5 block"
+                    className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:border-teal/50 transition-colors cursor-pointer block"
                   >
-                    Upload Proof
-                  </label>
-                  <div className="border-2 border-dashed border-border rounded-xl p-4 text-center hover:border-teal/50 transition-colors cursor-pointer">
-                    <Upload className="w-5 h-5 text-muted-foreground mx-auto mb-1.5" />
-                    <p className="text-xs text-muted-foreground">
-                      Click to upload screenshot or document
-                    </p>
                     <input
+                      ref={fileInputRef}
                       id="atf-proof"
                       type="file"
                       className="hidden"
                       accept="image/*,.pdf"
-                      onChange={(e) =>
-                        setForm((f) => ({
-                          ...f,
-                          file: e.target.files?.[0]?.name || "",
-                        }))
-                      }
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setForm((f) => ({ ...f, file: file.name }));
+                        }
+                      }}
                     />
-                  </div>
-                  {form.file && (
-                    <p className="text-xs text-teal mt-1">📎 {form.file}</p>
-                  )}
+                    <Upload className="w-5 h-5 text-muted-foreground mx-auto mb-1.5" />
+                    {form.file ? (
+                      <p className="text-xs text-green-600 font-medium">
+                        ✓ {form.file}
+                      </p>
+                    ) : (
+                      <p className="text-xs text-muted-foreground">
+                        Click to upload screenshot or document
+                      </p>
+                    )}
+                  </label>
                 </div>
                 <Button
                   type="submit"

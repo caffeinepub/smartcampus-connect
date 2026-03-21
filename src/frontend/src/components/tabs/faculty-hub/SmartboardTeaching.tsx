@@ -180,6 +180,15 @@ function useTimer(running: boolean) {
   return `${h > 0 ? `${h}:` : ""}${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
+// Light theme constants for consistent styling
+const CARD_BG = "#ffffff";
+const CARD_BORDER = "#c7d2fe";
+const INNER_BG = "#f5f3ff";
+const HEADING_COLOR = "#1e1b4b";
+const LABEL_COLOR = "#6b7280";
+const ACCENT_COLOR = "#4338ca";
+const ACCENT_LIGHT = "#6366f1";
+
 export default function SmartboardTeaching() {
   const [branch, setBranch] = useState("CSE");
   const [division, setDivision] = useState("A");
@@ -217,7 +226,7 @@ export default function SmartboardTeaching() {
       className="min-h-screen"
       style={{
         background:
-          "linear-gradient(160deg, #1e1b4b 0%, #312e81 30%, #3730a3 60%, #1e1b4b 100%)",
+          "linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 50%, #ede9ff 100%)",
       }}
     >
       {/* Session Status Bar */}
@@ -226,8 +235,8 @@ export default function SmartboardTeaching() {
         style={{
           background: classStarted
             ? "linear-gradient(135deg, #064e3b, #065f46)"
-            : "linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)",
-          borderColor: "rgba(255,255,255,0.1)",
+            : "linear-gradient(135deg, #4338ca 0%, #6366f1 100%)",
+          borderColor: "rgba(255,255,255,0.15)",
           transition: "background 0.5s",
         }}
       >
@@ -236,7 +245,7 @@ export default function SmartboardTeaching() {
             src="/assets/generated/nirgrantha-logo-transparent.dim_400x80.png"
             alt="NIRGRANTHA"
             className="h-5 w-auto mr-2"
-            style={{ filter: "brightness(0) invert(1)", opacity: 0.8 }}
+            style={{ filter: "brightness(0) invert(1)", opacity: 0.9 }}
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).style.display = "none";
             }}
@@ -250,23 +259,23 @@ export default function SmartboardTeaching() {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Radio className="w-4 h-4 text-fhub-muted" />
-              <span className="text-fhub-muted text-sm">No active session</span>
+              <Radio className="w-4 h-4 text-indigo-200" />
+              <span className="text-indigo-100 text-sm">No active session</span>
             </div>
           )}
           {classStarted && (
-            <div className="hidden sm:flex items-center gap-3 text-sm text-white/80">
-              <span className="px-2 py-0.5 rounded bg-white/10">{branch}</span>
-              <span className="px-2 py-0.5 rounded bg-white/10">
+            <div className="hidden sm:flex items-center gap-3 text-sm text-white/90">
+              <span className="px-2 py-0.5 rounded bg-white/15">{branch}</span>
+              <span className="px-2 py-0.5 rounded bg-white/15">
                 Div {division}
               </span>
-              <span className="px-2 py-0.5 rounded bg-white/10">{subject}</span>
+              <span className="px-2 py-0.5 rounded bg-white/15">{subject}</span>
             </div>
           )}
         </div>
         <div className="flex items-center gap-3">
           {classStarted && (
-            <div className="flex items-center gap-1.5 text-white/70 text-sm font-mono">
+            <div className="flex items-center gap-1.5 text-white/80 text-sm font-mono">
               <Clock className="w-3.5 h-3.5" />
               {timer}
             </div>
@@ -308,18 +317,18 @@ export default function SmartboardTeaching() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           {/* Live Class Control Panel */}
           <div
-            className="lg:col-span-3 rounded-2xl p-5 border space-y-4"
+            className="lg:col-span-3 rounded-2xl p-5 space-y-4"
             style={{
-              background:
-                "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%)",
-              borderColor: "rgba(255,255,255,0.15)",
+              background: "linear-gradient(135deg, #f5f3ff 0%, #ede9ff 100%)",
+              border: `2px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.10)",
             }}
           >
             <div className="flex items-center gap-2 mb-1">
               <Monitor className="w-4 h-4" style={{ color: "#00c896" }} />
               <h3
-                className="font-semibold text-sm"
-                style={{ color: "oklch(var(--fhub-heading))" }}
+                className="font-bold text-sm"
+                style={{ color: HEADING_COLOR }}
               >
                 Live Class Control
               </h3>
@@ -329,15 +338,20 @@ export default function SmartboardTeaching() {
             <div className="space-y-2">
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Branch
                 </Label>
                 <Select value={branch} onValueChange={handleBranchChange}>
                   <SelectTrigger
                     data-ocid="smartboard.select"
-                    className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading"
+                    className="h-8 text-xs"
+                    style={{
+                      background: CARD_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
                   >
                     <SelectValue />
                   </SelectTrigger>
@@ -352,13 +366,20 @@ export default function SmartboardTeaching() {
               </div>
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Division
                 </Label>
                 <Select value={division} onValueChange={setDivision}>
-                  <SelectTrigger className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading">
+                  <SelectTrigger
+                    className="h-8 text-xs"
+                    style={{
+                      background: CARD_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -372,13 +393,20 @@ export default function SmartboardTeaching() {
               </div>
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Subject
                 </Label>
                 <Select value={subject} onValueChange={setSubject}>
-                  <SelectTrigger className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading">
+                  <SelectTrigger
+                    className="h-8 text-xs"
+                    style={{
+                      background: CARD_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -396,33 +424,31 @@ export default function SmartboardTeaching() {
             <div
               className="rounded-xl p-3 text-xs space-y-2"
               style={{
-                background: "oklch(var(--fhub-bg))",
-                border: "1px solid oklch(var(--fhub-border) / 0.3)",
+                background: CARD_BG,
+                border: `1px solid ${CARD_BORDER}`,
               }}
             >
               <div className="flex items-center justify-between">
-                <span style={{ color: "oklch(var(--fhub-muted))" }}>
+                <span style={{ color: HEADING_COLOR, fontWeight: 600 }}>
                   SMART Board 7000 Pro
                 </span>
-                <Badge className="text-[10px] px-1.5 py-0 h-5 bg-green-900/40 text-green-300 border-green-800">
+                <Badge className="text-[10px] px-1.5 py-0 h-5 bg-green-100 text-green-700 border-green-300">
                   <Wifi className="w-2.5 h-2.5 mr-1" />
                   Connected
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
-                <span style={{ color: "oklch(var(--fhub-muted))" }}>
-                  Resolution
-                </span>
+                <span style={{ color: LABEL_COLOR }}>Resolution</span>
                 <span
-                  className="font-medium"
-                  style={{ color: "oklch(var(--fhub-heading))" }}
+                  className="font-semibold"
+                  style={{ color: HEADING_COLOR }}
                 >
                   4K UHD
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span style={{ color: "oklch(var(--fhub-muted))" }}>Sync</span>
-                <span className="text-green-400 font-medium">Real-time</span>
+                <span style={{ color: LABEL_COLOR }}>Sync</span>
+                <span className="text-green-600 font-semibold">Real-time</span>
               </div>
             </div>
 
@@ -430,11 +456,11 @@ export default function SmartboardTeaching() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label
-                  className="flex items-center gap-2 text-xs cursor-pointer"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="flex items-center gap-2 text-xs cursor-pointer font-medium"
+                  style={{ color: "#374151" }}
                 >
                   {micOn ? (
-                    <Mic className="w-3.5 h-3.5 text-green-400" />
+                    <Mic className="w-3.5 h-3.5 text-green-500" />
                   ) : (
                     <MicOff className="w-3.5 h-3.5 text-red-400" />
                   )}
@@ -448,11 +474,11 @@ export default function SmartboardTeaching() {
               </div>
               <div className="flex items-center justify-between">
                 <Label
-                  className="flex items-center gap-2 text-xs cursor-pointer"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="flex items-center gap-2 text-xs cursor-pointer font-medium"
+                  style={{ color: "#374151" }}
                 >
                   <span
-                    className={`w-2 h-2 rounded-full ${recording ? "bg-red-500 animate-pulse" : "bg-gray-500"}`}
+                    className={`w-2 h-2 rounded-full ${recording ? "bg-red-500 animate-pulse" : "bg-gray-400"}`}
                   />
                   Record Lecture
                 </Label>
@@ -468,26 +494,27 @@ export default function SmartboardTeaching() {
 
           {/* Real-time Whiteboard */}
           <div
-            className="lg:col-span-6 rounded-2xl border overflow-hidden flex flex-col"
+            className="lg:col-span-6 rounded-2xl overflow-hidden flex flex-col"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div
               className="flex items-center justify-between px-4 py-3 border-b"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4" style={{ color: "#00c896" }} />
                 <span
-                  className="font-semibold text-sm"
-                  style={{ color: "oklch(var(--fhub-heading))" }}
+                  className="font-bold text-sm"
+                  style={{ color: HEADING_COLOR }}
                 >
                   Real-time Whiteboard
                 </span>
                 {classStarted && (
-                  <Badge className="text-[10px] px-1.5 bg-green-900/40 text-green-300 border-green-800">
+                  <Badge className="text-[10px] px-1.5 bg-green-100 text-green-700 border-green-300">
                     Sync Active
                   </Badge>
                 )}
@@ -501,13 +528,12 @@ export default function SmartboardTeaching() {
                     className="p-1.5 rounded-lg transition-colors"
                     style={{
                       background:
+                        activeTool === tool ? "#ede9ff" : "transparent",
+                      color: activeTool === tool ? ACCENT_COLOR : LABEL_COLOR,
+                      border:
                         activeTool === tool
-                          ? "oklch(var(--fhub-accent) / 0.2)"
-                          : "transparent",
-                      color:
-                        activeTool === tool
-                          ? "oklch(var(--fhub-accent))"
-                          : "oklch(var(--fhub-muted))",
+                          ? `1px solid ${CARD_BORDER}`
+                          : "1px solid transparent",
                     }}
                   >
                     {tool === "pen" && <Pen className="w-3.5 h-3.5" />}
@@ -521,24 +547,27 @@ export default function SmartboardTeaching() {
             {/* Board area */}
             <div
               className="flex-1 flex items-center justify-center min-h-[260px] relative"
-              style={{ background: "#fafafa" }}
+              style={{ background: "#fafbff" }}
             >
               <div className="text-center">
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3"
-                  style={{ background: "oklch(var(--fhub-accent) / 0.1)" }}
+                  style={{ background: "#ede9ff" }}
                 >
                   <Monitor
                     className="w-8 h-8"
-                    style={{ color: "oklch(var(--fhub-accent))" }}
+                    style={{ color: ACCENT_COLOR }}
                   />
                 </div>
-                <p className="text-sm font-medium text-gray-600">
+                <p
+                  className="text-sm font-semibold"
+                  style={{ color: HEADING_COLOR }}
+                >
                   {classStarted
                     ? "Whiteboard Sync Active"
                     : "Start class to enable whiteboard"}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs mt-1" style={{ color: LABEL_COLOR }}>
                   {subject} · {branch} Div {division}
                 </p>
               </div>
@@ -547,28 +576,25 @@ export default function SmartboardTeaching() {
             {/* Page nav + action buttons */}
             <div
               className="flex items-center justify-between px-4 py-2.5 border-t"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setWhitePage((p) => Math.max(1, p - 1))}
-                  className="p-1 rounded hover:bg-gray-100"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="p-1 rounded hover:bg-indigo-50"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <span
-                  className="text-xs"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
-                >
+                <span className="text-xs" style={{ color: LABEL_COLOR }}>
                   Page {whitePage} of 3
                 </span>
                 <button
                   type="button"
                   onClick={() => setWhitePage((p) => Math.min(3, p + 1))}
-                  className="p-1 rounded hover:bg-gray-100"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="p-1 rounded hover:bg-indigo-50"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -577,7 +603,8 @@ export default function SmartboardTeaching() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-7 text-xs gap-1 border-fhub-border text-fhub-heading"
+                  className="h-7 text-xs gap-1"
+                  style={{ borderColor: CARD_BORDER, color: HEADING_COLOR }}
                 >
                   <Save className="w-3 h-3" />
                   Save Notes
@@ -585,7 +612,9 @@ export default function SmartboardTeaching() {
                 <Button
                   size="sm"
                   className="h-7 text-xs gap-1 text-white"
-                  style={{ background: "oklch(var(--fhub-ai-badge))" }}
+                  style={{
+                    background: "linear-gradient(135deg, #7c3aed, #a78bfa)",
+                  }}
                 >
                   <Bot className="w-3 h-3" />
                   AI Capture
@@ -596,26 +625,27 @@ export default function SmartboardTeaching() {
 
           {/* Student Participation Monitor */}
           <div
-            className="lg:col-span-3 rounded-2xl border flex flex-col"
+            className="lg:col-span-3 rounded-2xl flex flex-col"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div
               className="flex items-center justify-between px-4 py-3 border-b"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" style={{ color: "#00c896" }} />
                 <span
-                  className="font-semibold text-sm"
-                  style={{ color: "oklch(var(--fhub-heading))" }}
+                  className="font-bold text-sm"
+                  style={{ color: HEADING_COLOR }}
                 >
                   Participation
                 </span>
               </div>
-              <Badge className="text-[10px] px-1.5 bg-blue-900/40 text-blue-300 border-blue-800">
+              <Badge className="text-[10px] px-1.5 bg-blue-100 text-blue-700 border-blue-300">
                 {presentCount}/{totalCount} Present
               </Badge>
             </div>
@@ -625,30 +655,33 @@ export default function SmartboardTeaching() {
                   <div
                     key={student.name}
                     className="rounded-lg p-2.5"
-                    style={{ background: "oklch(var(--fhub-bg))" }}
+                    style={{
+                      background: INNER_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                    }}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span
-                        className="text-xs font-medium"
-                        style={{ color: "oklch(var(--fhub-heading))" }}
+                        className="text-xs font-semibold"
+                        style={{ color: HEADING_COLOR }}
                       >
                         {student.name}
                       </span>
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
                         style={{
                           background:
                             student.status === "Active"
-                              ? "rgba(0,200,150,0.15)"
+                              ? "rgba(0,180,120,0.12)"
                               : student.status === "Raised Hand"
-                                ? "rgba(250,200,50,0.2)"
-                                : "rgba(200,100,100,0.15)",
+                                ? "rgba(217,119,6,0.12)"
+                                : "rgba(220,38,38,0.10)",
                           color:
                             student.status === "Active"
-                              ? "#00c896"
+                              ? "#059669"
                               : student.status === "Raised Hand"
-                                ? "#f5c542"
-                                : "#f87171",
+                                ? "#d97706"
+                                : "#dc2626",
                         }}
                       >
                         {student.status === "Raised Hand"
@@ -659,21 +692,21 @@ export default function SmartboardTeaching() {
                     <div className="flex items-center gap-2">
                       <Progress
                         value={student.attention}
-                        className="h-1 flex-1 bg-white/10"
+                        className="h-1.5 flex-1"
                         style={
                           {
                             "--progress-color":
                               student.attention > 70
-                                ? "#00c896"
+                                ? "#059669"
                                 : student.attention > 40
-                                  ? "#f5c542"
-                                  : "#f87171",
+                                  ? "#d97706"
+                                  : "#dc2626",
                           } as React.CSSProperties
                         }
                       />
                       <span
-                        className="text-[10px] w-7 text-right"
-                        style={{ color: "oklch(var(--fhub-muted))" }}
+                        className="text-[10px] w-7 text-right font-medium"
+                        style={{ color: LABEL_COLOR }}
                       >
                         {student.attention}%
                       </span>
@@ -689,26 +722,33 @@ export default function SmartboardTeaching() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           {/* Notes & Lecture Materials */}
           <div
-            className="lg:col-span-4 rounded-2xl border"
+            className="lg:col-span-4 rounded-2xl"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div
               className="flex items-center gap-2 px-4 py-3 border-b"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <BookOpen className="w-4 h-4" style={{ color: "#00c896" }} />
               <span
-                className="font-semibold text-sm"
-                style={{ color: "oklch(var(--fhub-heading))" }}
+                className="font-bold text-sm"
+                style={{ color: HEADING_COLOR }}
               >
                 Notes & Materials
               </span>
             </div>
             <Tabs defaultValue="session" className="p-4">
-              <TabsList className="grid grid-cols-3 h-8 mb-3 bg-fhub-bg">
+              <TabsList
+                className="grid grid-cols-3 h-8 mb-3"
+                style={{
+                  background: INNER_BG,
+                  border: `1px solid ${CARD_BORDER}`,
+                }}
+              >
                 <TabsTrigger value="session" className="text-xs">
                   Session Notes
                 </TabsTrigger>
@@ -723,8 +763,9 @@ export default function SmartboardTeaching() {
                 <div
                   className="rounded-xl p-3 min-h-[120px] text-xs border border-dashed text-center flex flex-col items-center justify-center gap-2"
                   style={{
-                    borderColor: "oklch(var(--fhub-border) / 0.4)",
-                    color: "oklch(var(--fhub-muted))",
+                    borderColor: ACCENT_LIGHT,
+                    background: INNER_BG,
+                    color: LABEL_COLOR,
                   }}
                 >
                   <Upload className="w-6 h-6 opacity-50" />
@@ -732,7 +773,8 @@ export default function SmartboardTeaching() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-7 text-xs border-fhub-border text-fhub-heading mt-1"
+                    className="h-7 text-xs mt-1"
+                    style={{ borderColor: CARD_BORDER, color: HEADING_COLOR }}
                   >
                     Browse Files
                   </Button>
@@ -745,21 +787,24 @@ export default function SmartboardTeaching() {
                     <div
                       key={f}
                       className="flex items-center gap-2 p-2 rounded-lg"
-                      style={{ background: "oklch(var(--fhub-bg))" }}
+                      style={{
+                        background: INNER_BG,
+                        border: `1px solid ${CARD_BORDER}`,
+                      }}
                     >
                       <FileText
                         className="w-3.5 h-3.5 flex-shrink-0"
-                        style={{ color: "oklch(var(--fhub-accent))" }}
+                        style={{ color: ACCENT_COLOR }}
                       />
                       <span
-                        className="text-xs flex-1 truncate"
-                        style={{ color: "oklch(var(--fhub-heading))" }}
+                        className="text-xs flex-1 truncate font-medium"
+                        style={{ color: HEADING_COLOR }}
                       >
                         {f}
                       </span>
                       <Download
-                        className="w-3 h-3 opacity-50 cursor-pointer hover:opacity-100"
-                        style={{ color: "oklch(var(--fhub-muted))" }}
+                        className="w-3 h-3 cursor-pointer"
+                        style={{ color: ACCENT_LIGHT }}
                       />
                     </div>
                   ))}
@@ -775,21 +820,24 @@ export default function SmartboardTeaching() {
                     <div
                       key={f}
                       className="flex items-center gap-2 p-2 rounded-lg"
-                      style={{ background: "oklch(var(--fhub-bg))" }}
+                      style={{
+                        background: INNER_BG,
+                        border: `1px solid ${CARD_BORDER}`,
+                      }}
                     >
                       <FileText
                         className="w-3.5 h-3.5 flex-shrink-0"
-                        style={{ color: "oklch(var(--fhub-accent))" }}
+                        style={{ color: ACCENT_COLOR }}
                       />
                       <span
-                        className="text-xs flex-1 truncate"
-                        style={{ color: "oklch(var(--fhub-heading))" }}
+                        className="text-xs flex-1 truncate font-medium"
+                        style={{ color: HEADING_COLOR }}
                       >
                         {f}
                       </span>
                       <Download
-                        className="w-3 h-3 opacity-50 cursor-pointer hover:opacity-100"
-                        style={{ color: "oklch(var(--fhub-muted))" }}
+                        className="w-3 h-3 cursor-pointer"
+                        style={{ color: ACCENT_LIGHT }}
                       />
                     </div>
                   ))}
@@ -801,19 +849,22 @@ export default function SmartboardTeaching() {
                     <div
                       key={r.title}
                       className="flex items-center gap-2 p-2 rounded-lg"
-                      style={{ background: "oklch(var(--fhub-bg))" }}
+                      style={{
+                        background: INNER_BG,
+                        border: `1px solid ${CARD_BORDER}`,
+                      }}
                     >
-                      <Video className="w-3.5 h-3.5 flex-shrink-0 text-purple-400" />
+                      <Video className="w-3.5 h-3.5 flex-shrink-0 text-purple-500" />
                       <div className="flex-1 min-w-0">
                         <p
-                          className="text-xs truncate"
-                          style={{ color: "oklch(var(--fhub-heading))" }}
+                          className="text-xs truncate font-medium"
+                          style={{ color: HEADING_COLOR }}
                         >
                           {r.title}
                         </p>
                         <p
                           className="text-[10px]"
-                          style={{ color: "oklch(var(--fhub-muted))" }}
+                          style={{ color: LABEL_COLOR }}
                         >
                           {r.date} · {r.duration}
                         </p>
@@ -827,26 +878,27 @@ export default function SmartboardTeaching() {
 
           {/* Doubt & Q&A Panel */}
           <div
-            className="lg:col-span-4 rounded-2xl border flex flex-col"
+            className="lg:col-span-4 rounded-2xl flex flex-col"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div
               className="flex items-center justify-between px-4 py-3 border-b"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <div className="flex items-center gap-2">
                 <HelpCircle className="w-4 h-4" style={{ color: "#00c896" }} />
                 <span
-                  className="font-semibold text-sm"
-                  style={{ color: "oklch(var(--fhub-heading))" }}
+                  className="font-bold text-sm"
+                  style={{ color: HEADING_COLOR }}
                 >
                   Doubt & Q&A
                 </span>
               </div>
-              <Badge className="text-[10px] bg-yellow-900/40 text-yellow-300 border-yellow-800">
+              <Badge className="text-[10px] bg-amber-100 text-amber-700 border-amber-300">
                 {questions.filter((q) => q.status === "Pending").length} Pending
               </Badge>
             </div>
@@ -858,41 +910,38 @@ export default function SmartboardTeaching() {
                     key={i}
                     className="rounded-xl p-3"
                     style={{
-                      background:
-                        q.status === "Pending"
-                          ? "oklch(var(--fhub-bg))"
-                          : "oklch(0.15 0.02 160 / 0.2)",
-                      border: `1px solid ${q.status === "Pending" ? "oklch(var(--fhub-border) / 0.3)" : "oklch(0.3 0.1 160 / 0.3)"}`,
+                      background: q.status === "Pending" ? INNER_BG : "#f0fdf4",
+                      border: `1px solid ${q.status === "Pending" ? CARD_BORDER : "#86efac"}`,
                     }}
                   >
                     <div className="flex items-start justify-between gap-2 mb-1.5">
                       <div>
                         <span
-                          className="text-[10px] font-semibold"
-                          style={{ color: "oklch(var(--fhub-accent))" }}
+                          className="text-[10px] font-bold"
+                          style={{ color: ACCENT_COLOR }}
                         >
                           {q.student}
                         </span>
                         <span
                           className="text-[10px] ml-2"
-                          style={{ color: "oklch(var(--fhub-muted))" }}
+                          style={{ color: LABEL_COLOR }}
                         >
                           {q.time}
                         </span>
                       </div>
                       <span
-                        className={`text-[9px] px-1.5 py-0.5 rounded-full font-medium ${
+                        className={`text-[9px] px-1.5 py-0.5 rounded-full font-semibold ${
                           q.status === "Pending"
-                            ? "bg-yellow-900/40 text-yellow-300"
-                            : "bg-green-900/40 text-green-300"
+                            ? "bg-amber-100 text-amber-700"
+                            : "bg-green-100 text-green-700"
                         }`}
                       >
                         {q.status}
                       </span>
                     </div>
                     <p
-                      className="text-xs mb-2"
-                      style={{ color: "oklch(var(--fhub-heading))" }}
+                      className="text-xs mb-2 font-medium"
+                      style={{ color: HEADING_COLOR }}
                     >
                       {q.question}
                     </p>
@@ -901,7 +950,7 @@ export default function SmartboardTeaching() {
                         size="sm"
                         onClick={() => markAnswered(i)}
                         className="h-6 text-[10px] px-2 text-white"
-                        style={{ background: "oklch(var(--fhub-accent))" }}
+                        style={{ background: ACCENT_COLOR }}
                       >
                         Mark Answered
                       </Button>
@@ -914,25 +963,26 @@ export default function SmartboardTeaching() {
 
           {/* AI Auto-Notes & Summary */}
           <div
-            className="lg:col-span-4 rounded-2xl border"
+            className="lg:col-span-4 rounded-2xl"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div
               className="flex items-center justify-between px-4 py-3 border-b"
-              style={{ borderColor: "oklch(var(--fhub-border) / 0.2)" }}
+              style={{ borderColor: CARD_BORDER }}
             >
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4" style={{ color: "#a78bfa" }} />
+                <Sparkles className="w-4 h-4 text-purple-500" />
                 <span
-                  className="font-semibold text-sm"
-                  style={{ color: "oklch(var(--fhub-heading))" }}
+                  className="font-bold text-sm"
+                  style={{ color: HEADING_COLOR }}
                 >
                   AI Auto-Notes
                 </span>
-                <Badge className="text-[10px] px-1.5 bg-purple-900/40 text-purple-300 border-purple-800">
+                <Badge className="text-[10px] px-1.5 bg-purple-100 text-purple-700 border-purple-300">
                   AI
                 </Badge>
               </div>
@@ -945,28 +995,25 @@ export default function SmartboardTeaching() {
             </div>
             <div className="p-4 space-y-3">
               {aiNotesOn && (
-                <div
-                  className="flex items-center gap-2 text-xs"
-                  style={{ color: "#a78bfa" }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                <div className="flex items-center gap-2 text-xs text-purple-600 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
                   AI is summarizing this session...
                 </div>
               )}
               <div className="space-y-1.5">
                 <p
-                  className="text-[10px] font-semibold uppercase tracking-wide"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-[10px] font-bold uppercase tracking-wide"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Key Points Auto-Generated
                 </p>
                 {aiKeyPoints.map((point, i) => (
                   // biome-ignore lint/suspicious/noArrayIndexKey: static list
                   <div key={i} className="flex items-start gap-2">
-                    <Circle className="w-1.5 h-1.5 mt-1.5 flex-shrink-0 fill-purple-400 text-purple-400" />
+                    <Circle className="w-1.5 h-1.5 mt-1.5 flex-shrink-0 fill-purple-500 text-purple-500" />
                     <p
-                      className="text-xs"
-                      style={{ color: "oklch(var(--fhub-heading))" }}
+                      className="text-xs font-medium"
+                      style={{ color: HEADING_COLOR }}
                     >
                       {point}
                     </p>
@@ -974,7 +1021,7 @@ export default function SmartboardTeaching() {
                 ))}
               </div>
               <Button
-                className="w-full h-8 text-xs gap-1.5 text-white"
+                className="w-full h-8 text-xs gap-1.5 text-white font-semibold"
                 style={{
                   background: "linear-gradient(135deg, #7c3aed, #a78bfa)",
                 }}
@@ -990,34 +1037,42 @@ export default function SmartboardTeaching() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Quiz Generator */}
           <div
-            className="rounded-2xl border p-5"
+            className="rounded-2xl p-5"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <Zap className="w-4 h-4" style={{ color: "#f5c542" }} />
+              <Zap className="w-4 h-4 text-amber-500" />
               <h3
-                className="font-semibold text-sm"
-                style={{ color: "oklch(var(--fhub-heading))" }}
+                className="font-bold text-sm"
+                style={{ color: HEADING_COLOR }}
               >
                 Quiz Generator
               </h3>
-              <Badge className="text-[10px] px-1.5 bg-yellow-900/40 text-yellow-300 border-yellow-800">
+              <Badge className="text-[10px] px-1.5 bg-amber-100 text-amber-700 border-amber-300">
                 AI Powered
               </Badge>
             </div>
             <div className="grid grid-cols-3 gap-3 mb-4">
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Topic
                 </Label>
                 <Select value={quizTopic} onValueChange={setQuizTopic}>
-                  <SelectTrigger className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading">
+                  <SelectTrigger
+                    className="h-8 text-xs"
+                    style={{
+                      background: INNER_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -1033,13 +1088,20 @@ export default function SmartboardTeaching() {
               </div>
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Questions
                 </Label>
                 <Select value={quizCount} onValueChange={setQuizCount}>
-                  <SelectTrigger className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading">
+                  <SelectTrigger
+                    className="h-8 text-xs"
+                    style={{
+                      background: INNER_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -1053,13 +1115,20 @@ export default function SmartboardTeaching() {
               </div>
               <div>
                 <Label
-                  className="text-xs mb-1 block"
-                  style={{ color: "oklch(var(--fhub-muted))" }}
+                  className="text-xs mb-1 block font-medium"
+                  style={{ color: ACCENT_COLOR }}
                 >
                   Type
                 </Label>
                 <Select defaultValue="mcq">
-                  <SelectTrigger className="h-8 text-xs border-fhub-border bg-fhub-bg text-fhub-heading">
+                  <SelectTrigger
+                    className="h-8 text-xs"
+                    style={{
+                      background: INNER_BG,
+                      border: `1px solid ${CARD_BORDER}`,
+                      color: HEADING_COLOR,
+                    }}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -1072,9 +1141,9 @@ export default function SmartboardTeaching() {
             </div>
             <Button
               data-ocid="smartboard.secondary_button"
-              className="w-full h-9 text-sm gap-2 text-white font-semibold"
+              className="w-full h-9 text-sm gap-2 text-white font-bold"
               style={{
-                background: "linear-gradient(135deg, #f5c542, #f97316)",
+                background: "linear-gradient(135deg, #f59e0b, #f97316)",
               }}
             >
               <Sparkles className="w-4 h-4" />
@@ -1084,21 +1153,29 @@ export default function SmartboardTeaching() {
 
           {/* Recorded Lectures Library */}
           <div
-            className="rounded-2xl border p-5"
+            className="rounded-2xl p-5"
             style={{
-              background: "oklch(var(--fhub-card))",
-              borderColor: "oklch(var(--fhub-border) / 0.3)",
+              background: CARD_BG,
+              border: `1.5px solid ${CARD_BORDER}`,
+              boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
             }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <Video className="w-4 h-4 text-purple-400" />
+              <Video className="w-4 h-4 text-purple-500" />
               <h3
-                className="font-semibold text-sm"
-                style={{ color: "oklch(var(--fhub-heading))" }}
+                className="font-bold text-sm"
+                style={{ color: HEADING_COLOR }}
               >
                 Recorded Lectures
               </h3>
-              <Badge className="text-[10px] px-1.5 bg-fhub-badge-bg text-fhub-muted">
+              <Badge
+                className="text-[10px] px-1.5"
+                style={{
+                  background: INNER_BG,
+                  color: LABEL_COLOR,
+                  border: `1px solid ${CARD_BORDER}`,
+                }}
+              >
                 {mockRecordings.length} recordings
               </Badge>
             </div>
@@ -1107,40 +1184,40 @@ export default function SmartboardTeaching() {
                 <div
                   key={r.title}
                   className="flex items-center gap-3 p-2.5 rounded-xl"
-                  style={{ background: "oklch(var(--fhub-bg))" }}
+                  style={{
+                    background: INNER_BG,
+                    border: `1px solid ${CARD_BORDER}`,
+                  }}
                 >
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "oklch(0.22 0.1 285 / 0.5)" }}
+                    style={{ background: "#ede9ff" }}
                   >
-                    <Video className="w-3.5 h-3.5 text-purple-400" />
+                    <Video className="w-3.5 h-3.5 text-purple-500" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p
-                      className="text-xs font-medium truncate"
-                      style={{ color: "oklch(var(--fhub-heading))" }}
+                      className="text-xs font-semibold truncate"
+                      style={{ color: HEADING_COLOR }}
                     >
                       {r.title}
                     </p>
-                    <p
-                      className="text-[10px]"
-                      style={{ color: "oklch(var(--fhub-muted))" }}
-                    >
+                    <p className="text-[10px]" style={{ color: LABEL_COLOR }}>
                       {r.date} · {r.duration} · {r.size}
                     </p>
                   </div>
                   <div className="flex items-center gap-1">
                     <button
                       type="button"
-                      className="p-1 rounded hover:bg-white/10"
-                      style={{ color: "oklch(var(--fhub-accent))" }}
+                      className="p-1 rounded hover:bg-indigo-50"
+                      style={{ color: ACCENT_COLOR }}
                     >
                       <Play className="w-3.5 h-3.5" />
                     </button>
                     <button
                       type="button"
-                      className="p-1 rounded hover:bg-white/10"
-                      style={{ color: "oklch(var(--fhub-muted))" }}
+                      className="p-1 rounded hover:bg-indigo-50"
+                      style={{ color: LABEL_COLOR }}
                     >
                       <Download className="w-3.5 h-3.5" />
                     </button>
@@ -1153,17 +1230,18 @@ export default function SmartboardTeaching() {
 
         {/* Row 4: Message/Discussion */}
         <div
-          className="rounded-2xl border p-5"
+          className="rounded-2xl p-5"
           style={{
-            background: "oklch(var(--fhub-card))",
-            borderColor: "oklch(var(--fhub-border) / 0.3)",
+            background: CARD_BG,
+            border: `1.5px solid ${CARD_BORDER}`,
+            boxShadow: "0 4px 16px rgba(99,102,241,0.08)",
           }}
         >
           <div className="flex items-center gap-2 mb-3">
             <MessageSquare className="w-4 h-4" style={{ color: "#00c896" }} />
             <span
-              className="font-semibold text-sm"
-              style={{ color: "oklch(var(--fhub-heading))" }}
+              className="font-bold text-sm"
+              style={{ color: HEADING_COLOR }}
             >
               Live Classroom Announcements
             </span>
@@ -1172,17 +1250,19 @@ export default function SmartboardTeaching() {
             <input
               type="text"
               placeholder="Post an announcement to all students..."
-              className="flex-1 h-9 px-3 rounded-xl text-sm border"
+              className="flex-1 h-9 px-3 rounded-xl text-sm"
               style={{
-                background: "oklch(var(--fhub-bg))",
-                borderColor: "oklch(var(--fhub-border) / 0.4)",
-                color: "oklch(var(--fhub-heading))",
+                background: INNER_BG,
+                border: `1px solid ${CARD_BORDER}`,
+                color: HEADING_COLOR,
                 outline: "none",
               }}
             />
             <Button
-              className="h-9 px-4 text-sm gap-1.5 text-white"
-              style={{ background: "oklch(var(--fhub-accent))" }}
+              className="h-9 px-4 text-sm gap-1.5 text-white font-semibold"
+              style={{
+                background: "linear-gradient(135deg, #4338ca, #6366f1)",
+              }}
             >
               <Radio className="w-3.5 h-3.5" />
               Broadcast

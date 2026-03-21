@@ -110,18 +110,18 @@ const roleConfigs: Record<UserRole, RoleConfig> = {
   },
 };
 
-function getRightPanelBg(role: UserRole): string {
-  const bgs: Record<UserRole, string> = {
+function getSignInGradient(role: UserRole): string {
+  const gradients: Record<UserRole, string> = {
     student:
-      "linear-gradient(135deg, oklch(0.94 0.08 165) 0%, oklch(0.96 0.05 185) 50%, oklch(0.93 0.04 160) 100%)",
+      "linear-gradient(135deg, oklch(0.48 0.2 165), oklch(0.42 0.21 155))",
     teacher:
-      "linear-gradient(135deg, oklch(0.93 0.07 245) 0%, oklch(0.95 0.05 260) 50%, oklch(0.92 0.06 235) 100%)",
+      "linear-gradient(135deg, oklch(0.46 0.22 245), oklch(0.38 0.22 255))",
     institute:
-      "linear-gradient(135deg, oklch(0.92 0.07 250) 0%, oklch(0.95 0.05 240) 50%, oklch(0.91 0.06 255) 100%)",
+      "linear-gradient(135deg, oklch(0.4 0.22 258), oklch(0.32 0.22 250))",
     parent:
-      "linear-gradient(135deg, oklch(0.93 0.07 225) 0%, oklch(0.95 0.05 235) 50%, oklch(0.92 0.06 220) 100%)",
+      "linear-gradient(135deg, oklch(0.48 0.18 238), oklch(0.38 0.2 230))",
   };
-  return bgs[role];
+  return gradients[role];
 }
 
 function getOrbColor(role: UserRole): string {
@@ -142,20 +142,6 @@ function getOrbColor2(role: UserRole): string {
     parent: "oklch(0.65 0.17 215)",
   };
   return orbs[role];
-}
-
-function getSignInGradient(role: UserRole): string {
-  const gradients: Record<UserRole, string> = {
-    student:
-      "linear-gradient(135deg, oklch(0.48 0.2 165), oklch(0.42 0.21 155))",
-    teacher:
-      "linear-gradient(135deg, oklch(0.46 0.22 245), oklch(0.38 0.22 255))",
-    institute:
-      "linear-gradient(135deg, oklch(0.4 0.22 258), oklch(0.32 0.22 250))",
-    parent:
-      "linear-gradient(135deg, oklch(0.48 0.18 238), oklch(0.38 0.2 230))",
-  };
-  return gradients[role];
 }
 
 interface RoleLoginPageProps {
@@ -297,23 +283,10 @@ export default function RoleLoginPage({
         </div>
       </div>
 
-      {/* Right Panel - Login Form with gradient background */}
-      <div
-        className="flex-1 flex items-center justify-center p-8 relative overflow-hidden"
-        style={{ background: getRightPanelBg(role) }}
-      >
-        {/* Decorative blurred orbs */}
-        <div
-          className="absolute top-10 right-10 w-64 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
-          style={{ background: getOrbColor(role) }}
-        />
-        <div
-          className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: getOrbColor2(role) }}
-        />
-
-        {/* Glass form card */}
-        <div className="w-full max-w-md relative z-10 glass-card rounded-2xl p-8">
+      {/* Right Panel - Clean white background */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+        {/* Form card */}
+        <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-1">
               Sign in as {config.label}
@@ -326,7 +299,7 @@ export default function RoleLoginPage({
           {/* Credentials notice — only for student, teacher, parent */}
           {role !== "institute" && (
             <div
-              className="credential-notice flex items-start gap-3 px-4 py-3 rounded-xl mb-6"
+              className="credential-notice flex items-start gap-3 px-4 py-3 rounded-xl mb-3"
               style={{
                 backgroundColor: "oklch(0.97 0.02 27)",
               }}
@@ -343,6 +316,29 @@ export default function RoleLoginPage({
                 🔐 Your login credentials are provided by your{" "}
                 <strong>Institute</strong>. Contact your college admin if you
                 haven't received them.
+              </p>
+            </div>
+          )}
+
+          {/* Parent-specific notice */}
+          {role === "parent" && (
+            <div
+              className="flex items-start gap-3 px-4 py-3 rounded-xl mb-6"
+              style={{
+                backgroundColor: "oklch(0.95 0.04 230)",
+                border: "1px solid oklch(0.82 0.1 230)",
+              }}
+              data-ocid="login.parent_notice.panel"
+            >
+              <span className="text-sm mt-0.5 flex-shrink-0">👨‍👧</span>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "#1a1a1a", fontWeight: 600 }}
+              >
+                Parent login is linked to your{" "}
+                <strong>child's student account</strong>. Your credentials were
+                issued when your child enrolled. You will see your child's
+                academic progress, attendance, and welfare reports.
               </p>
             </div>
           )}
@@ -375,7 +371,7 @@ export default function RoleLoginPage({
                 placeholder={config.placeholder.username}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="rounded-xl border-gray-300 bg-white/70 backdrop-blur-sm focus:ring-2 text-gray-900"
+                className="rounded-xl border-gray-300 bg-white focus:ring-2 text-gray-900"
                 style={{ "--ring": config.accentColor } as React.CSSProperties}
                 data-ocid="login.input"
               />
@@ -395,7 +391,7 @@ export default function RoleLoginPage({
                   placeholder={config.placeholder.password}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-xl border-gray-300 bg-white/70 backdrop-blur-sm pr-10 text-gray-900"
+                  className="rounded-xl border-gray-300 bg-white pr-10 text-gray-900"
                   data-ocid="login.input"
                 />
                 <button
@@ -445,7 +441,7 @@ export default function RoleLoginPage({
               style={{
                 borderColor: config.accentColor,
                 color: config.accentColor,
-                background: "rgba(255,255,255,0.6)",
+                background: "#ffffff",
               }}
               data-ocid="login.secondary_button"
             >
