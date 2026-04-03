@@ -4,17 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   AlertCircle,
   AlertTriangle,
   BookOpen,
   CheckCircle2,
+  ChevronDown,
   Clock,
   Code2,
   ExternalLink,
@@ -24,6 +18,7 @@ import {
   Loader2,
   Phone,
   RefreshCw,
+  Shield,
   Star,
   Target,
   Trophy,
@@ -32,8 +27,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import GradientProgress from "../GradientProgress";
-
-const branches = ["CSE", "IT", "Mechanical", "Civil", "E&TC", "MBA"];
 
 const semesterData: Record<
   number,
@@ -256,39 +249,75 @@ const semesterData: Record<
   5: {
     subjects: [
       {
-        name: "Design & Analysis of Algorithms",
-        credits: 3,
+        name: "23CSU5CC1T – Database Engineering",
+        credits: 4,
         progress: 72,
         status: "ongoing",
       },
       {
-        name: "Database Management Systems (Advanced)",
-        credits: 3,
-        progress: 80,
+        name: "23CSU5CC2T – Design and Analysis of Algorithm",
+        credits: 4,
+        progress: 68,
         status: "ongoing",
       },
       {
-        name: "Theory of Computation",
+        name: "23CSU5CC3T – Operating Systems",
+        credits: 4,
+        progress: 75,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5EN*4T – Programme Elective I",
         credits: 3,
+        progress: 60,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5IK5T – Indian Knowledge System-II: Vedic Mathematics",
+        credits: 2,
+        progress: 55,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5MD6T – Multidisciplinary Minor III",
+        credits: 2,
+        progress: 50,
+        status: "ongoing",
+      },
+      {
+        name: "23##U5ON*7T – Open Elective III (MOOC)",
+        credits: 2,
+        progress: 45,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5CC1L – Database Engineering Lab",
+        credits: 2,
+        progress: 70,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5CC2L – Design and Analysis of Algorithm Lab",
+        credits: 2,
         progress: 65,
         status: "ongoing",
       },
       {
-        name: "Microprocessors & Interfacing",
-        credits: 3,
+        name: "23CSU5CC3L – Operating Systems Lab",
+        credits: 2,
+        progress: 72,
+        status: "ongoing",
+      },
+      {
+        name: "23CSU5EN*4L – Programme Elective I Lab",
+        credits: 2,
         progress: 58,
         status: "ongoing",
       },
       {
-        name: "Software Engineering",
-        credits: 3,
-        progress: 74,
-        status: "ongoing",
-      },
-      {
-        name: "Open Elective I",
+        name: "23CSU5CC8P – Advanced Java Programming",
         credits: 2,
-        progress: 60,
+        progress: 50,
         status: "ongoing",
       },
     ],
@@ -297,35 +326,35 @@ const semesterData: Record<
         name: "Prof. S.R. Patil",
         phone: "+91 94221 45678",
         qualification: "M.Tech CS, IIT Hyderabad",
-        subject: "Design & Analysis of Algorithms",
+        subject: "Database Engineering",
         linkedin: "https://linkedin.com/in/srpatil-wit",
       },
       {
         name: "Prof. M.K. Desai",
         phone: "+91 98230 67890",
         qualification: "M.Tech CS, VJTI Mumbai",
-        subject: "Database Management Systems",
+        subject: "Design and Analysis of Algorithm",
         linkedin: "https://linkedin.com/in/mkdesai-wit",
       },
       {
         name: "Dr. A.V. Kulkarni",
         phone: "+91 94222 56789",
         qualification: "Ph.D CS, DBATU Lonere",
-        subject: "Theory of Computation",
+        subject: "Operating Systems",
         linkedin: "https://linkedin.com/in/avkulkarni-wit",
       },
       {
         name: "Prof. R.S. Jadhav",
         phone: "+91 95232 78901",
-        qualification: "M.Tech ECE, SPPU Pune",
-        subject: "Microprocessors & Interfacing",
+        qualification: "M.Tech CS, SPPU Pune",
+        subject: "Programme Elective I",
         linkedin: "https://linkedin.com/in/rsjadhav-wit",
       },
       {
         name: "Prof. N.B. Shinde",
         phone: "+91 97234 89012",
         qualification: "M.Tech SE, BATU Lonere",
-        subject: "Software Engineering",
+        subject: "Indian Knowledge System & Open Elective",
         linkedin: "https://linkedin.com/in/nbshinde-wit",
       },
     ],
@@ -333,43 +362,95 @@ const semesterData: Record<
   6: {
     subjects: [
       {
-        name: "Compiler Design",
-        credits: 3,
-        progress: 0,
-        status: "upcoming",
-      },
-      {
-        name: "Computer Networks (Advanced)",
-        credits: 3,
-        progress: 0,
-        status: "upcoming",
-      },
-      {
-        name: "Distributed Systems",
-        credits: 3,
-        progress: 0,
-        status: "upcoming",
-      },
-      {
-        name: "Machine Learning",
-        credits: 3,
-        progress: 0,
-        status: "upcoming",
-      },
-      {
-        name: "Web Technologies (Advanced)",
-        credits: 3,
-        progress: 0,
-        status: "upcoming",
-      },
-      {
-        name: "Major Project Phase I",
+        name: "23CSU6CC1T – Artificial Intelligence",
         credits: 4,
         progress: 0,
         status: "upcoming",
       },
+      {
+        name: "23CSU6CC2T – System Software",
+        credits: 4,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSU6CC3T – Software Engineering",
+        credits: 4,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSUEN*4T – Programme Elective II",
+        credits: 3,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSUEN*5T – Programme Elective III",
+        credits: 3,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23##U6MD6T – Multidisciplinary Minor IV",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSU6CC1L – Artificial Intelligence Lab",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSU6CC2L – System Software Lab",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSUEN*4L – Programme Elective II Lab",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23CSU6VS7P – Full Stack Development",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
+      {
+        name: "23##U6MD6L – Multidisciplinary Minor IV Lab",
+        credits: 2,
+        progress: 0,
+        status: "upcoming",
+      },
     ],
-    teachers: [],
+    teachers: [
+      {
+        name: "Dr. P.R. Kulkarni",
+        phone: "+91 94220 11234",
+        qualification: "Ph.D AI, IIT Bombay",
+        subject: "Artificial Intelligence",
+        linkedin: "https://linkedin.com/in/prkulkarni-wit",
+      },
+      {
+        name: "Prof. V.S. Bhosale",
+        phone: "+91 98221 34567",
+        qualification: "M.Tech CS, SPPU Pune",
+        subject: "System Software",
+        linkedin: "https://linkedin.com/in/vsbhosale-wit",
+      },
+      {
+        name: "Prof. A.B. More",
+        phone: "+91 97234 56789",
+        qualification: "M.Tech SE, VJTI Mumbai",
+        subject: "Software Engineering",
+        linkedin: "https://linkedin.com/in/abmore-wit",
+      },
+    ],
   },
   7: {
     subjects: [
@@ -432,7 +513,7 @@ const semesterData: Record<
   },
 };
 
-const exams = [
+const _exams = [
   {
     name: "Unit Test I",
     subject: "Design & Analysis of Algorithms",
@@ -468,6 +549,126 @@ const exams = [
     subject: "Open Elective I",
     date: "Apr 15, 2026",
     status: "upcoming",
+  },
+];
+
+const theorySubjects: Record<number, string[]> = {
+  5: [
+    "Database Engineering",
+    "Design and Analysis of Algorithm",
+    "Operating Systems",
+    "Programme Elective I",
+    "Indian Knowledge System-II: Vedic Mathematics",
+    "Multidisciplinary Minor III",
+    "Open Elective III (MOOC)",
+  ],
+  6: [
+    "Artificial Intelligence",
+    "System Software",
+    "Software Engineering",
+    "Programme Elective II",
+    "Programme Elective III",
+    "Multidisciplinary Minor IV",
+  ],
+};
+
+const labSubjects: Record<number, string[]> = {
+  5: [
+    "Database Engineering Lab",
+    "Design and Analysis of Algorithm Lab",
+    "Operating Systems Lab",
+    "Programme Elective I Lab",
+    "Advanced Java Programming",
+  ],
+  6: [
+    "Artificial Intelligence Lab",
+    "System Software Lab",
+    "Programme Elective II Lab",
+    "Full Stack Development",
+    "Multidisciplinary Minor IV Lab",
+  ],
+};
+
+const examCategories = [
+  {
+    id: "ise1",
+    label: "ISE 1",
+    fullLabel: "Internal Semester Exam 1",
+    type: "theory",
+    color: "#4f46e5",
+    bg: "linear-gradient(135deg,#eef2ff,#e0e7ff)",
+    border: "#6366f1",
+    icon: "📝",
+  },
+  {
+    id: "ise2",
+    label: "ISE 2",
+    fullLabel: "Internal Semester Exam 2",
+    type: "theory",
+    color: "#7c3aed",
+    bg: "linear-gradient(135deg,#f5f3ff,#ede9fe)",
+    border: "#8b5cf6",
+    icon: "📝",
+  },
+  {
+    id: "ise3",
+    label: "ISE 3",
+    fullLabel: "Internal Semester Exam 3",
+    type: "theory",
+    color: "#0369a1",
+    bg: "linear-gradient(135deg,#f0f9ff,#e0f2fe)",
+    border: "#0ea5e9",
+    icon: "📝",
+  },
+  {
+    id: "ese",
+    label: "ESE",
+    fullLabel: "End Semester Exam",
+    type: "theory",
+    color: "#b45309",
+    bg: "linear-gradient(135deg,#fffbeb,#fef3c7)",
+    border: "#f59e0b",
+    icon: "🎓",
+  },
+  {
+    id: "practical",
+    label: "Practical Exam",
+    fullLabel: "Practical / Lab Exam",
+    type: "lab",
+    color: "#d97706",
+    bg: "linear-gradient(135deg,#fef9c3,#fde68a)",
+    border: "#f59e0b",
+    icon: "🔬",
+  },
+  {
+    id: "nptel",
+    label: "NPTEL",
+    fullLabel: "NPTEL Online Courses",
+    type: "none",
+    color: "#0d9488",
+    bg: "linear-gradient(135deg,#f0fdfa,#ccfbf1)",
+    border: "#14b8a6",
+    icon: "🌐",
+  },
+  {
+    id: "project",
+    label: "Project",
+    fullLabel: "Project Submission",
+    type: "all",
+    color: "#059669",
+    bg: "linear-gradient(135deg,#ecfdf5,#d1fae5)",
+    border: "#10b981",
+    icon: "💡",
+  },
+  {
+    id: "assignment",
+    label: "Assignment Submissions",
+    fullLabel: "Assignment Submissions",
+    type: "all",
+    color: "#dc2626",
+    bg: "linear-gradient(135deg,#fef2f2,#fee2e2)",
+    border: "#ef4444",
+    icon: "📋",
   },
 ];
 
@@ -756,11 +957,11 @@ function computeSkillMatch(
 }
 
 export default function AcademicRoadmaps() {
-  const [selectedBranch, setSelectedBranch] = useState("CSE");
-  const [selectedSem, setSelectedSem] = useState(3);
-  // Current academic year scoping: only show 2 semesters per year
-  const currentYear = Math.ceil(selectedSem / 2);
-  const allowedSems = [currentYear * 2 - 1, currentYear * 2];
+  const [selectedSem, setSelectedSem] = useState(5);
+  const [expandedExam, setExpandedExam] = useState<string | null>(null);
+  // Year 3 only: Sem 5 & 6
+  const currentYear = 3;
+  const allowedSems = [5, 6];
   // GitHub state
   const [githubInput, setGithubInput] = useState("");
   const [githubData, setGithubData] = useState<GitHubData | null>(null);
@@ -941,29 +1142,8 @@ export default function AcademicRoadmaps() {
         </div>
       </div>
 
-      {/* Branch + Semester Selection */}
+      {/* Branch Info (CSE only, Year 3) */}
       <div className="flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-3">
-          <label
-            htmlFor="roadmap-branch"
-            className="text-sm font-semibold"
-            style={{ color: "var(--mod-academic)" }}
-          >
-            Branch:
-          </label>
-          <Select value={selectedBranch} onValueChange={setSelectedBranch}>
-            <SelectTrigger className="w-40 rounded-xl" id="roadmap-branch">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {branches.map((b) => (
-                <SelectItem key={b} value={b}>
-                  {b}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
         <Badge
           variant="outline"
           className="px-3 py-1 text-sm font-semibold"
@@ -973,7 +1153,7 @@ export default function AcademicRoadmaps() {
             background: "var(--mod-academic-bg)",
           }}
         >
-          {selectedBranch} — Semester {selectedSem}
+          CSE — Year 3 | Semester {selectedSem}
         </Badge>
       </div>
 
@@ -985,8 +1165,7 @@ export default function AcademicRoadmaps() {
         <span className="text-indigo-500 text-xl mt-0.5">📅</span>
         <div>
           <p className="font-bold text-indigo-900 text-sm">
-            Year {currentYear} Syllabus — Semester {allowedSems[0]} &amp;{" "}
-            {allowedSems[1]}
+            Year 3 Syllabus — Semester 5 &amp; 6
           </p>
           <p className="text-xs text-indigo-700 mt-0.5">
             Syllabus is updated annually by the university. Only the current
@@ -994,6 +1173,35 @@ export default function AcademicRoadmaps() {
             your HOD for other year syllabi.
           </p>
         </div>
+      </div>
+
+      {/* WIT Solapur Official Syllabus Link */}
+      <div
+        className="flex items-center justify-between rounded-xl px-4 py-3 border border-violet-200"
+        style={{ background: "linear-gradient(135deg,#f5f3ff,#ede9fe)" }}
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-violet-500 text-xl">📄</span>
+          <div>
+            <p className="font-bold text-violet-900 text-sm">
+              WIT Solapur — Official CSE Syllabus
+            </p>
+            <p className="text-xs text-violet-700 mt-0.5">
+              Download the complete B.Tech CSE syllabus from the official WIT
+              Solapur website
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://witsolapur.org/syllabus-cse/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white flex-shrink-0"
+          style={{ background: "linear-gradient(135deg, #7c3aed, #6d28d9)" }}
+        >
+          <ExternalLink className="w-4 h-4" />
+          View Syllabus
+        </a>
       </div>
 
       {/* Semester Timeline */}
@@ -1056,31 +1264,57 @@ export default function AcademicRoadmaps() {
           {semData.subjects.map((subject) => {
             const cfg = statusConfig[subject.status];
             const Icon = cfg.icon;
+            // Split code and name: "23CSU5CC1T – Database Engineering" => ["23CSU5CC1T", "Database Engineering"]
+            const parts = subject.name.split(" – ");
+            const subjectCode = parts.length > 1 ? parts[0] : "";
+            const subjectTitle = parts.length > 1 ? parts[1] : subject.name;
+            // Determine Theory vs Lab based on last char of code
+            const lastChar = subjectCode ? subjectCode.slice(-1) : "";
+            const isLab = lastChar === "L" || lastChar === "P";
+            const subjectType = isLab ? "Lab" : "Theory";
+            const typeColor = isLab
+              ? "bg-amber-100 text-amber-700"
+              : "bg-indigo-100 text-indigo-700";
             return (
               <Card
                 key={subject.name}
                 className="rounded-2xl shadow-card card-glow-hover module-border-academic"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 60%, #6ee7b7 100%)",
-                  borderLeft: "4px solid #10b981",
+                  background: isLab
+                    ? "linear-gradient(135deg, #fef9c3 0%, #fef08a 60%, #fde047 100%)"
+                    : "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 60%, #6ee7b7 100%)",
+                  borderLeft: isLab ? "4px solid #f59e0b" : "4px solid #10b981",
                 }}
               >
                 <CardContent className="p-5">
-                  <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-start justify-between mb-2">
                     <BookOpen
-                      className="w-5 h-5 mt-0.5"
-                      style={{ color: "var(--mod-academic)" }}
+                      className="w-5 h-5 mt-0.5 flex-shrink-0"
+                      style={{
+                        color: isLab ? "#d97706" : "var(--mod-academic)",
+                      }}
                     />
-                    <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
-                    >
-                      <Icon className="w-3 h-3" />
-                      {cfg.label}
-                    </span>
+                    <div className="flex items-center gap-1 flex-wrap justify-end">
+                      <span
+                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${typeColor}`}
+                      >
+                        {subjectType}
+                      </span>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        {cfg.label}
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-sm leading-snug mb-1 text-gray-900">
-                    {subject.name}
+                  {subjectCode && (
+                    <p className="text-[10px] font-mono font-semibold text-gray-500 mb-0.5 tracking-wide">
+                      {subjectCode}
+                    </p>
+                  )}
+                  <h3 className="font-bold text-sm leading-snug mb-1 text-gray-900">
+                    {subjectTitle}
                   </h3>
                   <p className="text-xs text-muted-foreground mb-3">
                     {subject.credits} Credits
@@ -1090,7 +1324,9 @@ export default function AcademicRoadmaps() {
                       <span>Progress</span>
                       <span
                         className="font-semibold"
-                        style={{ color: "var(--mod-academic)" }}
+                        style={{
+                          color: isLab ? "#d97706" : "var(--mod-academic)",
+                        }}
                       >
                         {subject.progress}%
                       </span>
@@ -1104,127 +1340,245 @@ export default function AcademicRoadmaps() {
         </div>
       </div>
 
-      {/* Teachers + Exam Tracker */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Teachers */}
-        <div>
-          <h2
-            className="font-display font-semibold text-lg mb-4"
-            style={{ color: "var(--mod-academic)" }}
-          >
-            Faculty Details
-          </h2>
-          {semData.teachers.length > 0 ? (
-            <div className="space-y-3">
-              {semData.teachers.map((teacher) => (
-                <Card
-                  key={teacher.name}
-                  className="rounded-2xl shadow-card card-glow-hover module-border-academic"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 60%, #a7f3d0 100%)",
-                  }}
-                >
-                  <CardContent className="p-5">
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, var(--mod-academic), oklch(0.42 0.18 175))",
-                        }}
-                      >
-                        {teacher.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="font-semibold text-sm">
-                            {teacher.name}
-                          </h3>
-                          <a
-                            href={teacher.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-700 flex-shrink-0"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <p
-                          className="text-xs font-medium mt-0.5"
-                          style={{ color: "var(--mod-academic)" }}
-                        >
-                          {teacher.subject}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {teacher.qualification}
-                        </p>
-                        <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
-                          <Phone className="w-3 h-3" />
-                          <span>{teacher.phone}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <Card className="rounded-2xl shadow-card">
-              <CardContent className="p-8 text-center text-muted-foreground text-sm">
-                Faculty details will be available when the semester begins.
-              </CardContent>
-            </Card>
-          )}
-        </div>
-
-        {/* Exam Tracker */}
-        <div>
-          <h2
-            className="font-display font-semibold text-lg mb-4"
-            style={{ color: "var(--mod-academic)" }}
-          >
-            Exam Tracker
-          </h2>
-          <div className="space-y-3">
-            {exams.map((exam) => {
-              const cfg =
-                statusConfig[exam.status as keyof typeof statusConfig];
-              const Icon = cfg.icon;
-              return (
-                <Card
-                  key={exam.name}
-                  className="rounded-2xl shadow-card card-glow-hover module-border-academic"
-                >
-                  <CardContent className="p-4 flex items-center gap-4">
+      {/* Faculty */}
+      <div>
+        <h2
+          className="font-display font-semibold text-lg mb-4"
+          style={{ color: "var(--mod-academic)" }}
+        >
+          Faculty Details
+        </h2>
+        {semData.teachers.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {semData.teachers.map((teacher) => (
+              <Card
+                key={teacher.name}
+                className="rounded-2xl shadow-card card-glow-hover module-border-academic"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 60%, #a7f3d0 100%)",
+                }}
+              >
+                <CardContent className="p-5">
+                  <div className="flex items-start gap-4">
                     <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${cfg.color}`}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, var(--mod-academic), oklch(0.42 0.18 175))",
+                      }}
                     >
-                      <Icon className="w-4 h-4" />
+                      {teacher.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .slice(0, 2)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-sm">{exam.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {exam.subject}
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="font-semibold text-sm">
+                          {teacher.name}
+                        </h3>
+                        <a
+                          href={teacher.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-700 flex-shrink-0"
+                        >
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      </div>
+                      <p
+                        className="text-xs font-medium mt-0.5"
+                        style={{ color: "var(--mod-academic)" }}
+                      >
+                        {teacher.subject}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {teacher.qualification}
+                      </p>
+                      <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+                        <Phone className="w-3 h-3" />
+                        <span>{teacher.phone}</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <Card className="rounded-2xl shadow-card">
+            <CardContent className="p-8 text-center text-muted-foreground text-sm">
+              Faculty details will be available when the semester begins.
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Institute Data Wall Banner */}
+      <div
+        className="rounded-xl px-5 py-4 border flex items-start gap-4"
+        style={{
+          background:
+            "linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1d4ed8 100%)",
+          borderColor: "#3b82f6",
+        }}
+      >
+        <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <Shield className="w-5 h-5 text-white" />
+        </div>
+        <div>
+          <p className="font-bold text-white text-sm">
+            Attendance — Institute Controlled
+          </p>
+          <p className="text-blue-100 text-xs mt-1 leading-relaxed">
+            Detailed attendance records are managed exclusively by your
+            institute admin to ensure data privacy and compliance with DPDP Act
+            2023 &amp; UGC norms. Contact your department office for attendance
+            queries.
+          </p>
+        </div>
+      </div>
+
+      {/* Exam Tracker */}
+      <div>
+        <h2
+          className="font-display font-semibold text-lg mb-4"
+          style={{ color: "var(--mod-academic)" }}
+        >
+          Exam Tracker — Semester {selectedSem}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {examCategories.map((cat) => {
+            const isOpen = expandedExam === cat.id;
+            const subjects =
+              cat.type === "theory"
+                ? (theorySubjects[selectedSem] ?? [])
+                : cat.type === "lab"
+                  ? (labSubjects[selectedSem] ?? [])
+                  : cat.type === "all"
+                    ? [
+                        ...(theorySubjects[selectedSem] ?? []),
+                        ...(labSubjects[selectedSem] ?? []),
+                      ]
+                    : [];
+            return (
+              <div
+                key={cat.id}
+                className="rounded-2xl shadow-card overflow-hidden"
+                style={{ border: `2px solid ${cat.border}` }}
+              >
+                {/* Category Header */}
+                <button
+                  type="button"
+                  className="w-full text-left"
+                  data-ocid={`exam_tracker.${cat.id}.toggle`}
+                  onClick={() => setExpandedExam(isOpen ? null : cat.id)}
+                >
+                  <div
+                    className="px-5 py-4 flex items-center gap-3"
+                    style={{ background: cat.bg }}
+                  >
+                    <span className="text-2xl flex-shrink-0">{cat.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <p
+                        className="font-bold text-sm"
+                        style={{ color: cat.color }}
+                      >
+                        {cat.label}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {cat.fullLabel}
                       </p>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-xs font-medium">{exam.date}</p>
-                      <span
-                        className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
-                      >
-                        {cfg.label}
-                      </span>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {cat.type !== "none" && (
+                        <span
+                          className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                          style={{
+                            background: `${cat.border}22`,
+                            color: cat.color,
+                          }}
+                        >
+                          {cat.type === "all"
+                            ? (theorySubjects[selectedSem]?.length ?? 0) +
+                              (labSubjects[selectedSem]?.length ?? 0)
+                            : cat.type === "theory"
+                              ? (theorySubjects[selectedSem]?.length ?? 0)
+                              : (labSubjects[selectedSem]?.length ?? 0)}{" "}
+                          subjects
+                        </span>
+                      )}
+                      <ChevronDown
+                        className="w-4 h-4 transition-transform duration-200"
+                        style={{
+                          color: cat.color,
+                          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        }}
+                      />
                     </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                  </div>
+                </button>
+
+                {/* Expanded Subject List */}
+                {isOpen && (
+                  <div
+                    className="px-4 pb-4 pt-2 space-y-2"
+                    style={{ background: cat.bg }}
+                  >
+                    {cat.type === "none" ? (
+                      <div
+                        className="rounded-xl px-4 py-3 border"
+                        style={{
+                          background: "linear-gradient(135deg,#f0fdfa,#ccfbf1)",
+                          borderColor: "#14b8a6",
+                        }}
+                      >
+                        <p className="text-xs font-semibold text-teal-800">
+                          🌐 No subjects tracked here
+                        </p>
+                        <p className="text-xs text-teal-700 mt-1">
+                          Link your NPTEL profile in Competitive Exam Hub.
+                          Course completions and certificates are managed there.
+                        </p>
+                      </div>
+                    ) : (
+                      subjects.map((subject, idx) => (
+                        <div
+                          key={subject}
+                          className="rounded-xl px-4 py-2.5 flex items-center gap-3"
+                          style={{
+                            background: "rgba(255,255,255,0.7)",
+                            border: `1px solid ${cat.border}44`,
+                          }}
+                          data-ocid={`exam_tracker.${cat.id}.item.${idx + 1}`}
+                        >
+                          <span
+                            className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 text-white"
+                            style={{ background: cat.color }}
+                          >
+                            {idx + 1}
+                          </span>
+                          <p className="flex-1 text-xs font-semibold text-gray-800 leading-tight">
+                            {subject}
+                          </p>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                              Scheduled
+                            </span>
+                            <span className="text-[10px] text-gray-400 font-medium">
+                              TBD
+                            </span>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
