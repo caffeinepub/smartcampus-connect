@@ -23,6 +23,7 @@ import {
   Award,
   BarChart3,
   Calendar,
+  CheckCircle,
   CheckCircle2,
   ChevronRight,
   Clock,
@@ -36,6 +37,7 @@ import {
   MapPin,
   Plus,
   Share2,
+  Shield,
   Sparkles,
   Star,
   Trash2,
@@ -43,6 +45,7 @@ import {
   UserPlus,
   Users,
   X,
+  XCircle,
   Zap,
 } from "lucide-react";
 import { useState } from "react";
@@ -2198,12 +2201,13 @@ function EarningsCalculator({
 
 function OrganizeWizard({
   onPublish,
-}: { onPublish: (h: OrganizedHackathon) => void }) {
+  initialName = "",
+}: { onPublish: (h: OrganizedHackathon) => void; initialName?: string }) {
   const [step, setStep] = useState(1);
   const TOTAL_STEPS = 4;
 
   // Step 1
-  const [name, setName] = useState("");
+  const [name, setName] = useState(initialName);
   const [domain, setDomain] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("09:00");
@@ -2966,6 +2970,32 @@ export default function SkillBasedTeams() {
   const [organizedEvents, setOrganizedEvents] =
     useState<OrganizedHackathon[]>(MOCK_ORGANIZED);
 
+  // HOD Permission for organizing hackathons
+  const [hodStatus, setHodStatus] = useState<
+    "idle" | "pending" | "approved" | "rejected"
+  >("idle");
+  const [hodForm, setHodForm] = useState({
+    title: "",
+    description: "",
+    participants: "",
+    proposedDate: "",
+  });
+  const [hodSubmitting, setHodSubmitting] = useState(false);
+
+  // Custom hackathons added by users
+  const [customHackathons, setCustomHackathons] = useState<Hackathon[]>([]);
+  const [addHackathonOpen, setAddHackathonOpen] = useState(false);
+  const [newHack, setNewHack] = useState({
+    title: "",
+    domain: "",
+    date: "",
+    mode: "Online" as "Online" | "Offline" | "Hybrid",
+    prize: "",
+    fee: "",
+    description: "",
+    link: "",
+  });
+
   // Modal states
   const [profileOpen, setProfileOpen] = useState(false);
   const [createTeamOpen, setCreateTeamOpen] = useState(false);
@@ -3442,14 +3472,253 @@ export default function SkillBasedTeams() {
             ))}
           </div>
 
+          {/* Add New Hackathon Modal */}
+          {addHackathonOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              style={{ background: "rgba(0,0,0,0.5)" }}
+              data-ocid="hackathon.add.modal"
+            >
+              <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2">
+                      <Plus className="w-5 h-5 text-violet-600" /> Add New
+                      Hackathon
+                    </h3>
+                    <button
+                      type="button"
+                      data-ocid="hackathon.add.close_button"
+                      onClick={() => setAddHackathonOpen(false)}
+                      className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Hackathon Title *
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.add.title.input"
+                        placeholder="e.g. CodeStorm 2026"
+                        value={newHack.title}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, title: e.target.value }))
+                        }
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Domain *
+                      </Label>
+                      <select
+                        data-ocid="hackathon.add.domain.select"
+                        className="w-full border border-gray-200 rounded-lg p-2 text-sm"
+                        value={newHack.domain}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, domain: e.target.value }))
+                        }
+                      >
+                        <option value="">Select domain</option>
+                        {[
+                          "Web Dev",
+                          "AI/ML",
+                          "Cybersecurity",
+                          "IoT & Hardware",
+                          "Mobile Apps",
+                          "Open Innovation",
+                        ].map((d) => (
+                          <option key={d} value={d}>
+                            {d}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Date *
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.add.date.input"
+                        type="date"
+                        value={newHack.date}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, date: e.target.value }))
+                        }
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Mode
+                      </Label>
+                      <select
+                        data-ocid="hackathon.add.mode.select"
+                        className="w-full border border-gray-200 rounded-lg p-2 text-sm"
+                        value={newHack.mode}
+                        onChange={(e) =>
+                          setNewHack((h) => ({
+                            ...h,
+                            mode: e.target.value as
+                              | "Online"
+                              | "Offline"
+                              | "Hybrid",
+                          }))
+                        }
+                      >
+                        <option>Online</option>
+                        <option>Offline</option>
+                        <option>Hybrid</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Prize Pool
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.add.prize.input"
+                        placeholder="e.g. ₹50,000"
+                        value={newHack.prize}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, prize: e.target.value }))
+                        }
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Registration Fee
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.add.fee.input"
+                        placeholder="e.g. Free or ₹200"
+                        value={newHack.fee}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, fee: e.target.value }))
+                        }
+                      />
+                    </div>
+                    <div className="space-y-1 sm:col-span-2">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Registration Link
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.add.link.input"
+                        placeholder="https://unstop.com/..."
+                        value={newHack.link}
+                        onChange={(e) =>
+                          setNewHack((h) => ({ ...h, link: e.target.value }))
+                        }
+                      />
+                    </div>
+                    <div className="space-y-1 sm:col-span-2">
+                      <Label className="text-sm font-semibold text-gray-700">
+                        Description
+                      </Label>
+                      <textarea
+                        data-ocid="hackathon.add.description.textarea"
+                        className="w-full border border-gray-200 rounded-lg p-3 text-sm resize-none focus:outline-none focus:border-violet-400"
+                        rows={3}
+                        placeholder="Briefly describe the hackathon..."
+                        value={newHack.description}
+                        onChange={(e) =>
+                          setNewHack((h) => ({
+                            ...h,
+                            description: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      data-ocid="hackathon.add.cancel_button"
+                      onClick={() => setAddHackathonOpen(false)}
+                      className="flex-1 py-2.5 rounded-xl border border-gray-200 font-semibold text-gray-600 hover:bg-gray-50"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      data-ocid="hackathon.add.submit_button"
+                      disabled={
+                        !newHack.title || !newHack.domain || !newHack.date
+                      }
+                      onClick={() => {
+                        const newEntry: Hackathon = {
+                          id: `custom-${Date.now()}`,
+                          name: newHack.title,
+                          organizer: "Student Added",
+                          dateRange: newHack.date,
+                          location:
+                            newHack.mode === "Online"
+                              ? "Online"
+                              : "WIT Solapur",
+                          isOnline: newHack.mode === "Online",
+                          type: "College",
+                          prize: newHack.prize || "TBD",
+                          tags: [newHack.domain],
+                          teamSize: "2–4",
+                          deadline: new Date(newHack.date),
+                          domainOptions: [newHack.domain],
+                        };
+                        setCustomHackathons((prev) => [newEntry, ...prev]);
+                        setAddHackathonOpen(false);
+                        setNewHack({
+                          title: "",
+                          domain: "",
+                          date: "",
+                          mode: "Online",
+                          prize: "",
+                          fee: "",
+                          description: "",
+                          link: "",
+                        });
+                        toast.success("Hackathon added successfully!");
+                      }}
+                      className="flex-1 py-2.5 rounded-xl font-bold text-white transition-all"
+                      style={{
+                        background:
+                          newHack.title && newHack.domain && newHack.date
+                            ? "linear-gradient(135deg,#7c3aed,#6d28d9)"
+                            : "#d1d5db",
+                      }}
+                    >
+                      Add Hackathon
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Tab: Find Hackathons */}
           {hackathonTab === "find" && (
             <div className="space-y-5">
+              {/* Header with Add button */}
+              <div className="flex items-center justify-between">
+                <h3 className="font-bold text-gray-800 text-base">
+                  Available Hackathons (
+                  {HACKATHONS.length + customHackathons.length})
+                </h3>
+                <button
+                  type="button"
+                  data-ocid="hackathons.open_modal_button"
+                  onClick={() => setAddHackathonOpen(true)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-white text-sm shadow-md transition-all hover:scale-105"
+                  style={{
+                    background: "linear-gradient(135deg,#7c3aed,#6d28d9)",
+                  }}
+                >
+                  <Plus className="w-4 h-4" /> Add New Hackathon
+                </button>
+              </div>
               <div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
                 data-ocid="hackathons.list"
               >
-                {HACKATHONS.map((h, idx) => (
+                {[...HACKATHONS, ...customHackathons].map((h, idx) => (
                   <HackathonCard
                     key={h.id}
                     hackathon={h}
@@ -3504,6 +3773,7 @@ export default function SkillBasedTeams() {
           {/* Tab: Organize a Hackathon */}
           {hackathonTab === "organize" && (
             <div className="space-y-5">
+              {/* Header banner */}
               <div
                 className="rounded-2xl p-5 border border-emerald-200 flex items-center gap-4"
                 style={{
@@ -3518,14 +3788,286 @@ export default function SkillBasedTeams() {
                     Host Your Own College Hackathon
                   </h3>
                   <p className="text-sm text-emerald-700 mt-0.5">
-                    Set registration fees, invite your faculty as judges, and
-                    earn money while building your campus community.
+                    HOD approval is required before you can organize an official
+                    college hackathon.
                   </p>
                 </div>
               </div>
-              <OrganizeWizard
-                onPublish={(h) => setOrganizedEvents((prev) => [h, ...prev])}
-              />
+
+              {/* HOD Permission: IDLE — show request form */}
+              {hodStatus === "idle" && (
+                <div
+                  className="rounded-2xl border border-amber-200 p-6 space-y-5"
+                  style={{
+                    background: "linear-gradient(135deg,#fffbeb,#fef3c7)",
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center">
+                      <Shield className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-amber-900 text-base">
+                        Request HOD Permission
+                      </h3>
+                      <p className="text-xs text-amber-700">
+                        Fill in your hackathon proposal. Your HOD will review
+                        and approve it.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <Label className="font-semibold text-gray-700">
+                        Hackathon Title *
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.title.input"
+                        placeholder="e.g. InnoSpark 2026"
+                        value={hodForm.title}
+                        onChange={(e) =>
+                          setHodForm((f) => ({ ...f, title: e.target.value }))
+                        }
+                        className="border-amber-200 focus:border-amber-400"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="font-semibold text-gray-700">
+                        Proposed Date *
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.date.input"
+                        type="date"
+                        value={hodForm.proposedDate}
+                        onChange={(e) =>
+                          setHodForm((f) => ({
+                            ...f,
+                            proposedDate: e.target.value,
+                          }))
+                        }
+                        className="border-amber-200 focus:border-amber-400"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="font-semibold text-gray-700">
+                        Expected Participants *
+                      </Label>
+                      <Input
+                        data-ocid="hackathon.participants.input"
+                        type="number"
+                        placeholder="e.g. 100"
+                        value={hodForm.participants}
+                        onChange={(e) =>
+                          setHodForm((f) => ({
+                            ...f,
+                            participants: e.target.value,
+                          }))
+                        }
+                        className="border-amber-200 focus:border-amber-400"
+                      />
+                    </div>
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <Label className="font-semibold text-gray-700">
+                        Brief Description *
+                      </Label>
+                      <textarea
+                        data-ocid="hackathon.description.textarea"
+                        className="w-full border border-amber-200 rounded-lg p-3 text-sm focus:outline-none focus:border-amber-400 resize-none"
+                        rows={3}
+                        placeholder="Describe your hackathon theme, goals, and why it benefits students..."
+                        value={hodForm.description}
+                        onChange={(e) =>
+                          setHodForm((f) => ({
+                            ...f,
+                            description: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-ocid="hackathon.hod_request.submit_button"
+                    disabled={
+                      !hodForm.title ||
+                      !hodForm.proposedDate ||
+                      !hodForm.participants ||
+                      !hodForm.description ||
+                      hodSubmitting
+                    }
+                    onClick={() => {
+                      setHodSubmitting(true);
+                      setTimeout(() => {
+                        setHodStatus("pending");
+                        setHodSubmitting(false);
+                      }, 1200);
+                    }}
+                    className="w-full py-3 rounded-xl font-bold text-white transition-all"
+                    style={{
+                      background:
+                        hodForm.title &&
+                        hodForm.proposedDate &&
+                        hodForm.participants &&
+                        hodForm.description
+                          ? "linear-gradient(135deg,#f59e0b,#d97706)"
+                          : "#d1d5db",
+                      cursor:
+                        hodForm.title &&
+                        hodForm.proposedDate &&
+                        hodForm.participants &&
+                        hodForm.description
+                          ? "pointer"
+                          : "not-allowed",
+                    }}
+                  >
+                    {hodSubmitting
+                      ? "Submitting Request..."
+                      : "📨 Submit HOD Permission Request"}
+                  </button>
+                </div>
+              )}
+
+              {/* HOD Permission: PENDING */}
+              {hodStatus === "pending" && (
+                <div
+                  className="rounded-2xl border border-orange-200 p-8 text-center space-y-4"
+                  style={{
+                    background: "linear-gradient(135deg,#fff7ed,#ffedd5)",
+                  }}
+                  data-ocid="hackathon.hod_pending.panel"
+                >
+                  <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto">
+                    <Clock className="w-8 h-8 text-orange-500 animate-pulse" />
+                  </div>
+                  <h3 className="font-bold text-orange-900 text-lg">
+                    Permission Request Sent to HOD
+                  </h3>
+                  <p className="text-sm text-orange-700">
+                    Your request for{" "}
+                    <strong>&ldquo;{hodForm.title}&rdquo;</strong> has been
+                    submitted to your HOD for review. You will be notified once
+                    it is approved or rejected.
+                  </p>
+                  <div className="rounded-xl border border-orange-200 p-4 text-left space-y-2 bg-white/60">
+                    <p className="text-xs font-bold text-orange-800 uppercase tracking-wide">
+                      Request Summary
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold">Title:</span>{" "}
+                      {hodForm.title}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold">Proposed Date:</span>{" "}
+                      {hodForm.proposedDate}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold">
+                        Expected Participants:
+                      </span>{" "}
+                      {hodForm.participants}
+                    </p>
+                  </div>
+                  <div
+                    className="rounded-xl border border-dashed border-orange-300 p-3 bg-orange-50"
+                    data-ocid="hackathon.hod_pending.loading_state"
+                  >
+                    <p className="text-xs text-orange-600 font-semibold">
+                      ⏳ Status: Awaiting HOD Review
+                    </p>
+                    <p className="text-xs text-orange-500 mt-1">
+                      Typical response time: 1–3 working days
+                    </p>
+                  </div>
+                  {/* Demo button for testing the flow */}
+                  <button
+                    type="button"
+                    data-ocid="hackathon.hod_approve.button"
+                    onClick={() => setHodStatus("approved")}
+                    className="mt-2 px-5 py-2 rounded-lg text-xs font-bold border-2 border-dashed border-emerald-400 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-all"
+                  >
+                    🧪 Demo: Simulate HOD Approval
+                  </button>
+                </div>
+              )}
+
+              {/* HOD Permission: REJECTED */}
+              {hodStatus === "rejected" && (
+                <div
+                  className="rounded-2xl border border-red-200 p-8 text-center space-y-4"
+                  style={{
+                    background: "linear-gradient(135deg,#fef2f2,#fee2e2)",
+                  }}
+                  data-ocid="hackathon.hod_rejected.error_state"
+                >
+                  <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto">
+                    <XCircle className="w-8 h-8 text-red-500" />
+                  </div>
+                  <h3 className="font-bold text-red-900 text-lg">
+                    Request Rejected
+                  </h3>
+                  <p className="text-sm text-red-700">
+                    Your HOD has reviewed and rejected the request for{" "}
+                    <strong>&ldquo;{hodForm.title}&rdquo;</strong>. You can
+                    submit a revised proposal.
+                  </p>
+                  <button
+                    type="button"
+                    data-ocid="hackathon.hod_resubmit.button"
+                    onClick={() => {
+                      setHodStatus("idle");
+                      setHodForm({
+                        title: "",
+                        description: "",
+                        participants: "",
+                        proposedDate: "",
+                      });
+                    }}
+                    className="px-6 py-2.5 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 transition-all"
+                  >
+                    Submit New Request
+                  </button>
+                </div>
+              )}
+
+              {/* HOD Permission: APPROVED — show full wizard */}
+              {hodStatus === "approved" && (
+                <div
+                  className="space-y-4"
+                  data-ocid="hackathon.organize.success_state"
+                >
+                  <div
+                    className="rounded-xl border border-emerald-300 p-4 flex items-center gap-3"
+                    style={{
+                      background: "linear-gradient(135deg,#d1fae5,#a7f3d0)",
+                    }}
+                  >
+                    <CheckCircle className="w-6 h-6 text-emerald-600 flex-shrink-0" />
+                    <div>
+                      <p className="font-bold text-emerald-900 text-sm">
+                        HOD Approval Granted ✓
+                      </p>
+                      <p className="text-xs text-emerald-700">
+                        Your request for{" "}
+                        <strong>&ldquo;{hodForm.title}&rdquo;</strong> has been
+                        approved. You can now set up your hackathon below.
+                      </p>
+                    </div>
+                  </div>
+                  <OrganizeWizard
+                    onPublish={(h) => {
+                      setOrganizedEvents((prev) => [h, ...prev]);
+                      setHodStatus("idle");
+                      setHodForm({
+                        title: "",
+                        description: "",
+                        participants: "",
+                        proposedDate: "",
+                      });
+                    }}
+                    initialName={hodForm.title}
+                  />
+                </div>
+              )}
             </div>
           )}
 

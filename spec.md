@@ -1,56 +1,27 @@
-# NIRGRANTHA — Complete Color Grading & Visual Theme System
+# NIRGRANTHA
 
 ## Current State
-The platform has role-based portals (Student, Teacher, Institute, Parent) with:
-- Login page: Left branding panel has dark gradient, right panel is plain white `bg-background`
-- Dashboards: Header has colored background via CSS vars, but interior content uses white cards on single-tone colored bg
-- No semantic accent colors per module type
-- No gradient progress bars
-- No interactive hover/active glow states on cards/buttons
-- No glass/layered surface depth system
+- Academic Roadmaps shows all 8 semester syllabus buttons freely navigable; student defaults to Sem 3 but can access any semester
+- Organize Hackathon wizard has 4 steps: Event Details → Assign Judges → Fees & Prizes → Review & Publish; no HOD permission flow exists
+- Find Hackathons tab is read-only static list with no ability to add new hackathons
 
 ## Requested Changes (Diff)
 
 ### Add
-- Login page right panel: rich layered gradient background (role-specific) instead of plain white, with glassmorphism card floating in center
-- Complete semantic module accent system:
-  - Academic/Learning: emerald-teal (#008080 family)
-  - Exams/Assessments: amber-orange
-  - Goals/Productivity: violet-purple
-  - Collaboration/Teams: sky-blue
-  - Marketplace/Resources: rose-coral
-  - Alerts/Feedback/Risk: red-rose
-- Gradient progress bars across all dashboards (low=red, medium=amber, high=green gradient)
-- Card hover states: lift shadow + subtle glow border
-- Active/selected menu tabs: strong contrast indicator with gradient underline
-- Background layer hierarchy: page bg → section bg → card → elevated card with shadow
-- CSS tokens for all semantic module colors
-- Focus rings for accessibility on interactive elements
+- HOD permission request flow in Organize Hackathon: before the 4-step wizard opens, student must first submit a HOD permission request (event name, description, expected participants); show a pending/approved/rejected status; only approved students can proceed to the wizard
+- "Request HOD Permission" form with fields: Hackathon Title, Brief Description, Expected Participants, Proposed Date
+- HOD approval simulation: after submitting, show a "Pending Approval" state; include a demo "Simulate HOD Approval" button so the flow can be tested
+- "+ Add New Hackathon" button in Find Hackathons tab that opens a form to add a new hackathon to the list
+- Add New Hackathon form fields: Title, Domain, Date, Mode (Online/Offline/Hybrid), Prize Pool, Registration Fee, Description, Registration Link
 
 ### Modify
-- `index.css`: Add module semantic tokens + gradient utilities + interactive state utilities
-- `RoleLoginPage.tsx`: Right panel becomes a richly styled gradient background with glass card for the form
-- `StudentDashboard.tsx` and sub-tabs: Apply semantic accents per section (Academic=emerald, Exam=amber, Goals=violet, Teams=sky, Marketplace=rose, Feedback=red)
-- `FacultyIntelligenceHub.tsx` and sub-tabs: Apply indigo-based layering with module-specific accents
-- `InstituteCommandCenter.tsx` and sub-tabs: Apply navy-based layering with distinct section accents
-- `ParentInsightPortal.tsx` and sub-tabs: Apply sky-blue layering with module accents
-- All progress bar components: Use gradient fills
-- All stat/metric cards: Add hover glow, glass effect on elevated cards
+- Academic Roadmaps syllabus: restrict visible semesters to only the student's current academic year (2 semesters). Student in Sem 3 or 4 sees only Sem 3 & 4. Student in Sem 5 or 6 sees only Sem 5 & 6. etc. Show a clear label explaining "Showing Year 2 Syllabus (Sem 3 & 4) — Syllabus is updated annually"
+- The semester timeline buttons should only show the 2 semesters for the current year, not all 8
 
 ### Remove
-- Plain white right panel backgrounds on login pages
-- Flat single-color card backgrounds without depth
+- Free navigation to all 8 semesters from Academic Roadmaps (replaced by year-scoped view)
 
 ## Implementation Plan
-1. Enhance `index.css` with full semantic token system:
-   - Module accent tokens (academic, exam, goals, teams, marketplace, alerts)
-   - Glass surface utilities
-   - Status color tokens (low/medium/high performance)
-   - Interactive state tokens
-2. Update `RoleLoginPage.tsx` right panel with role-specific gradient + glass form card
-3. Update all sub-tab components to use semantic accent colors for:
-   - Section headers with colored left borders or gradient top bars
-   - Progress bars with gradient fills matching status
-   - Stat cards with module-specific accent glow on hover
-   - Active tab indicators with gradient underlines
-4. Apply background layer hierarchy throughout: page→section→card depth
+1. Edit AcademicRoadmaps.tsx: Add logic to compute `currentYear` from `selectedSem` (default 3 → year 2), derive `allowedSems = [year*2-1, year*2]`, filter semester timeline to only show those 2 buttons, add info banner explaining annual update policy
+2. Edit SkillBasedTeams.tsx: Add `hodPermission` state with values `idle | pending | approved | rejected`; render HOD permission request form when `hodPermission === 'idle'`; render pending screen when `pending`; only render OrganizeWizard when `approved`
+3. Edit SkillBasedTeams.tsx: Add `addHackathonOpen` state and form in Find Hackathons tab; on submit append to a `customHackathons` state array merged with `HACKATHONS` for display

@@ -758,6 +758,9 @@ function computeSkillMatch(
 export default function AcademicRoadmaps() {
   const [selectedBranch, setSelectedBranch] = useState("CSE");
   const [selectedSem, setSelectedSem] = useState(3);
+  // Current academic year scoping: only show 2 semesters per year
+  const currentYear = Math.ceil(selectedSem / 2);
+  const allowedSems = [currentYear * 2 - 1, currentYear * 2];
   // GitHub state
   const [githubInput, setGithubInput] = useState("");
   const [githubData, setGithubData] = useState<GitHubData | null>(null);
@@ -974,6 +977,25 @@ export default function AcademicRoadmaps() {
         </Badge>
       </div>
 
+      {/* Year-scoped info banner */}
+      <div
+        className="rounded-xl px-4 py-3 border border-indigo-200 flex items-start gap-3"
+        style={{ background: "linear-gradient(135deg,#eef2ff,#e0e7ff)" }}
+      >
+        <span className="text-indigo-500 text-xl mt-0.5">📅</span>
+        <div>
+          <p className="font-bold text-indigo-900 text-sm">
+            Year {currentYear} Syllabus — Semester {allowedSems[0]} &amp;{" "}
+            {allowedSems[1]}
+          </p>
+          <p className="text-xs text-indigo-700 mt-0.5">
+            Syllabus is updated annually by the university. Only the current
+            academic year&apos;s syllabus is shown to ensure accuracy. Contact
+            your HOD for other year syllabi.
+          </p>
+        </div>
+      </div>
+
       {/* Semester Timeline */}
       <Card
         className="rounded-2xl shadow-card module-border-academic"
@@ -986,45 +1008,34 @@ export default function AcademicRoadmaps() {
             className="text-base font-semibold"
             style={{ color: "var(--mod-academic)" }}
           >
-            Semester Timeline
+            Semester Timeline — Year {currentYear}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-0 overflow-x-auto pb-2">
-            {Array.from({ length: 8 }, (_, i) => i + 1).map((sem, idx) => (
+            {allowedSems.map((sem, idx) => (
               <div key={sem} className="flex items-center flex-shrink-0">
                 <button
                   type="button"
                   onClick={() => setSelectedSem(sem)}
-                  className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition-all duration-200"
+                  className="flex flex-col items-center gap-1.5 px-5 py-3 rounded-xl transition-all duration-200"
                   style={{
                     background:
                       selectedSem === sem
                         ? "var(--mod-academic)"
-                        : sem < selectedSem
-                          ? "var(--mod-academic-bg)"
-                          : "var(--muted)",
+                        : "var(--muted)",
                     color:
-                      selectedSem === sem
-                        ? "white"
-                        : sem < selectedSem
-                          ? "var(--mod-academic)"
-                          : "var(--muted-foreground)",
+                      selectedSem === sem ? "white" : "var(--muted-foreground)",
                     transform: selectedSem === sem ? "scale(1.05)" : "scale(1)",
                   }}
                 >
-                  <span className="text-xs font-bold">S{sem}</span>
-                  <span className="text-[10px] opacity-80">Sem {sem}</span>
+                  <span className="text-sm font-bold">S{sem}</span>
+                  <span className="text-[11px] opacity-80">Semester {sem}</span>
                 </button>
-                {idx < 7 && (
+                {idx < 1 && (
                   <div
-                    className="h-0.5 w-6 flex-shrink-0"
-                    style={{
-                      background:
-                        sem < selectedSem
-                          ? "var(--mod-academic)"
-                          : "var(--border)",
-                    }}
+                    className="h-0.5 w-10 flex-shrink-0"
+                    style={{ background: "var(--mod-academic)" }}
                   />
                 )}
               </div>
