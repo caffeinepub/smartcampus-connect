@@ -14,60 +14,60 @@ import {
 } from "lucide-react";
 
 const studentData = {
-  name: "Arjun Sharma",
+  name: "Arihant Mahajan",
   branch: "Computer Science & Engineering",
-  division: "Division B",
+  division: "Division A",
   semester: 5,
   totalSemesters: 8,
-  rollNo: "CS21B042",
-  attendance: 87,
-  assignmentCompletion: 92,
+  rollNo: "21CSE047",
+  attendance: 84,
+  assignmentCompletion: 88,
   overallGrade: "A",
-  cgpa: 8.6,
+  cgpa: 8.4,
 };
 
 const subjects = [
   {
-    name: "Data Structures & Algorithms",
+    name: "Design & Analysis of Algorithms",
     internal: 38,
-    max: 40,
+    max: 50,
+    grade: "A+",
+    attendance: 78,
+  },
+  {
+    name: "Database Management Systems",
+    internal: 44,
+    max: 50,
     grade: "O",
     attendance: 91,
   },
   {
-    name: "Operating Systems",
-    internal: 34,
-    max: 40,
-    grade: "A+",
-    attendance: 88,
-  },
-  {
-    name: "Database Management Systems",
-    internal: 36,
-    max: 40,
-    grade: "O",
-    attendance: 85,
-  },
-  {
-    name: "Computer Networks",
-    internal: 30,
-    max: 40,
+    name: "Theory of Computation",
+    internal: 35,
+    max: 50,
     grade: "A",
+    attendance: 86,
+  },
+  {
+    name: "Microprocessors & Interfacing",
+    internal: 40,
+    max: 50,
+    grade: "A+",
     attendance: 82,
   },
   {
     name: "Software Engineering",
-    internal: 35,
-    max: 40,
+    internal: 42,
+    max: 50,
     grade: "A+",
-    attendance: 90,
+    attendance: 88,
   },
   {
-    name: "Machine Learning",
-    internal: 32,
-    max: 40,
+    name: "Open Elective I",
+    internal: 36,
+    max: 50,
     grade: "A",
-    attendance: 86,
+    attendance: 80,
   },
 ];
 
@@ -82,42 +82,42 @@ const skills = [
 const achievements = [
   {
     type: "Hackathon",
-    title: "Smart India Hackathon 2025",
-    result: "Finalist",
+    title: "Smart India Hackathon 2025 – WIT Team",
+    result: "Institute Finalist",
     icon: "🏆",
     color: "var(--parent-primary)",
   },
   {
-    type: "Competition",
-    title: "ACM ICPC Regional",
-    result: "Participated",
-    icon: "🎯",
+    type: "Project",
+    title: "NIRGRANTHA – EdTech Platform",
+    result: "Founder & Developer",
+    icon: "🚀",
     color: "oklch(0.55 0.18 280)",
   },
   {
     type: "Award",
-    title: "Best Project Award – Dept.",
+    title: "Best Final Year Project Proposal – CSE Dept.",
     result: "Winner",
     icon: "🥇",
     color: "oklch(0.65 0.18 60)",
   },
   {
     type: "Club",
-    title: "Coding Club",
+    title: "WIT Coding Club",
     result: "Core Member",
     icon: "💻",
     color: "oklch(0.52 0.14 185)",
   },
   {
     type: "Event",
-    title: "TechFest 2025 – Paper Presentation",
+    title: "WIT TechFest 2025 – Paper Presentation",
     result: "2nd Place",
     icon: "📄",
     color: "oklch(0.55 0.15 145)",
   },
   {
     type: "Leadership",
-    title: "Class Representative",
+    title: "CSE Class Representative (TY-A)",
     result: "Elected",
     icon: "👑",
     color: "oklch(0.60 0.18 30)",
@@ -125,16 +125,16 @@ const achievements = [
 ];
 
 const careerData = {
-  targetExam: "GATE (CSE)",
-  placementReadiness: 76,
-  internshipStatus: "Completed – Infosys (Summer 2025)",
+  targetExam: "GATE CSE 2026 / Campus Placements 2026",
+  placementReadiness: 78,
+  internshipStatus: "In Progress – WIT CSE Dept. Project Internship (2025–26)",
   certifications: [
-    "AWS Cloud Practitioner",
-    "Google Data Analytics",
-    "Meta Front-End Developer",
+    "AWS Cloud Practitioner (In Progress)",
+    "NPTEL Data Structures",
+    "Coursera Python for Everybody",
   ],
-  leetcode: { solved: 312, easy: 180, medium: 112, hard: 20 },
-  github: { repos: 18, contributions: 847, streak: 34 },
+  leetcode: { solved: 156, easy: 78, medium: 62, hard: 16 },
+  github: { repos: 12, contributions: 347, streak: 22 },
 };
 
 const monthlyPerformance = [
@@ -147,15 +147,15 @@ const monthlyPerformance = [
 ];
 
 const strengths = [
-  "Data Structures",
-  "Machine Learning",
-  "Project Management",
-  "Consistent Attendance",
+  "DBMS & SQL Queries",
+  "Python & Web Development",
+  "Project Leadership",
+  "Competitive Programming (LeetCode)",
 ];
 const weakAreas = [
-  "Computer Networks Theory",
-  "Technical Writing",
-  "Time Management in Exams",
+  "Dynamic Programming (DAA)",
+  "Attendance in DAA lectures",
+  "Time Management in University Exams",
 ];
 
 function MiniLineChart({ data }: { data: { month: string; score: number }[] }) {
@@ -989,12 +989,13 @@ export default function StudentGrowthActivityReport() {
                 className="text-sm leading-relaxed"
                 style={{ color: "var(--parent-heading)" }}
               >
-                Arjun is performing exceptionally well in core CS subjects. To
-                maximize placement readiness, focus on strengthening Computer
-                Networks concepts and practice 2–3 medium LeetCode problems
-                daily. Consider enrolling in a technical writing workshop to
-                boost communication skills. With current trajectory, GATE
-                preparation should begin with full focus from Semester 6.
+                Arihant is performing well in DBMS and Software Engineering with
+                outstanding scores. To maximize GATE CSE 2026 readiness, focus
+                on strengthening Dynamic Programming and Graph Algorithms in
+                DAA. Increase LeetCode medium/hard problem practice to 2–3 per
+                day. Attendance in DAA lectures needs attention — target 85%+.
+                With this trajectory, full GATE preparation from Semester 6 will
+                yield strong results.
               </p>
             </div>
           </div>

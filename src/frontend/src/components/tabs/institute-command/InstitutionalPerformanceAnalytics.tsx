@@ -13,7 +13,7 @@ import {
 const kpiCards = [
   {
     label: "Overall GPA",
-    value: "7.4",
+    value: "7.6",
     unit: "/10",
     trend: "+0.3",
     up: true,
@@ -33,7 +33,7 @@ const kpiCards = [
   },
   {
     label: "Placement Rate",
-    value: "68%",
+    value: "78%",
     unit: "",
     trend: "+5%",
     up: true,
@@ -74,103 +74,103 @@ const kpiCards = [
 ];
 
 const branchData = [
-  { branch: "CSE", score: 82, students: 480, placed: 78 },
-  { branch: "IT", score: 79, students: 360, placed: 74 },
-  { branch: "ECE", score: 74, students: 420, placed: 65 },
-  { branch: "Mechanical", score: 68, students: 380, placed: 52 },
-  { branch: "Civil", score: 65, students: 320, placed: 48 },
-  { branch: "EEE", score: 71, students: 280, placed: 58 },
+  { branch: "CSE", score: 85, students: 520, placed: 82 },
+  { branch: "IT", score: 82, students: 380, placed: 78 },
+  { branch: "Mechanical", score: 72, students: 460, placed: 58 },
+  { branch: "Civil", score: 68, students: 340, placed: 51 },
+  { branch: "E&TC", score: 76, students: 400, placed: 64 },
+  { branch: "MBA", score: 80, students: 120, placed: 75 },
 ];
 
 const divisionData = [
-  { div: "Division A", score: 84, count: 240 },
-  { div: "Division B", score: 78, count: 238 },
-  { div: "Division C", score: 72, count: 242 },
-  { div: "Division D", score: 69, count: 235 },
+  { div: "CSE Div A", score: 86, count: 65 },
+  { div: "CSE Div B", score: 84, count: 62 },
+  { div: "Mech Div A", score: 74, count: 70 },
+  { div: "IT Div A", score: 82, count: 60 },
 ];
 
 const teacherRanking = [
   {
     rank: 1,
-    name: "Dr. Priya Sharma",
+    name: "Dr. S.V. Kulkarni",
     dept: "CSE",
-    score: 94,
-    research: 8,
-    feedback: 4.8,
+    score: 95,
+    research: 11,
+    feedback: 4.9,
   },
   {
     rank: 2,
-    name: "Prof. Rajesh Kumar",
-    dept: "IT",
+    name: "Prof. M.K. Desai",
+    dept: "CSE",
     score: 91,
-    research: 6,
+    research: 7,
     feedback: 4.7,
   },
   {
     rank: 3,
-    name: "Dr. Anita Patel",
-    dept: "ECE",
+    name: "Dr. V.R. Patil",
+    dept: "Mechanical",
     score: 88,
-    research: 5,
+    research: 7,
     feedback: 4.6,
   },
   {
     rank: 4,
-    name: "Prof. Suresh Nair",
-    dept: "Mechanical",
-    score: 85,
-    research: 4,
-    feedback: 4.5,
+    name: "Prof. S.R. Patil",
+    dept: "CSE",
+    score: 89,
+    research: 6,
+    feedback: 4.6,
   },
   {
     rank: 5,
-    name: "Dr. Meena Iyer",
-    dept: "Civil",
-    score: 82,
+    name: "Prof. A.P. More",
+    dept: "IT",
+    score: 83,
     research: 3,
-    feedback: 4.4,
+    feedback: 4.3,
   },
   {
     rank: 6,
-    name: "Prof. Vikram Singh",
-    dept: "EEE",
-    score: 79,
-    research: 2,
-    feedback: 4.2,
+    name: "Dr. A.V. Kulkarni",
+    dept: "CSE",
+    score: 87,
+    research: 5,
+    feedback: 4.5,
   },
   {
     rank: 7,
-    name: "Dr. Kavitha Rao",
+    name: "Prof. N.B. Shinde",
     dept: "CSE",
-    score: 76,
+    score: 72,
     research: 2,
-    feedback: 4.1,
+    feedback: 3.9,
   },
   {
     rank: 8,
-    name: "Prof. Arun Menon",
-    dept: "IT",
-    score: 71,
-    research: 1,
-    feedback: 3.8,
+    name: "Prof. S.K. Jagtap",
+    dept: "Mechanical",
+    score: 76,
+    research: 2,
+    feedback: 4.0,
   },
 ];
 
 const weakStudentData = [
-  { branch: "CSE", total: 480, weak: 38, risk: "low" },
-  { branch: "IT", total: 360, weak: 42, risk: "medium" },
-  { branch: "ECE", total: 420, weak: 68, risk: "high" },
-  { branch: "Mechanical", total: 380, weak: 82, risk: "high" },
-  { branch: "Civil", total: 320, weak: 54, risk: "medium" },
-  { branch: "EEE", total: 280, weak: 28, risk: "low" },
+  { branch: "CSE", total: 520, weak: 32, risk: "low" },
+  { branch: "IT", total: 380, weak: 44, risk: "medium" },
+  { branch: "E&TC", total: 400, weak: 62, risk: "medium" },
+  { branch: "Mechanical", total: 460, weak: 86, risk: "high" },
+  { branch: "Civil", total: 340, weak: 58, risk: "high" },
+  { branch: "MBA", total: 120, weak: 12, risk: "low" },
 ];
 
 const attendanceMonths = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
 const attendanceValues = [88, 85, 82, 79, 83, 82];
 
 const comparisonData = [
-  { metric: "Average GPA", institute: 7.4, iit: 9.1, nit: 8.4, tier1: 8.0 },
-  { metric: "Placement Rate", institute: 68, iit: 98, nit: 92, tier1: 85 },
+  { metric: "Average GPA", institute: 7.6, iit: 9.1, nit: 8.4, tier1: 8.0 },
+  { metric: "Placement Rate", institute: 78, iit: 98, nit: 92, tier1: 85 },
   {
     metric: "Research Papers/yr",
     institute: 47,
@@ -180,7 +180,7 @@ const comparisonData = [
   },
   {
     metric: "Avg CTC (LPA)",
-    institute: 6.2,
+    institute: 4.2,
     iit: 22.5,
     nit: 14.8,
     tier1: 11.2,
@@ -1012,7 +1012,7 @@ export default function InstitutionalPerformanceAnalytics() {
             {
               label: "Total Placed",
               value: "1,428",
-              sub: "out of 2,240 eligible",
+              sub: "out of 2,847 eligible",
               color: "#2563eb",
             },
             {

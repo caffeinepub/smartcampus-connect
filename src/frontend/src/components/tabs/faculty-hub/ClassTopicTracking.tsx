@@ -11,101 +11,93 @@ import {
 const branchProgress = [
   {
     branch: "CSE",
-    completion: 78,
-    topics: 42,
+    completion: 72,
+    topics: 39,
     total: 54,
     color: "bg-blue-500",
   },
   {
     branch: "IT",
-    completion: 65,
-    topics: 35,
+    completion: 68,
+    topics: 37,
     total: 54,
     color: "bg-indigo-500",
   },
   {
-    branch: "ECE",
-    completion: 82,
-    topics: 44,
-    total: 54,
-    color: "bg-cyan-500",
-  },
-  {
     branch: "Mechanical",
-    completion: 55,
-    topics: 30,
+    completion: 60,
+    topics: 32,
     total: 54,
     color: "bg-orange-500",
   },
   {
     branch: "Civil",
-    completion: 70,
-    topics: 38,
+    completion: 55,
+    topics: 30,
     total: 54,
     color: "bg-teal-500",
   },
   {
-    branch: "EEE",
-    completion: 60,
-    topics: 32,
+    branch: "E&TC",
+    completion: 65,
+    topics: 35,
     total: 54,
-    color: "bg-purple-500",
+    color: "bg-cyan-500",
   },
 ];
 
 const divisionProgress = [
-  { div: "Division A", completion: 72, students: 60 },
-  { div: "Division B", completion: 65, students: 58 },
-  { div: "Division C", completion: 58, students: 55 },
-  { div: "Division D", completion: 80, students: 52 },
+  { div: "CSE TY-A", completion: 72, students: 60 },
+  { div: "CSE TY-B", completion: 68, students: 58 },
+  { div: "IT TY-A", completion: 70, students: 55 },
 ];
 
 const topicTimeline = [
-  { name: "Arrays", covered: true },
-  { name: "Linked Lists", covered: true },
-  { name: "Stacks", covered: true },
-  { name: "Queues", covered: true },
-  { name: "Trees", covered: true },
-  { name: "Graphs", covered: false },
-  { name: "Hashing", covered: false },
-  { name: "DP", covered: false },
-  { name: "Sorting", covered: false },
-  { name: "Searching", covered: false },
+  { name: "Asymptotic Notation", covered: true },
+  { name: "Divide & Conquer", covered: true },
+  { name: "Merge Sort / Quick Sort", covered: true },
+  { name: "Greedy Algorithms", covered: true },
+  { name: "Kruskal & Prim MST", covered: true },
+  { name: "Dynamic Programming", covered: false },
+  { name: "0/1 Knapsack", covered: false },
+  { name: "LCS & Matrix Chain", covered: false },
+  { name: "Backtracking", covered: false },
+  { name: "Branch & Bound", covered: false },
 ];
 
 const pendingTopics = [
   {
-    subject: "Data Structures",
-    topic: "Graphs & BFS/DFS",
-    daysOverdue: 3,
+    subject: "Design & Analysis of Algorithms",
+    topic: "Dynamic Programming — LCS & Knapsack",
+    daysOverdue: 2,
     branch: "CSE",
   },
   {
-    subject: "Algorithms",
-    topic: "NP-Completeness",
+    subject: "Database Management Systems",
+    topic: "Indexing & Query Optimization",
     daysOverdue: 1,
     branch: "CSE",
   },
   {
-    subject: "DBMS",
-    topic: "Transaction Management",
-    daysOverdue: 5,
-    branch: "IT",
+    subject: "Theory of Computation",
+    topic: "Turing Machines & Decidability",
+    daysOverdue: 4,
+    branch: "CSE",
   },
   {
-    subject: "Networks",
-    topic: "TCP/IP Protocol Suite",
+    subject: "Microprocessors & Interfacing",
+    topic: "8051 Interfacing — ADC/DAC",
     daysOverdue: 2,
-    branch: "ECE",
+    branch: "CSE",
   },
 ];
 
 const heatmapData = [
-  { subject: "Data Structures", weeks: [5, 4, 5, 3, 2, 1, 0, 0] },
-  { subject: "Algorithms", weeks: [4, 5, 4, 4, 3, 2, 1, 0] },
-  { subject: "DBMS", weeks: [3, 3, 4, 5, 4, 3, 2, 1] },
-  { subject: "OS", weeks: [2, 3, 3, 4, 5, 4, 3, 2] },
-  { subject: "Networks", weeks: [1, 2, 2, 3, 4, 5, 4, 3] },
+  { subject: "DAA", weeks: [5, 4, 5, 3, 2, 1, 0, 0] },
+  { subject: "DBMS", weeks: [4, 5, 4, 4, 3, 2, 1, 0] },
+  { subject: "TOC", weeks: [3, 3, 4, 5, 4, 3, 2, 1] },
+  { subject: "Microproc.", weeks: [2, 3, 3, 4, 5, 4, 3, 2] },
+  { subject: "SE", weeks: [1, 2, 2, 3, 4, 5, 4, 3] },
 ];
 
 const heatIntensity = (val: number) => {
@@ -290,7 +282,7 @@ export default function ClassTopicTracking() {
       {/* Topic Timeline */}
       <div className="bg-white dark:bg-fhub-card rounded-2xl border border-fhub-border shadow-fhub p-6">
         <h3 className="font-display font-semibold text-fhub-heading text-base mb-4">
-          Topic Timeline · Data Structures (CSE)
+          Topic Timeline · Design & Analysis of Algorithms (CSE)
         </h3>
         <div className="flex items-center gap-0 overflow-x-auto pb-2">
           {topicTimeline.map((topic, i) => (
