@@ -1023,6 +1023,7 @@ export default function AcademicRoadmaps() {
   const [expandedSubjects, setExpandedSubjects] = useState<
     Record<string, boolean>
   >({});
+  const [showSubjectsGrid, setShowSubjectsGrid] = useState(false);
   // Year 3 only: Sem 5 & 6
   const currentYear = 3;
   const allowedSems = [5, 6];
@@ -1316,92 +1317,153 @@ export default function AcademicRoadmaps() {
         </CardContent>
       </Card>
 
-      {/* Subjects Grid */}
+      {/* Subjects Toggle Box */}
       <div>
-        <h2
-          className="font-display font-semibold text-lg mb-4"
-          style={{ color: "var(--mod-academic)" }}
+        {/* Clickable "Subjects" toggle box */}
+        <button
+          type="button"
+          onClick={() => setShowSubjectsGrid((prev) => !prev)}
+          className="w-full text-left mb-4"
+          data-ocid="academic.subjects.toggle"
         >
-          Semester {selectedSem} Subjects
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {semData.subjects.map((subject) => {
-            const cfg = statusConfig[subject.status];
-            const Icon = cfg.icon;
-            // Split code and name: "23CSU5CC1T – Database Engineering" => ["23CSU5CC1T", "Database Engineering"]
-            const parts = subject.name.split(" – ");
-            const subjectCode = parts.length > 1 ? parts[0] : "";
-            const subjectTitle = parts.length > 1 ? parts[1] : subject.name;
-            // Determine Theory vs Lab based on last char of code
-            const lastChar = subjectCode ? subjectCode.slice(-1) : "";
-            const isLab = lastChar === "L" || lastChar === "P";
-            const subjectType = isLab ? "Lab" : "Theory";
-            const typeColor = isLab
-              ? "bg-amber-100 text-amber-700"
-              : "bg-indigo-100 text-indigo-700";
-            return (
-              <Card
-                key={subject.name}
-                className="rounded-2xl shadow-card card-glow-hover module-border-academic"
-                style={{
-                  background: isLab
-                    ? "linear-gradient(135deg, #fef9c3 0%, #fef08a 60%, #fde047 100%)"
-                    : "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 60%, #6ee7b7 100%)",
-                  borderLeft: isLab ? "4px solid #f59e0b" : "4px solid #10b981",
-                }}
+          <div
+            className="rounded-2xl px-6 py-4 flex items-center justify-between border-2 transition-all duration-200 hover:shadow-md cursor-pointer"
+            style={{
+              background: "linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%)",
+              borderColor: "#6366f1",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">📚</span>
+              <span
+                className="text-base font-bold"
+                style={{ color: "#4f46e5" }}
               >
-                <CardContent className="p-5">
-                  <div className="flex items-start justify-between mb-2">
-                    <BookOpen
-                      className="w-5 h-5 mt-0.5 flex-shrink-0"
-                      style={{
-                        color: isLab ? "#d97706" : "var(--mod-academic)",
-                      }}
-                    />
-                    <div className="flex items-center gap-1 flex-wrap justify-end">
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${typeColor}`}
-                      >
-                        {subjectType}
-                      </span>
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
-                      >
-                        <Icon className="w-3 h-3" />
-                        {cfg.label}
-                      </span>
-                    </div>
-                  </div>
-                  {subjectCode && (
-                    <p className="text-[10px] font-mono font-semibold text-gray-500 mb-0.5 tracking-wide">
-                      {subjectCode}
-                    </p>
-                  )}
-                  <h3 className="font-bold text-sm leading-snug mb-1 text-gray-900">
-                    {subjectTitle}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mb-3">
-                    {subject.credits} Credits
-                  </p>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>Progress</span>
-                      <span
-                        className="font-semibold"
+                Subjects
+              </span>
+              <span
+                className="text-xs font-bold px-2 py-0.5 rounded-full"
+                style={{ background: "#6366f122", color: "#4f46e5" }}
+              >
+                {semData.subjects.length} subjects
+              </span>
+              <span className="text-xs text-indigo-500 font-medium">
+                Semester {selectedSem}
+              </span>
+            </div>
+            <ChevronDown
+              className="w-5 h-5 transition-transform duration-200"
+              style={{
+                color: "#4f46e5",
+                transform: showSubjectsGrid ? "rotate(180deg)" : "rotate(0deg)",
+              }}
+            />
+          </div>
+        </button>
+
+        {/* Subjects Grid — only shown when toggled */}
+        {showSubjectsGrid && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {semData.subjects.map((subject) => {
+              const cfg = statusConfig[subject.status];
+              const Icon = cfg.icon;
+              // Split code and name: "23CSU5CC1T – Database Engineering" => ["23CSU5CC1T", "Database Engineering"]
+              const parts = subject.name.split(" – ");
+              const subjectCode = parts.length > 1 ? parts[0] : "";
+              const subjectTitle = parts.length > 1 ? parts[1] : subject.name;
+              // Determine Theory vs Lab based on last char of code
+              const lastChar = subjectCode ? subjectCode.slice(-1) : "";
+              const isLab = lastChar === "L" || lastChar === "P";
+              const subjectType = isLab ? "Lab" : "Theory";
+              const typeColor = isLab
+                ? "bg-amber-100 text-amber-700"
+                : "bg-indigo-100 text-indigo-700";
+              const notesLink = subjectNotesLinks[subjectTitle];
+              return (
+                <Card
+                  key={subject.name}
+                  className="rounded-2xl shadow-card card-glow-hover module-border-academic"
+                  style={{
+                    background: isLab
+                      ? "linear-gradient(135deg, #fef9c3 0%, #fef08a 60%, #fde047 100%)"
+                      : "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 60%, #6ee7b7 100%)",
+                    borderLeft: isLab
+                      ? "4px solid #f59e0b"
+                      : "4px solid #10b981",
+                  }}
+                >
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-2">
+                      <BookOpen
+                        className="w-5 h-5 mt-0.5 flex-shrink-0"
                         style={{
                           color: isLab ? "#d97706" : "var(--mod-academic)",
                         }}
-                      >
-                        {subject.progress}%
-                      </span>
+                      />
+                      <div className="flex items-center gap-1 flex-wrap justify-end">
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${typeColor}`}
+                        >
+                          {subjectType}
+                        </span>
+                        <span
+                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.color}`}
+                        >
+                          <Icon className="w-3 h-3" />
+                          {cfg.label}
+                        </span>
+                      </div>
                     </div>
-                    <GradientProgress value={subject.progress} />
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                    {subjectCode && (
+                      <p className="text-[10px] font-mono font-semibold text-gray-500 mb-0.5 tracking-wide">
+                        {subjectCode}
+                      </p>
+                    )}
+                    <h3 className="font-bold text-sm leading-snug mb-1 text-gray-900">
+                      {subjectTitle}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mb-3">
+                      {subject.credits} Credits
+                    </p>
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs text-muted-foreground">
+                        <span>Progress</span>
+                        <span
+                          className="font-semibold"
+                          style={{
+                            color: isLab ? "#d97706" : "var(--mod-academic)",
+                          }}
+                        >
+                          {subject.progress}%
+                        </span>
+                      </div>
+                      <GradientProgress value={subject.progress} />
+                    </div>
+                    {notesLink && (
+                      <a
+                        href={notesLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full hover:opacity-80 transition-opacity"
+                        style={{
+                          background: isLab ? "#fef3c722" : "#eef2ff",
+                          color: isLab ? "#d97706" : "#4f46e5",
+                          border: isLab
+                            ? "1px solid #f59e0b44"
+                            : "1px solid #6366f144",
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        data-ocid="academic.subjects.link"
+                      >
+                        📝 Notes
+                      </a>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Faculty */}
