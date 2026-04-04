@@ -589,6 +589,67 @@ const labSubjects: Record<number, string[]> = {
   ],
 };
 
+// Notes links per subject (Sem 5 & 6)
+const subjectNotesLinks: Record<string, string> = {
+  // Sem 5 Theory
+  "Database Engineering": "https://www.geeksforgeeks.org/dbms/",
+  "Design and Analysis of Algorithm":
+    "https://www.geeksforgeeks.org/design-and-analysis-of-algorithms/",
+  "Operating Systems": "https://www.geeksforgeeks.org/operating-systems/",
+  "Programme Elective I": "https://nptel.ac.in/course.html",
+  "Indian Knowledge System-II: Vedic Mathematics":
+    "https://www.vedicmathsindia.org/",
+  "Multidisciplinary Minor III": "https://nptel.ac.in/",
+  "Open Elective III (MOOC)": "https://swayam.gov.in/",
+  // Sem 5 Labs
+  "Database Engineering Lab": "https://www.w3schools.com/sql/",
+  "Design and Analysis of Algorithm Lab":
+    "https://www.geeksforgeeks.org/data-structures/",
+  "Operating Systems Lab": "https://www.tutorialspoint.com/operating_system/",
+  "Programme Elective I Lab": "https://nptel.ac.in/",
+  "Advanced Java Programming": "https://www.javatpoint.com/advanced-java",
+  // Sem 6 Theory
+  "Artificial Intelligence":
+    "https://www.geeksforgeeks.org/artificial-intelligence/",
+  "System Software": "https://www.tutorialspoint.com/compiler_design/",
+  "Software Engineering": "https://www.geeksforgeeks.org/software-engineering/",
+  "Programme Elective II": "https://nptel.ac.in/",
+  "Programme Elective III": "https://nptel.ac.in/",
+  "Multidisciplinary Minor IV": "https://nptel.ac.in/",
+  // Sem 6 Labs
+  "Artificial Intelligence Lab":
+    "https://www.geeksforgeeks.org/machine-learning/",
+  "System Software Lab":
+    "https://www.tutorialspoint.com/compiler_design/index.htm",
+  "Programme Elective II Lab": "https://nptel.ac.in/",
+  "Full Stack Development": "https://www.geeksforgeeks.org/web-development/",
+  "Multidisciplinary Minor IV Lab": "https://nptel.ac.in/",
+};
+
+// Exam dates per semester
+const examDates: Record<number, Record<string, string>> = {
+  5: {
+    ise1: "August 2025",
+    ise2: "September 2025",
+    ise3: "October 2025",
+    practical: "November 2025",
+    ese: "November – December 2025",
+    nptel: "Ongoing / Self-paced",
+    project: "Counted as Internal Marks (ICA)",
+    assignment: "Counted as Internal Marks (ICA)",
+  },
+  6: {
+    ise1: "January 2026",
+    ise2: "February 2026",
+    ise3: "March 2026",
+    practical: "April 2026",
+    ese: "April – May 2026",
+    nptel: "Ongoing / Self-paced",
+    project: "Counted as Internal Marks (ICA)",
+    assignment: "Counted as Internal Marks (ICA)",
+  },
+};
+
 const examCategories = [
   {
     id: "ise1",
@@ -959,6 +1020,9 @@ function computeSkillMatch(
 export default function AcademicRoadmaps() {
   const [selectedSem, setSelectedSem] = useState(5);
   const [expandedExam, setExpandedExam] = useState<string | null>(null);
+  const [expandedSubjects, setExpandedSubjects] = useState<
+    Record<string, boolean>
+  >({});
   // Year 3 only: Sem 5 & 6
   const currentYear = 3;
   const allowedSems = [5, 6];
@@ -1452,6 +1516,8 @@ export default function AcademicRoadmaps() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {examCategories.map((cat) => {
             const isOpen = expandedExam === cat.id;
+            const dateLabel = examDates[selectedSem]?.[cat.id] ?? "TBD";
+            const isICA = cat.id === "project" || cat.id === "assignment";
             const subjects =
               cat.type === "theory"
                 ? (theorySubjects[selectedSem] ?? [])
@@ -1469,7 +1535,7 @@ export default function AcademicRoadmaps() {
                 className="rounded-2xl shadow-card overflow-hidden"
                 style={{ border: `2px solid ${cat.border}` }}
               >
-                {/* Category Header */}
+                {/* Category Header — clickable */}
                 <button
                   type="button"
                   className="w-full text-left"
@@ -1490,6 +1556,13 @@ export default function AcademicRoadmaps() {
                       </p>
                       <p className="text-xs text-gray-500 mt-0.5">
                         {cat.fullLabel}
+                      </p>
+                      {/* Exam Date */}
+                      <p
+                        className="text-[10px] font-bold mt-1 flex items-center gap-1"
+                        style={{ color: cat.color }}
+                      >
+                        📅 {dateLabel}
                       </p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -1521,12 +1594,37 @@ export default function AcademicRoadmaps() {
                   </div>
                 </button>
 
-                {/* Expanded Subject List */}
+                {/* Expanded Content */}
                 {isOpen && (
                   <div
-                    className="px-4 pb-4 pt-2 space-y-2"
+                    className="px-4 pb-4 pt-2 space-y-3"
                     style={{ background: cat.bg }}
                   >
+                    {/* ICA Remark for Project and Assignment */}
+                    {isICA && (
+                      <div
+                        className="rounded-xl px-4 py-3 border flex items-start gap-2"
+                        style={{
+                          background: "linear-gradient(135deg,#fefce8,#fef9c3)",
+                          borderColor: "#ca8a04",
+                        }}
+                      >
+                        <span className="text-base flex-shrink-0 mt-0.5">
+                          📌
+                        </span>
+                        <div>
+                          <p className="text-xs font-bold text-yellow-900">
+                            Internal Continuous Assessment (ICA)
+                          </p>
+                          <p className="text-xs text-yellow-800 mt-0.5 leading-relaxed">
+                            Counted as Internal Marks — taken as submission for
+                            ICA. Timely submission is mandatory for internal
+                            marks.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
                     {cat.type === "none" ? (
                       <div
                         className="rounded-xl px-4 py-3 border"
@@ -1544,35 +1642,107 @@ export default function AcademicRoadmaps() {
                         </p>
                       </div>
                     ) : (
-                      subjects.map((subject, idx) => (
-                        <div
-                          key={subject}
-                          className="rounded-xl px-4 py-2.5 flex items-center gap-3"
-                          style={{
-                            background: "rgba(255,255,255,0.7)",
-                            border: `1px solid ${cat.border}44`,
+                      <>
+                        {/* Subjects Square Box — click to toggle subject list */}
+                        <button
+                          type="button"
+                          className="w-full text-left"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedSubjects((prev) => ({
+                              ...prev,
+                              [cat.id]: !prev[cat.id],
+                            }));
                           }}
-                          data-ocid={`exam_tracker.${cat.id}.item.${idx + 1}`}
                         >
-                          <span
-                            className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 text-white"
-                            style={{ background: cat.color }}
+                          <div
+                            className="rounded-xl px-4 py-3 flex items-center justify-between border-2 transition-all duration-200 hover:shadow-md"
+                            style={{
+                              background: `${cat.border}18`,
+                              borderColor: cat.border,
+                            }}
                           >
-                            {idx + 1}
-                          </span>
-                          <p className="flex-1 text-xs font-semibold text-gray-800 leading-tight">
-                            {subject}
-                          </p>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
-                              Scheduled
-                            </span>
-                            <span className="text-[10px] text-gray-400 font-medium">
-                              TBD
-                            </span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg">📚</span>
+                              <span
+                                className="text-sm font-bold"
+                                style={{ color: cat.color }}
+                              >
+                                Subjects
+                              </span>
+                              <span
+                                className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                                style={{
+                                  background: `${cat.border}30`,
+                                  color: cat.color,
+                                }}
+                              >
+                                {subjects.length}
+                              </span>
+                            </div>
+                            <ChevronDown
+                              className="w-4 h-4 transition-transform duration-200"
+                              style={{
+                                color: cat.color,
+                                transform: expandedSubjects[cat.id]
+                                  ? "rotate(180deg)"
+                                  : "rotate(0deg)",
+                              }}
+                            />
                           </div>
-                        </div>
-                      ))
+                        </button>
+
+                        {/* Subject List with Notes Links */}
+                        {expandedSubjects[cat.id] && (
+                          <div className="space-y-2 pt-1">
+                            {subjects.map((subject, idx) => {
+                              const notesUrl = subjectNotesLinks[subject];
+                              return (
+                                <div
+                                  key={subject}
+                                  className="rounded-xl px-4 py-2.5 flex items-center gap-3"
+                                  style={{
+                                    background: "rgba(255,255,255,0.85)",
+                                    border: `1px solid ${cat.border}44`,
+                                  }}
+                                  data-ocid={`exam_tracker.${cat.id}.item.${idx + 1}`}
+                                >
+                                  <span
+                                    className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 text-white"
+                                    style={{ background: cat.color }}
+                                  >
+                                    {idx + 1}
+                                  </span>
+                                  <p className="flex-1 text-xs font-semibold text-gray-800 leading-tight">
+                                    {subject}
+                                  </p>
+                                  <div className="flex items-center gap-2 flex-shrink-0">
+                                    {notesUrl && (
+                                      <a
+                                        href={notesUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 hover:opacity-80 transition-opacity"
+                                        style={{
+                                          background: `${cat.border}22`,
+                                          color: cat.color,
+                                          border: `1px solid ${cat.border}44`,
+                                        }}
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        📝 Notes
+                                      </a>
+                                    )}
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                                      Scheduled
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 )}
